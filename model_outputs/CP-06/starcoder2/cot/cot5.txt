@@ -1,0 +1,20 @@
+
+
+<?php
+function mergeKLists(array $lists): ?ListNode {
+    // Write your code here.
+}
+
+// Do not edit after this line!
+
+$sample0 = [new ListNode(), new ListNode()];
+$expected0 = new ListNode();
+var_dump(mergeKLists($sample0) === $expected0);
+echo PHP_EOL;
+
+$sample1 = [];
+$expected1 = null;
+var_dump(mergeKLists($sample1));
+
+
+

@@ -1,0 +1,16 @@
+
+
+---
+
+Given a list of numbers `nums`, write a function that returns True if there is a subset of nums where their sum equals zero. Otherwise, return False.
+
+Constraints:
+
+0 <= len(nums) < 150
+-10^6 <= nums[i] <= 10^6
+
+Output Requirement: - Implement a function function zeroSubsetExists(array $numbers): bool - Use O(n) time complexity.
+
+Generate the solution now.
+
+

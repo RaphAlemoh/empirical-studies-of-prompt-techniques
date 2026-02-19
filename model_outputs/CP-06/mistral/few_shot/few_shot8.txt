@@ -1,0 +1,50 @@
+ Here is the solution for merging k sorted linked lists in PHP using an efficient algorithm (O(N log k)).
+
+```php
+function mergeKLists($lists) {
+    if (!count($lists)) return null;
+
+    $n = count($lists);
+    for ($i = 1; $i < $n; $i *= 2) {
+        $tempLists = [];
+        for ($j = 0; $j < $n; $j += $i * 2) {
+            $first = $lists[$j];
+            if ($j + $i < $n) {
+                $second = $lists[$j + $i];
+                $tempLists[] = mergeTwoLists($first, $second);
+            } else {
+                $tempLists[] = $first;
+            }
+        }
+        $lists = $tempLists;
+    }
+    return $lists[0];
+}
+
+function mergeTwoLists(?ListNode $l1, ?ListNode $l2): ?ListNode {
+    if ($l1 === null) return $l2;
+    if ($l2 === null) return $l1;
+
+    $dummy = new ListNode(0);
+    $current = $dummy;
+
+    while ($l1 !== null && $l2 !== null) {
+        if ($l1->val <= $l2->val) {
+            $current->next = $l1;
+            $l1 = $l1->next;
+        } else {
+            $current->next = $l2;
+            $l2 = $l2->next;
+        }
+        $current = $current->next;
+    }
+
+    if ($l1 !== null) $current->next = $l1;
+    if ($l2 !== null) $current->next = $l2;
+
+    return $dummy->next;
+}
+```
+
+In this solution, the function `mergeKLists()` uses a divide and conquer approach to merge k sorted linked lists. It repeatedly merges pairs of linked lists until it has merged all of them. The inner function `mergeTwoLists()` is the same as in your original example.
+

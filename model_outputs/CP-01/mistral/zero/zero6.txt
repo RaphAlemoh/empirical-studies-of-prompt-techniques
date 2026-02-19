@@ -1,0 +1,15 @@
+ ```php
+function &removeDuplicates(array &$nums) {
+    $unique = [];
+    $i = 0;
+    for ($j = 0; $j < count($nums); $j++) {
+        if (!in_array($nums[$j], $unique)) {
+            $unique[] = $nums[$j];
+            $nums[$i] = $nums[$j];
+            $i++;
+        }
+    }
+    return $i;
+}
+```
+

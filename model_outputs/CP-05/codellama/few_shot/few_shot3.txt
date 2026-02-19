@@ -1,0 +1,40 @@
+
+You can solve this task by using a similar approach as the previous problem, but with some additional considerations for the elevation map. Here's an example solution in PHP:
+```php
+function trap(array $height): int {
+    // Find the highest bar and the lowest bar
+    $highest = -1;
+    $lowest = 100000;
+
+    foreach ($height as $i => $bar) {
+        if ($bar > $highest) {
+            $highest = $bar;
+        }
+        if ($bar < $lowest) {
+            $lowest = $bar;
+        }
+    }
+
+    // Calculate the total water trapped
+    $totalWater = 0;
+
+    foreach ($height as $i => $bar) {
+        $water = min($highest - $bar, $lowest - $bar);
+        if ($water > 0) {
+            $totalWater += $water;
+        }
+    }
+
+    return $totalWater;
+}
+```
+This solution uses the same approach as the previous problem, where we find the highest and lowest bars in the elevation map, and then calculate the total water trapped between them. However, this time we also need to consider the width of each bar, which is 1 unit for this problem. We can use the `min` function to find the minimum value between the highest bar and the current bar, and the `max` function to find the maximum value between the lowest bar and the current bar.
+
+The time complexity of this solution is O(n), where n is the length of the elevation map. The space complexity is O(1) because we only need a single variable to store the highest and lowest bars.
+
+Example usage:
+```php
+$height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
+echo trap($height); // Outputs 6
+```
+

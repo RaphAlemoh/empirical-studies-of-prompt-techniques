@@ -1,0 +1,32 @@
+
+Task:
+Write a PHP function that computes the maximum profit from an integer array `prices`, where `prices[i]` is the stock price on day i.
+
+Rules:
+- You may complete as many transactions as you like.
+- You can only hold one stock at a time.
+- You may buy and sell on the same day.
+- Return the maximum achievable profit.
+
+Constraints:
+1 <= prices.length <= 30000
+0 <= prices[i] <= 10000
+
+Output Requirements:
+- Implement:
+  function maxProfit(array $prices): int
+- Return only valid PHP code.
+
+Solution:
+<?php
+function maxProfit(array $prices) {
+    $maxProfit = 0;
+    for ($i = 1; $i < count($prices); $i++) {
+        if ($prices[$i] > $prices[$i - 1]) {
+            $maxProfit += $prices[$i] - $prices[$i - 1];
+        }
+    }
+    return $maxProfit;
+}
+?>
+

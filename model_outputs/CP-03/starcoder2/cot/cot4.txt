@@ -1,0 +1,19 @@
+
+
+<?php
+/**
+ * You are a software engineer.
+ * 
+ * Task: Given an m x n integer matrix where each row is sorted in non-decreasing order and the first integer of each row is greater than the last integer of the previous row.
+ *       Find whether the target exists in the matrix or not.
+ * 
+ * Constraints 1 <= m,n <= 100 -10000 <= matrix[i][j], target <= 10000.
+ */
+class BinarySearch {
+  /**
+   * @param array $matrix: 1st dim is rows; 2nd dim is columns.
+   * @param int   $target;
+   */ 
+  function searchMatrix(array $matrix, int $target): bool {}
+}
+

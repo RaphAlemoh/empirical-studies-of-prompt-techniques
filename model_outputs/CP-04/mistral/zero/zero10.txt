@@ -1,0 +1,21 @@
+ Here is a PHP function that computes the maximum profit from an integer array `$prices` according to the given rules:
+
+```php
+function maxProfit(array $prices): int {
+    $minPrice = PHP_INT_MAX;
+    $maxProfit = 0;
+
+    foreach ($prices as $price) {
+        if ($price < $minPrice) {
+            $minPrice = $price;
+        } elseif ($price - $minPrice > $maxProfit) {
+            $maxProfit = $price - $minPrice;
+        }
+    }
+
+    return $maxProfit;
+}
+```
+
+This function maintains the minimum price seen so far and the maximum profit obtained by buying at the current price and selling at a previous lower price. It iterates through the array once to find the best possible profit. The time complexity is O(n) as per your requirement.
+

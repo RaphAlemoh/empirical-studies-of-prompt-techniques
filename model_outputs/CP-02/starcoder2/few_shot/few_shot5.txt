@@ -1,0 +1,5 @@
+
+
+For example (from https://open.kattis.com/problems/validparentheses) the input string `([)]` should be `false`.
+
+

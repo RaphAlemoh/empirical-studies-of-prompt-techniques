@@ -1,0 +1,11 @@
+
+
+Task:
+Given two strings `s` and `t`, return true if they are anagrams, false otherwise. An Anagram is a word or phrase formed by rearranging the letters of another, such as "cinema" being an anagram of "iceman".
+
+Constraints:
+1 <= s.length, t.length <= 5 * 10^4
+s and t consist only of lowercase English letters.
+
+
+

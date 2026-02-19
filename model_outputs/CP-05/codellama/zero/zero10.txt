@@ -1,0 +1,21 @@
+
+<?php
+function trap(array $height): int {
+    $total = 0;
+    for ($i = 1; $i < count($height) - 1; $i++) {
+        $leftMax = max(0, $height[$i - 1]);
+        $rightMax = max(0, $height[$i + 1]);
+        $currentBarHeight = min($leftMax, $rightMax);
+        $waterTrapped = ($currentBarHeight - $height[$i]) * 2;
+        if ($waterTrapped > 0) {
+            $total += $waterTrapped;
+        }
+    }
+    return $total;
+}
+?>
+
+This implementation uses a linear scan to traverse the array, checking each bar individually and computing the amount of water that can be trapped at each position. The `max` function is used to keep track of the maximum height in the left and right sides of the current bar, respectively. If the current bar's height is lower than the maximum height on either side, then some water will be trapped between the two bars. The amount of water trapped is computed as twice the difference between the current bar's height and the maximum height. If the amount of water trapped is positive, it is added to the total.
+
+This solution has a time complexity of O(n), where n is the length of the input array. This is because the loop iterates over each element in the array exactly once, and there are no nested loops or other operations that increase the time complexity.
+

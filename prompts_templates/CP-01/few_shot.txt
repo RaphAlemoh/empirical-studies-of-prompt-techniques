@@ -1,0 +1,29 @@
+You are a software engineer
+
+Here’s a simple example of modifying an array in place in PHP:
+
+function moveZeroes(&$nums) {
+    $pos = 0;
+    for ($i = 0; $i < count($nums); $i++) {
+        if ($nums[$i] !== 0) {
+            $nums[$pos] = $nums[$i];
+            $pos++;
+        }
+    }
+    return $pos;
+}
+
+Now write a PHP function called removeDuplicates that takes a sorted array by reference and removes duplicates in place.
+
+Return the number of unique elements. The first k values in the array should be the unique ones in sorted order.
+
+Constraints:
+1 <= nums.length <= 30000
+-100 <= nums[i] <= 100
+The array is sorted in non-decreasing order.
+
+
+Only return the PHP code.
+Do not use external libraries.
+Do not add comments or explanations.
+Function name must be removeDuplicates

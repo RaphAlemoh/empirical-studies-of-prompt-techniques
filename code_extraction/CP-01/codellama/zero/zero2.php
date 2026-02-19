@@ -1,0 +1,12 @@
+<?php
+
+function removeDuplicates($nums) {
+    $unique = 0;
+     for ($i = 1; $i < sizeof($nums); $i++) {
+         if ($nums[$i] !== $nums[$i - 1]) {
+             $unique++;
+             $nums[$unique] = $nums[$i];
+         }
+     }
+     return $unique + 1;
+}

@@ -1,0 +1,9 @@
+<?php
+
+function maxProfit($prices) {
+    $maxProfit = 0;
+    for ($i = 1; $i < count($prices); ++$i) {
+        $maxProfit += max(0, $prices[$i] - $prices[$i - 1]);
+    }
+    return $maxProfit;
+}

@@ -1,0 +1,22 @@
+ Here's a PHP implementation of the problem using an O(n) approach called the "Two Pointer" algorithm:
+
+```php
+function maxProfit(array $prices): int {
+    $minPrice = $prices[0];
+    $maxProfit = 0;
+
+    foreach ($prices as $price) {
+        if ($price < $minPrice) {
+            $minPrice = $price;
+        }
+        else if ($price - $minPrice > $maxProfit) {
+            $maxProfit = $price - $minPrice;
+        }
+    }
+
+    return $maxProfit;
+}
+```
+
+This function initializes a `$minPrice` variable with the first element of the given array, and an empty `$maxProfit`. As it iterates through each price in the array, if it finds a lower price than the current `$minPrice`, it updates `$minPrice` with the new price. If it finds a higher price than the difference between the current `$price` and `$minPrice`, it updates `$maxProfit`. In the end, it returns the maximum achievable profit.
+

@@ -1,0 +1,58 @@
+ Here's a solution in PHP for merging multiple sorted linked lists using the merge-sort approach, which has a time complexity of O(n log k).
+
+```php
+function mergeSort($lists) {
+    if (count($lists) <= 1) {
+        return $lists[0] ?? null;
+    }
+
+    $mid = floor(count($lists) / 2);
+    $leftLists = array_slice($lists, 0, $mid);
+    $rightLists = array_slice($lists, $mid);
+
+    $left = mergeSort($leftLists);
+    $right = mergeSort($rightLists);
+
+    return mergeTwoLists($left, $right);
+}
+
+function mergeTwoLists(?ListNode $l1, ?ListNode $l2): ?ListNode {
+    if ($l1 === null) {
+        return $l2;
+    }
+    if ($l2 === null) {
+        return $l1;
+    }
+
+    $dummy = new ListNode(0);
+    $current = $dummy;
+
+    while ($l1 !== null && $l2 !== null) {
+        if ($l1->val <= $l2->val) {
+            $current->next = $l1;
+            $l1 = $l1->next;
+        } else {
+            $current->next = $l2;
+            $l2 = $l2->next;
+        }
+        $current = $current->next;
+    }
+
+    if ($l1 !== null) {
+        $current->next = $l1;
+    }
+
+    if ($l2 !== null) {
+        $current->next = $l2;
+    }
+
+    return $dummy->next;
+}
+
+function mergeKLists(array $lists): ?ListNode {
+    return mergeSort($lists);
+}
+```
+
+This solution first sorts the input linked lists using a recursive merge sort algorithm. Then it merges each pair of sorted lists to form a new sorted list, until there's only one remaining list left. The resulting single sorted list is then returned as output.
+

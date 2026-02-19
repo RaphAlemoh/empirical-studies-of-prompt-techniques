@@ -1,0 +1,22 @@
+```
+function trap($height) {
+    // Initialize variables
+    $leftMax = [];
+    $rightMax = [];
+    $result = 0;
+    
+    // Find the max value on the left and right sides of each bar
+    for ($i = 1; $i < count($height); $i++) {
+        $leftMax[$i] = max($leftMax[$i - 1], $height[$i]);
+        $rightMax[$i] = max($rightMax[$i + 1], $height[$i]);
+    }
+    
+    // Calculate the trapped water for each bar
+    for ($i = 1; $i < count($height); $i++) {
+        $result += min($leftMax[$i], $rightMax[$i]) - $height[$i];
+    }
+    
+    return $result;
+}
+```
+

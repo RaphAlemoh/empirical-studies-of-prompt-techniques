@@ -1,0 +1,16 @@
+
+
+Example:
+<?php
+function maxProfit(array $prices): int {
+    $max = 0;
+    for ($i = 1; $i < count($prices); ++$i) {
+         $diff =  $prices[$i] -  $prices[$i-1];
+        if ($diff > 0 && $max + $diff <=  2000) {
+            $max +=  $diff;
+        }
+    }
+    return  $max;
+}?>
+
+

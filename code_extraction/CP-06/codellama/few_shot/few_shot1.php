@@ -1,0 +1,39 @@
+<?php
+
+function mergeKLists(array $lists): ?ListNode {
+    if (empty($lists)) return null;
+
+    // Merge two lists and return the merged list
+    function mergeTwoLists(?ListNode $l1, ?ListNode $l2): ?ListNode {
+        $dummy = new ListNode(0);
+        $current = $dummy;
+
+        while ($l1 !== null && $l2 !== null) {
+            if ($l1->val <= $l2->val) {
+                $current->next = $l1;
+                $l1 = $l1->next;
+            } else {
+                $current->next = $l2;
+                $l2 = $l2->next;
+            }
+            $current = $current->next;
+        }
+
+        $current->next = $l1 !== null ? $l1 : $l2;
+        return $dummy->next;
+    }
+
+    // Merge k sorted lists and return the merged list
+    function mergeKListsRecursive(array $lists, int $start, int $end): ?ListNode {
+        if ($start > $end) return null;
+        if ($start === $end) return $lists[$start];
+
+        $mid = floor(($start + $end) / 2);
+        $left = mergeKListsRecursive($lists, $start, $mid);
+        $right = mergeKListsRecursive($lists, $mid + 1, $end);
+
+        return mergeTwoLists($left, $right);
+    }
+
+    return mergeKListsRecursive($lists, 0, count($lists) - 1);
+}

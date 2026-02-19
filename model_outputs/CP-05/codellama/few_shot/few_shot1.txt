@@ -1,0 +1,36 @@
+
+<?php
+function trap(array $height): int {
+    // Find the maximum value in the array and its index
+    $maxValue = max($height);
+    $maxIndex = array_search($maxValue, $height);
+
+    // Initialize variables to keep track of the trapped water
+    $trappedWater = 0;
+    $leftMax = $maxValue;
+    $rightMax = $maxValue;
+
+    for ($i = 0; $i < $maxIndex; $i++) {
+        // If the current element is less than or equal to the maximum value on the left, it means that there are no higher bars to the left and we can calculate the trapped water
+        if ($height[$i] <= $leftMax) {
+            $trappedWater += $leftMax - $height[$i];
+        } else {
+            // If the current element is higher than the maximum value on the left, update the maximum value and its index
+            $leftMax = $height[$i];
+        }
+    }
+
+    for ($i = $maxIndex + 1; $i < count($height); $i++) {
+        // If the current element is less than or equal to the maximum value on the right, it means that there are no higher bars to the right and we can calculate the trapped water
+        if ($height[$i] <= $rightMax) {
+            $trappedWater += $rightMax - $height[$i];
+        } else {
+            // If the current element is higher than the maximum value on the right, update the maximum value and its index
+            $rightMax = $height[$i];
+        }
+    }
+
+    return $trappedWater;
+}
+?>
+

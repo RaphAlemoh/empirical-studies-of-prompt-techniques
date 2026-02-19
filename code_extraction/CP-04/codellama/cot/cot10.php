@@ -1,0 +1,14 @@
+<?php
+
+function maxProfit(array $prices): int {
+    $minPrice = null;
+    $maxProfit = 0;
+    foreach ($prices as $price) {
+        if ($minPrice === null || $price < $minPrice) {
+            $minPrice = $price;
+        } elseif ($price - $minPrice > $maxProfit) {
+            $maxProfit = $price - $minPrice;
+        }
+    }
+    return $maxProfit;
+}

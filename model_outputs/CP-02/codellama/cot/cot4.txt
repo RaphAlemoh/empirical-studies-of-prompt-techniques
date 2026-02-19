@@ -1,0 +1,18 @@
+function isValid($s) {
+    $stack = [];
+    foreach (str_split($s) as $char) {
+        if ($char === '(' || $char === '[' || $char === '{') {
+            array_push($stack, $char);
+        } elseif ($char === ')' || $char === ']' || $char === '}') {
+            if (empty($stack)) {
+                return false;
+            }
+            $top = array_pop($stack);
+            if (($char === ')' && $top !== '(') || ($char === ']' && $top !== '[') || ($char === '}' && $top !== '{')) {
+                return false;
+            }
+        }
+    }
+    return empty($stack);
+}
+

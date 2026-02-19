@@ -1,0 +1,33 @@
+<?php
+
+function isValid($s) {
+  if (strlen($s) == 0 || strlen($s) % 2 == 1) return false;
+  $stack = [];
+  for ($i = 0; $i < strlen($s); $i++) {
+    switch ($s[$i]) {
+      case '(':
+        array_push($stack, $s[$i]);
+        break;
+      case ')':
+        if (count($stack) == 0 || $stack[count($stack) - 1] != '(') return false;
+        array_pop($stack);
+        break;
+      case '{':
+        array_push($stack, $s[$i]);
+        break;
+      case '}':
+        if (count($stack) == 0 || $stack[count($stack) - 1] != '{') return false;
+        array_pop($stack);
+        break;
+      case '[':
+        array_push($stack, $s[$i]);
+        break;
+      case ']':
+        if (count($stack) == 0 || $stack[count($stack) - 1] != '[') return false;
+        array_pop($stack);
+        break;
+    }
+  }
+  return count($stack) == 0;
+}
+```

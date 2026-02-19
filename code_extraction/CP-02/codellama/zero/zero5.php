@@ -1,0 +1,14 @@
+<?php
+
+function isValid($s) {
+    $stack = array();
+    for ($i=0; $i < strlen($s); $i++) { 
+        switch($s[$i]) {
+            case '(': $stack[] = ')'; break;
+            case '{': $stack[] = '}'; break;
+            case '[': $stack[] = ']'; break;
+            default: array_pop($stack);
+        }
+    }
+    return empty($stack);
+}

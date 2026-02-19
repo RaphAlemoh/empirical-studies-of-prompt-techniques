@@ -1,0 +1,40 @@
+ Here is a PHP solution for the problem you've described, using an O(n) time complexity approach. The algorithm works by maintaining two pointers, `left` and `right`, which traverse from the left and right ends of the array respectively. At each step, we find the minimum height between these two pointers (let's call it `minHeight`) and update the water trapped at that position as `minHeight - height[i]`. We continue this process until both pointers meet.
+
+```php
+function trap($height) {
+    $n = count($height);
+    $left = 0;
+    $right = $n - 1;
+    $water = 0;
+    $leftMax = $rightMax = 0;
+
+    while ($left < $right) {
+        if ($height[$left] <= $height[$right]) {
+            // Move left pointer if the current height is smaller than the right max
+            if ($height[$left] < $leftMax) {
+                $water += $leftMax - $height[$left];
+            } else {
+                $leftMax = $height[$left];
+            }
+            $left++;
+        } else {
+            // Move right pointer if the current height is smaller than the left max
+            if ($height[$right] < $rightMax) {
+                $water += $rightMax - $height[$right];
+            } else {
+                $rightMax = $height[$right];
+            }
+            $right--;
+        }
+    }
+
+    return $water;
+}
+```
+
+This function initializes two pointers, `left` and `right`, at the starting and ending positions of the array respectively. It also sets `$leftMax` and `$rightMax` variables to 0 to store the maximum height on the left and right sides. The main loop continues until both pointers meet.
+
+Inside the loop, if the current height is less than or equal to the `rightMax`, the right pointer moves one step towards the left. If there's trapped water, we add it to the total amount of water. In case the height at the current position is greater than the `leftMax`, update the `leftMax` variable with the new height and move the left pointer. The same logic applies when the current height is less than or equal to the `leftMax` but greater than the `rightMax`.
+
+Finally, return the total amount of water trapped after rainfall.
+

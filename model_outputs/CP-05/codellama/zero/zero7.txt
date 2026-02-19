@@ -1,0 +1,28 @@
+```php
+<?php
+function trap($height){
+    // calculate the maximum value in the array and its index
+    $maxValue = max($height);
+    $maxIndex = array_search($maxValue, $height);
+    
+    // initialize variables for storing the trapped water
+    $trappedWater = 0;
+    
+    // loop through the array and calculate the trapped water for each bar
+    foreach ($height as $i => $barHeight) {
+        // if the bar is higher than the maximum value, it will not trap any water
+        if ($barHeight > $maxValue){
+            continue;
+        }
+        
+        // calculate the distance between the current bar and the maximum value
+        $distance = $maxIndex - $i;
+        
+        // calculate the amount of trapped water for this bar
+        $trappedWater += ($barHeight * $distance);
+    }
+    
+    return $trappedWater;
+}
+```
+

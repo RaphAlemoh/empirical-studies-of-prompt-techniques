@@ -1,0 +1,38 @@
+ ```php
+function searchMatrix(array $matrix, int $target) {
+    $rows = array_keys($matrix);
+    $low = 0;
+    $high = count($rows) - 1;
+
+    while ($low <= $high) {
+        $mid = floor(($low + $high) / 2);
+        $currentRow = $rows[$mid];
+
+        $left = 0;
+        $right = count($matrix[$currentRow]) - 1;
+
+        while ($left <= $right) {
+            $mid2 = floor(($left + $right) / 2);
+
+            if ($matrix[$currentRow][$mid2] === $target) {
+                return true;
+            }
+
+            if ($matrix[$currentRow][$mid2] < $target) {
+                $left = $mid2 + 1;
+            } else {
+                $right = $mid2 - 1;
+            }
+        }
+
+        if ($matrix[$rows[$mid]][$right] < $target) {
+            $low = $mid + 1;
+        } else {
+            $high = $mid - 1;
+        }
+    }
+
+    return false;
+}
+```
+

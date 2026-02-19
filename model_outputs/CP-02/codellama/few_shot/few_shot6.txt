@@ -1,0 +1,47 @@
+
+Solution:
+
+<?php
+function isValid(string $s): bool {
+    $stack = [];
+    $chars = str_split($s);
+
+    foreach ($chars as $ch) {
+        switch ($ch) {
+            case '(':
+                $stack[] = ')';
+                break;
+            case '{':
+                $stack[] = '}';
+                break;
+            case '[':
+                $stack[] = ']';
+                break;
+            default:
+                if (!empty($stack) && array_pop($stack) === $ch) {
+                    continue;
+                } else {
+                    return false;
+                }
+        }
+    }
+
+    return empty($stack);
+}
+?>
+
+Explanation:
+
+The above solution uses a stack-based approach to determine if the input string is valid. We first split the input string into an array of individual characters, then iterate through each character and check if it is a closing bracket. If it is a closing bracket, we pop the corresponding opening bracket from the stack and compare them for equality. If they are not equal, we return false immediately.
+
+If the current character is an opening bracket, we push it onto the stack. We then iterate through each character in the string again, but this time we only check if the current character is a closing bracket. If it is, we pop the corresponding opening bracket from the stack and compare them for equality. If they are not equal, we return false immediately.
+
+Finally, we check if the stack is empty. If it is, we return true, indicating that the input string is valid. Otherwise, we return false.
+
+Example usage:
+
+<?php
+echo isValid('()') ? 'Yes' : 'No'; // Output: Yes
+echo isValid('([)]') ? 'Yes' : 'No'; // Output: No
+?>
+

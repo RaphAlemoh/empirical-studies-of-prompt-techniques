@@ -1,0 +1,29 @@
+ Here's a solution for your problem in PHP. The given function uses two pointers, `left` and `right`, to traverse the array from both ends. The minimum height between `left` and `right` is calculated at each step, and if it's less than the current height, the difference is added to the total amount of trapped water.
+
+```php
+function trap($height) {
+    $n = count($height);
+    $left = 0;
+    $right = $n - 1;
+    $total_water = 0;
+    $left_max = $height[$left];
+    $right_max = $height[$right];
+
+    while ($left < $right) {
+        if ($left_max <= $right_max) {
+            $left++;
+            $left_max = max($left_max, $height[$left]);
+            $total_water += ($left_max - $height[$left]) > 0 ? ($left_max - $height[$left]) : 0;
+        } else {
+            $right--;
+            $right_max = max($right_max, $height[$right]);
+            $total_water += ($right_max - $height[$right]) > 0 ? ($right_max - $height[$right]) : 0;
+        }
+    }
+
+    return $total_water;
+}
+```
+
+This solution has a time complexity of O(n) and space complexity of O(1), as required. The function `trap()` accepts an array, calculates the total trapped water in the array, and returns it as an integer value.
+

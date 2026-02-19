@@ -1,0 +1,27 @@
+ Here's a PHP implementation of the given task:
+
+```php
+function isValid($s) {
+    $stack = [];
+    $pairings = [
+        '(' => ',)',
+        '[' => ']',
+        '{' => '}'
+    ];
+
+    foreach (str_split($s) as $char) {
+        if (in_array($char, array_keys($pairings))) {
+            $stack[] = $char;
+        } elseif ($stack && $stack[count($stack) - 1] === $pairings[$char]) {
+            array_pop($stack);
+        } else {
+            return false;
+        }
+    }
+
+    return empty($stack);
+}
+```
+
+This function uses a stack and a mapping between opening and closing brackets to check if the given string is valid. It iterates through each character in the input string, pushing opening brackets onto the stack and checking if there's a matching closing bracket at the top of the stack when it encounters them. If an unmatched closing bracket is found or the stack becomes empty before all characters are processed, the function returns false. Finally, it checks if the stack is empty after processing the entire string to determine its validity.
+

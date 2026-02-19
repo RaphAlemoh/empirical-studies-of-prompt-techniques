@@ -1,0 +1,23 @@
+ Here is a simple PHP function that checks if the input string is valid according to the given rules. This function uses a stack data structure to keep track of open brackets and checks if the closing brackets are properly matched and in the correct order.
+
+```php
+function isValid($s) {
+    $mapping = ['{', '[', '(', ']', '}', ')', ''];
+    $stack = [];
+
+    for ($i = 0; $i < strlen($s); $i++) {
+        if (in_array($s[$i], $mapping) && !empty($stack)) {
+            array_pop($stack);
+        }
+
+        if (in_array($s[$i], $mapping)) {
+            $stack[] = $s[$i];
+        }
+    }
+
+    return empty($stack);
+}
+```
+
+This function returns `true` if the input string is valid, and `false` otherwise. It has O(n) time complexity due to linear operations on the string and the stack.
+

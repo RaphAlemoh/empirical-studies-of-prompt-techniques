@@ -1,0 +1,44 @@
+ To solve the given task, we can modify the binary search algorithm to work on a 2D matrix instead of a 1D array. The idea is to perform a row-wise binary search and then apply regular binary search within the selected row. Here's the implementation in PHP:
+
+```php
+function searchMatrix(array $matrix, int $target): bool {
+    if (empty($matrix)) {
+        return false;
+    }
+
+    // Find the right starting row index based on the first element of each row
+    $row = 0;
+    while ($row < count($matrix) && $matrix[$row][0] > $target) {
+        $row++;
+    }
+
+    // If the target is smaller than all elements in the matrix, return false
+    if ($row == count($matrix)) {
+        return false;
+    }
+
+    // Perform binary search within the selected row
+    return binarySearch($matrix[$row], $target);
+}
+
+function binarySearch(array $nums, int $target): bool {
+    $left = 0;
+    $right = count($nums) - 1;
+
+    while ($left <= $right) {
+        $mid = intdiv($left + $right, 2);
+        if ($nums[$mid] === $target) {
+            return true;
+        } elseif ($nums[$mid] < $target) {
+            $left = $mid + 1;
+        } else {
+            $right = $mid - 1;
+        }
+    }
+
+    return false;
+}
+```
+
+This implementation uses a row-wise binary search to find the right starting row and then performs regular binary search within that selected row. The time complexity is O(log(m \* n)).
+

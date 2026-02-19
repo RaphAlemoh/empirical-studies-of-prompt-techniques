@@ -1,0 +1,10 @@
+
+```
+<?php
+/* Write your code here */
+function isValid($s){
+  //code here!
+}
+?>
+```
+

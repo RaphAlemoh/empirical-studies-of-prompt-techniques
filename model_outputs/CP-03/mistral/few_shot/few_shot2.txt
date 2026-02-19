@@ -1,0 +1,42 @@
+ To solve this task, we can modify the binary search algorithm to work with a 2D matrix. Here's an implementation of the `searchMatrix` function in PHP that follows your requirements:
+
+```php
+function searchMatrix(array $matrix, int $target): bool {
+    $rows = count($matrix);
+    if ($rows === 0) return false;
+
+    // Find the row where the target could be located (binary search on rows)
+    $left = 0;
+    $right = $rows - 1;
+    while ($left < $right) {
+        $mid = intdiv($left + $right, 2);
+        if ($matrix[$mid][0] > $target) {
+            $right = $mid;
+        } else {
+            $left = $mid + 1;
+        }
+    }
+
+    // If the target is smaller than the smallest element in the last row, return false.
+    if ($matrix[$right][0] > $target) return false;
+
+    // Perform binary search on the columns of the found row (binary search on columns)
+    $start = 0;
+    $end = count($matrix[$right]) - 1;
+    while ($start <= $end) {
+        $mid = intdiv($start + $end, 2);
+        if ($matrix[$right][$mid] === $target) return true;
+        elseif ($matrix[$right][$mid] < $target) {
+            $start = $mid + 1;
+        } else {
+            $end = $mid - 1;
+        }
+    }
+
+    // If the target is not found in the column binary search, return false.
+    return false;
+}
+```
+
+This solution uses a two-step binary search approach: first it finds the row where the target could be located, and then it performs a binary search within that row to find the target. The time complexity of this algorithm is O(log(m * n)).
+

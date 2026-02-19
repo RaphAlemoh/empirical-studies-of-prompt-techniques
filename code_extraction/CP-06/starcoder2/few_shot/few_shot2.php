@@ -1,0 +1,21 @@
+<?php
+
+function mergeKLists($lists = null): ?ListNode {
+    $dummy  = new ListNode();
+    $current  = $dummy;
+
+    while (count($lists)) {
+        $min = [null, INF];
+
+        foreach ($lists as $index => $list) {
+            if (!$list || !$list->val <  $min[1])
+                $min = [$index, $list ? $list->val : INF];
+        }
+
+        $current->next  = new ListNode($min[1]);
+        $current  = $current->next;
+        array_splice($lists, $min[0], 1);
+    }
+
+    return $dummy->next;
+}

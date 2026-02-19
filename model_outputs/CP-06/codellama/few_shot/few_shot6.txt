@@ -1,0 +1,39 @@
+You are given an array of k sorted singly linked lists. Merge them into one sorted linked list and return the head of the merged list.
+
+Constraints:
+
+* 1 <= k <= 30
+* The value of each node in the input linked list will be in the range [-10,000, 10,000].
+* Each linked list will have at most 1000 nodes.
+
+Input:
+array of k sorted singly linked lists
+
+Output:
+head of merged linked list
+
+Solution:
+The first step is to merge the two linked lists and then continue merging them until there is only one linked list left. This can be done by creating a new linked list that contains all the elements from the original linked lists, sorted in ascending order.
+
+Here's an example of how you might implement this:
+
+function mergeKLists(array $lists): ?ListNode {
+    if (empty($lists)) {
+        return null;
+    }
+    if (count($lists) === 1) {
+        return $lists[0];
+    }
+    $merged = new ListNode();
+    $current = $merged;
+    while (!empty($lists)) {
+        $first = array_shift($lists);
+        while ($first !== null) {
+            $current->next = $first;
+            $current = $current->next;
+            $first = $first->next;
+        }
+    }
+    return $merged->next;
+}
+

@@ -1,0 +1,44 @@
+
+To solve this task, we can use a similar approach to the binary search solution for the first problem. However, since we are searching a 2D matrix instead of a 1D array, we will need to modify the algorithm slightly.
+
+Here is an example implementation:
+```php
+<?php
+function searchMatrix(array $matrix, int $target): bool {
+    $m = count($matrix);
+    $n = count($matrix[0]);
+    
+    // Initialize left and right pointers for each row
+    $left = array_fill(0, $m, 0);
+    $right = array_fill(0, $m, $n - 1);
+    
+    while ($left !== null && $right !== null) {
+        // Check if the target exists in the current row
+        for ($i = 0; $i < $m; $i++) {
+            if ($matrix[$i][$left[$i]] === $target || $matrix[$i][$right[$i]] === $target) {
+                return true;
+            }
+        }
+        
+        // If the target is not found in the current row, update the left and right pointers
+        for ($i = 0; $i < $m; $i++) {
+            if ($matrix[$i][$left[$i]] > $target) {
+                $left[$i]++;
+            } else {
+                $right[$i]--;
+            }
+        }
+    }
+    
+    return false;
+}
+?>
+```
+In this solution, we use two arrays to keep track of the left and right pointers for each row. We initialize these arrays with `0` and `$n - 1`, respectively, since we know that the first integer of each row is greater than the last integer of the previous row.
+
+We then loop through each row in the matrix, checking if the target exists in the current row using two nested loops. If the target is found, we return `true`. If the target is not found, we update the left and right pointers for each row accordingly, so that we can continue searching the next row.
+
+We repeat this process until we have searched all rows in the matrix, or until we find the target. If we reach the end of the matrix without finding the target, we return `false`.
+
+The time complexity of this solution is O(log(m \* n)), as we only need to search each row at most once and there are at most m \* n rows in the matrix.
+

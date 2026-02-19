@@ -1,0 +1,31 @@
+ Here's a solution for the given task in PHP. This implementation performs binary search along each row and uses the fact that the matrix is sorted row by row to achieve O(log(min(m, n))) time complexity.
+
+```php
+function searchMatrix(array $matrix, int $target): bool {
+    $m = count($matrix);
+    if ($m === 0) return false;
+
+    for ($i = 0; $i < $m; $i++) {
+        $left = 0;
+        $right = count($matrix[$i]) - 1;
+
+        while ($left <= $right) {
+            $mid = intdiv($left + $right, 2);
+            if ($matrix[$i][$mid] === $target) {
+                return true;
+            } elseif ($matrix[$i][$mid] < $target) {
+                $left = $mid + 1;
+            } else {
+                $right = $mid - 1;
+            }
+        }
+
+        if (isset($matrix[$i][$right]) && $matrix[$i][$right] < $target) break;
+    }
+
+    return false;
+}
+```
+
+This function works by first checking if the matrix is empty. If it is, the target cannot be found. Then, it iterates through each row in the matrix and performs a binary search within that specific row to find the target. When the binary search determines that the target does not exist within the current row, the loop moves to the next row. The while loop breaks when the right index of the current row is greater than or equal to the target value, as this ensures that the target cannot be found in any subsequent rows with smaller values at their first elements.
+

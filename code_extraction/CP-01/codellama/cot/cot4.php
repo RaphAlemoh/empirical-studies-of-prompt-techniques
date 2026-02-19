@@ -1,0 +1,14 @@
+<?php
+
+function removeDuplicates(&$nums) {
+    $length = count($nums);
+    if ($length <= 1) return $length;
+
+    // find the first duplicate
+    for ($i = 1; $i < $length; $i++) {
+        if ($nums[$i] !== $nums[$i - 1]) continue;
+        unset($nums[$i]);
+    }
+
+    return count($nums);
+}

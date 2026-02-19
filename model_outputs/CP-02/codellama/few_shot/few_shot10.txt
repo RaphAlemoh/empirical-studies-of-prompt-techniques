@@ -1,0 +1,43 @@
+
+Solution:
+```php
+function isValid(string $s): bool {
+    $stack = [];
+    $chars = str_split($s);
+
+    foreach ($chars as $ch) {
+        if ($ch === '(' || $ch === '[' || $ch === '{') {
+            $stack[] = $ch;
+        } elseif ($ch === ')' || $ch === ']' || $ch === '}') {
+            if (empty($stack)) {
+                return false;
+            }
+
+            $top = end($stack);
+
+            if ($ch !== match($top)) {
+                return false;
+            }
+
+            array_pop($stack);
+        } else {
+            return false;
+        }
+    }
+
+    return empty($stack);
+}
+
+function match(string $ch): string {
+    switch ($ch) {
+        case '(': return ')';
+        case '{': return '}';
+        case '[': return ']';
+    }
+}
+```
+Explanation:
+The solution is similar to the previous one, but with a few additional cases to handle different types of brackets. The `match` function is used to map each opening bracket to its corresponding closing bracket. This allows us to check if the closing bracket is valid by comparing it to the top element of the stack using the `===` operator.
+
+We also need to handle invalid characters in the input string, which are not part of the allowed set of brackets. In this case, we return `false` immediately.
+

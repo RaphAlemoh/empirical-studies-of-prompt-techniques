@@ -1,0 +1,24 @@
+Here is a possible implementation of the `maxProfit` function in PHP:
+```php
+function maxProfit(array $prices): int {
+    $minPrice = INF;
+    $maxProfit = 0;
+    foreach ($prices as $price) {
+        if ($price < $minPrice) {
+            $minPrice = $price;
+            $maxProfit = max($maxProfit, $price - $minPrice);
+        } else {
+            $maxProfit = max($maxProfit, $price - $minPrice);
+        }
+    }
+    return $maxProfit;
+}
+```
+This implementation uses a single loop to iterate over the input array of prices and maintains two variables: `minPrice` and `maxProfit`. The `minPrice` variable is used to store the minimum price seen so far, while the `maxProfit` variable is used to store the maximum profit achieved.
+
+At each iteration of the loop, we check if the current price is less than the minimum price stored in `minPrice`. If it is, we update `minPrice` to be the current price and reset `maxProfit` to zero. This ensures that we always maintain a valid value for `minPrice`, which is necessary for computing the maximum profit.
+
+If the current price is greater than or equal to the minimum price stored in `minPrice`, we update `maxProfit` to be the maximum of its current value and the difference between the current price and the minimum price. This ensures that we always compute the maximum profit possible, given the prices seen so far.
+
+The time complexity of this implementation is O(n), where n is the length of the input array `prices`. This is because we only need to iterate over the input array once, and there are no nested loops or other operations that require additional computation.
+

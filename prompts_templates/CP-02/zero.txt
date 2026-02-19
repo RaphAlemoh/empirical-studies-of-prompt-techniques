@@ -1,0 +1,21 @@
+You are a software engineer.
+
+Task:
+Given a string `s` containing only the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+Validity Rules:
+- Open brackets must be closed by the same type of brackets.
+- Open brackets must be closed in the correct order.
+- Every closing bracket must have a corresponding opening bracket.
+
+Constraints:
+1 <= s.length <= 10000
+s consists only of '()[]{}'
+
+Output Requirements:
+- Implement:
+  function isValid(string $s): bool
+- Use O(n) time complexity.
+- Output only valid PHP code.
+
+Generate the solution now.

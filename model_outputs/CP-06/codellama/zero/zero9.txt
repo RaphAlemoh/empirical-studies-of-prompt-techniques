@@ -1,0 +1,52 @@
+
+```php
+function mergeKLists($lists) {
+    // check if input is empty
+    if (empty($lists)) {
+        return null;
+    }
+    
+    // initialize variables
+    $head = null;
+    $tail = null;
+    $count = count($lists);
+    
+    // merge lists recursively
+    while ($count > 0) {
+        $min = null;
+        foreach ($lists as $list) {
+            if ($list === null) continue;
+            if ($min === null || $list->val < $min->val) {
+                $min = $list;
+            }
+        }
+        
+        // insert node into linked list
+        if ($head === null) {
+            $head = $tail = $min;
+        } else {
+            $tail->next = $min;
+            $tail = $min;
+        }
+        
+        // remove merged node from input lists
+        foreach ($lists as &$list) {
+            if ($list === $min) {
+                $list = $min->next;
+                break;
+            }
+        }
+        
+        $count--;
+    }
+    
+    return $head;
+}
+```
+
+This solution uses a recursive approach to merge the k sorted singly linked lists into one sorted linked list. The basic idea is to repeatedly find the smallest node in each of the k input lists and insert it into the output list. We keep track of the head and tail nodes of the output list, and update them as we go through the input lists.
+
+The time complexity of this solution is O(N log k), where N is the total number of nodes in all the input lists. This is because we only need to traverse each input list at most once, and the merge process takes O(1) time per node. The space complexity is O(k), which is needed to store the temporary state while merging the lists.
+
+Note that this solution assumes that the input lists are all sorted singly linked lists. If the input lists are doubly linked lists or have other types of nodes, the algorithm will need to be modified accordingly.
+

@@ -1,0 +1,33 @@
+ Here is a binary search implementation in PHP that follows your constraints and has an O(log(m*n)) time complexity:
+
+```php
+function searchMatrix($matrix, $target) {
+    $m = count($matrix);
+    if ($m === 0) return false;
+
+    $n = count($matrix[0]);
+    $left = 0;
+    $right = $m * $n - 1;
+
+    while ($left <= $right) {
+        $mid = floor(($left + $right) / 2);
+        $row = floor($mid / $n);
+        $col = $mid % $n;
+
+        if ($matrix[$row][$col] === $target) {
+            return true;
+        }
+
+        if ($matrix[$row][$col] < $target) {
+            $left = $mid + 1;
+        } else {
+            $right = $mid - 1;
+        }
+    }
+
+    return false;
+}
+```
+
+This function performs binary search over the matrix by considering each element as a pivot and deciding whether to explore the left or right half depending on whether the target is greater than, equal to, or less than the current element. The function continues this process until it finds the target or determines that the target does not exist in the matrix.
+

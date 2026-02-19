@@ -1,0 +1,20 @@
+<?php
+
+function trap($height) {
+    // Find the largest bar on the left side of each bar
+    $leftMax = array_fill(0, count($height), 0);
+    for ($i = 1; $i < count($height); $i++) {
+        $leftMax[$i] = max($leftMax[$i - 1], $height[$i - 1]);
+    }
+    // Find the largest bar on the right side of each bar
+    $rightMax = array_fill(count($height) - 1, count($height), 0);
+    for ($i = count($height) - 2; $i >= 0; $i--) {
+        $rightMax[$i] = max($rightMax[$i + 1], $height[$i + 1]);
+    }
+    // Calculate the trapped water for each bar and sum it up
+    $trappedWater = 0;
+    for ($i = 1; $i < count($height) - 1; $i++) {
+        $trappedWater += min($leftMax[$i], $rightMax[$i]) - $height[$i];
+    }
+    return $trappedWater;
+}

@@ -1,0 +1,134 @@
+
+
+Solution:
+<?php
+function  isValid(string $s): bool {
+    $stack = [];
+
+    foreach (str_split($s) as $ch) {
+        switch ($ch) {
+            case '(':
+                $stack[] = ')';
+                break;
+
+            case '[':
+                $stack[] = ']';
+                break;
+
+            case '{':
+                $stack[]  = '}';
+                break;
+                
+            default: // closing character
+                if (array_pop($stack)!==$ch) return false;
+        }
+    }
+
+    return empty($stack);
+}
+?>
+
+Now solve this task:
+Task:
+Given a string `s` containing only digits and the '?' character, replace each question mark with one of 0-9.
+
+You may not add any leading zeros to output. Also, all values that are possible according to the given input will be put in the array or list.
+
+Output Requirements:
+- Implement
+  function replaceDigits(string $s): array
+- Return only valid PHP code.
+
+
+Solution:
+<?php
+function  replaceDigits(string $s): array {
+    $output = [];
+
+    for ($i=0; $i<strlen($s);$i++) {
+        if ($s[$i] === '?') {
+            $output[] .= '0-9';
+        } else {
+            $output []=$s[$i];
+        }
+    }
+    
+    return $output;
+}
+?>
+
+Now solve this task:
+Task:
+Given a string `s` containing just the characters '(', ')', '{', '}', '[' and ']'. Find all the possible combinations of well-formed parentheses.
+
+Well formed parentheses are defined as follows:
+- An empty sequence is considered to be "()".
+- A sequence made up only of opening brackets is considered to be an opening bracket.
+- A sequence made up only of closing brackets is considered to be a closing bracket.
+- If two sequences match, they must have the same length and the elements at each index must match. For example, the sequences "()" and "(())" both match the empty sequence. Similarly, the sequences "[()]" and "([])" both match the sequences with single opening and closing brackets. However, the sequence "[(()))" does not match the sequence that only contains opening brackets.
+- If a sequence is matched by multiple other sequences of same length (e.g., "(" and ")"), the longest one is included in the output. For example, the sequences "()()()" and "(())()" both contain 3 elements with values "()", which are also equal to each other. However, "()()()" contains more length than "(())()", which contains a single element of value "()".
+- If a sequence is matched by multiple other sequences of different lengths (e.g., "(" and ")"), the one that has more length is included in the output. For example, both "(())" and "()(())" contain 2 elements with values "()", but "()" has less length than "(())".
+
+Output Requirements:
+- Implement function
+  function matchParentheses(string $s): array
+- Return only valid PHP code
+
+
+Solution:
+<?php
+function  matchParentheses(string $s): array {
+    if (strlen($s) <1 || strlen($s) >30000) return [];
+
+    $stack =[];
+    for ($i=0; $i<strlen($s);$i++) {
+        switch ($s[$i]) {
+            case '(':
+                $stack[] = ')';
+                break;
+
+            case '[':
+                $stack []=']';
+                break;
+
+            case '{':
+                $stack []='}';
+                break;
+                
+            default:// closing character
+                if (array_pop($stack)!==$ch) return [];
+        }
+    }
+
+    if(empty($stack)) {return [strrev($s)];}
+    
+    while ($s = array_pop($stack)){
+        for ($i=0;$i<strlen($s);$i++) {
+            switch ($s[$i]) {
+                case '(':
+                    $stack[] = ')';
+                    break;
+
+                case '[':
+                     $stack []=']';
+                    break;
+
+                case '{':
+                      $stack []='}';
+                    break;
+                
+                default:// closing character
+                    if (array_pop($stack)!==$ch) return [];
+            }
+        }
+    }
+    
+    while (!empty ($stack)){
+        array_push($output,strrev(array_pop($stack)));
+    }
+    
+    return  array_unique($output);
+}
+
+
+

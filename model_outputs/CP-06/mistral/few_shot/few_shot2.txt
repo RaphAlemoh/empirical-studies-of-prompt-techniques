@@ -1,0 +1,45 @@
+ Here is a solution in PHP for merging k sorted linked lists using the merge-sort approach, which has a time complexity of O(n log k). The function `mergeKLists` takes an array of linked lists and returns the head of the merged list.
+
+```php
+function merge($l1, $l2) {
+    $dummy = new ListNode(0);
+    $current = $dummy;
+
+    while ($l1 !== null && $l2 !== null) {
+        if ($l1->val <= $l2->val) {
+            $current->next = $l1;
+            $l1 = $l1->next;
+        } else {
+            $current->next = $l2;
+            $l2 = $l2->next;
+        }
+        $current = $current->next;
+    }
+
+    $current->next = $l1 !== null ? $l1 : $l2;
+    return $dummy->next;
+}
+
+function mergeSort($lists, $low, $high) {
+    if ($low < $high) {
+        $mid = floor(($low + $high) / 2);
+        [$l1, $r1] = mergeSort($lists, $low, $mid);
+        [$l2, $r2] = mergeSort($lists, $mid + 1, $high);
+        $mergedList = merge($l1, $l2);
+        $mergedList->next = merge($mergedList, $r1);
+        return [$mergedList, $r2];
+    }
+    return [null, null];
+}
+
+function mergeKLists(array $lists): ?ListNode {
+    if (empty($lists)) {
+        return null;
+    }
+
+    return $head = mergeSort($lists, 0, count($lists) - 1)[0];
+}
+```
+
+This implementation first defines the `merge` function to combine two sorted linked lists. The `mergeSort` function sorts the given list of linked lists recursively using the merge sort algorithm and returns a pair containing the merged left subtree and right subtree. Finally, the `mergeKLists` function initializes and sorts the given list of linked lists using the `mergeSort` function and returns the head of the merged list.
+

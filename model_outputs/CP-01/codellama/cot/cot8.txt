@@ -1,0 +1,24 @@
+```php
+function removeDuplicates(&$nums){
+    $len = sizeof($nums);
+    if ($len === 0) return 0;
+    
+    // initialize pointers for beginning and end of unique subarray
+    $j = 0;
+    $i = 1;
+    
+    // loop through the array until we reach the end
+    while($i < $len){
+        // if current element is not equal to previous element, move it to next position in subarray
+        if ($nums[$i] !== $nums[$j]){
+            $j++;
+            $nums[$j] = $nums[$i];
+        }
+        $i++;
+    }
+    
+    // return the number of unique elements in the subarray
+    return $j + 1;
+}
+```
+

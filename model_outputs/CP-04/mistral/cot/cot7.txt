@@ -1,0 +1,21 @@
+ Here is the PHP function that solves the problem with the specified constraints:
+
+```php
+function maxProfit(array $prices): int {
+    $min = $prices[0];
+    $profit = 0;
+
+    foreach ($prices as $price) {
+        if ($price < $min) {
+            $min = $price;
+        } elseif ($price - $min > $profit) {
+            $profit = $price - $min;
+        }
+    }
+
+    return $profit;
+}
+```
+
+This function has a time complexity of O(n) and O(1) extra space. The idea is to maintain the minimum price encountered so far, then update the maximum profit if the difference between the current price and the minimum price is greater than the current profit.
+

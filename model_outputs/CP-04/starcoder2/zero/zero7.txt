@@ -1,0 +1,14 @@
+
+
+```
+<?php
+    /**
+     * Computes maximum profit from an array of stock prices
+     */
+    function maxProfit($prices): int {
+        // Write your code here.
+        return 0;
+    }
+?>
+```
+

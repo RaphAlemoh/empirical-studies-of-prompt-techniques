@@ -1,0 +1,10 @@
+prompt,model,N,Mean,SD
+cot,codellama,6,0.0,0.0
+cot,mistral,6,0.0,0.0
+cot,starcoder2,6,0.0,0.0
+few_shot,codellama,6,0.0,0.0
+few_shot,mistral,6,0.0,0.0
+few_shot,starcoder2,6,0.0,0.0
+zero,codellama,6,0.0,0.0
+zero,mistral,6,0.0,0.0
+zero,starcoder2,6,0.0,0.0

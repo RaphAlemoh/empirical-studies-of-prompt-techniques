@@ -1,0 +1,26 @@
+ ```php
+function searchMatrix(array $matrix, int $target) {
+    $rows = array_keys($matrix);
+    $left = 0;
+    $right = count($rows) - 1;
+
+    while ($left <= $right) {
+        $mid = floor(($left + $right) / 2);
+        $row = $rows[$mid];
+        $middle = $matrix[$row][count($matrix[$row]) - 1];
+
+        if ($target === $middle) {
+            return in_array($target, $matrix[$mid]);
+        }
+
+        if ($target < $middle) {
+            $right = $mid - 1;
+        } else {
+            $left = $mid + 1;
+        }
+    }
+
+    return false;
+}
+```
+

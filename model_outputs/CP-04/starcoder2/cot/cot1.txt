@@ -1,0 +1,12 @@
+
+<?php
+
+function maxProfit($prices) {
+    $profit = 0;
+
+    return $profit;
+}
+
+print(maxProfit([7, 3])); // 4
+
+

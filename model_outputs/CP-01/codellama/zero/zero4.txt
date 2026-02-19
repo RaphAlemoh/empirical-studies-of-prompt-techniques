@@ -1,0 +1,14 @@
+```
+function removeDuplicates($nums) {
+    if (!$nums) return 0;
+    $unique = [];
+    foreach ($nums as $key => $value) {
+        if (in_array($value, $unique)) continue;
+        else $unique[] = $value;
+        $nums[$key] = $unique[];
+    }
+
+    return count($nums);
+}
+```
+

@@ -1,0 +1,10 @@
+Prompt,Model,Shapiro_W,p_value
+cot,codellama,N/A,Zero variance or N<3
+cot,mistral,N/A,Zero variance or N<3
+cot,starcoder2,N/A,Zero variance or N<3
+few_shot,codellama,N/A,Zero variance or N<3
+few_shot,mistral,N/A,Zero variance or N<3
+few_shot,starcoder2,N/A,Zero variance or N<3
+zero,codellama,N/A,Zero variance or N<3
+zero,mistral,N/A,Zero variance or N<3
+zero,starcoder2,N/A,Zero variance or N<3

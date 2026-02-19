@@ -1,0 +1,27 @@
+
+```php
+function isValid($s) {
+    $openBrackets = ['(', '{', '['];
+    $closeBrackets = [')', '}', ']'];
+    $stack = [];
+
+    for ($i = 0; $i < strlen($s); $i++) {
+        $char = $s[$i];
+        if (in_array($char, $openBrackets)) {
+            array_push($stack, $char);
+        } else if (in_array($char, $closeBrackets)) {
+            $lastOpenBracket = end($stack);
+            if ($lastOpenBracket !== null && $closeBrackets[$lastOpenBracket] == $char) {
+                array_pop($stack);
+            } else {
+                return false;
+            }
+        }
+    }
+
+    return empty($stack);
+}
+```
+
+This solution uses a stack to keep track of the opening brackets and then checks if there are any closing brackets that do not have a corresponding opening bracket. If there is an invalid bracket, it returns `false`. If all brackets are valid, it returns `true`. The time complexity of this solution is O(n) where n is the length of the input string, since we only need to iterate through the string once and perform a single operation for each character.
+

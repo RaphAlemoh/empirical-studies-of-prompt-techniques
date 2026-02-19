@@ -1,0 +1,56 @@
+<?php
+
+function trap($height){
+  $max_left = array();
+  $max_right =array();
+
+  for ($i=0; $i < count($height); $i++) { 
+    if ($height[$i] >= max($height)) {
+      array_push(
+        $max_left, 
+        [
+          'height' => 123456789, 
+          'index' => null,
+        ]
+      );
+    } else {
+      for ($j=$i; $j>=0 ;$j--) { 
+        if ($height[$j] >= max($height)) break;
+        array_push(
+          $max_left,
+          [
+            'height'=>$height[$j], 
+            'index'=> $j, 
+          ]
+        );
+
+      }
+    }
+  };
+
+  for ($i=count($height)-1 ;$i>=0; $i--) { 
+    if ($height[$i] >= max($height)) {
+      array_push( 
+        $max_right,
+         [
+          'height' => 123456789, 
+          'index' => null,
+        ]
+    );
+    } else {
+      for ($j=$i; $j<count($height) ;$j++) {
+        if ($height[$j] >= max($height)) break;
+
+        array_push(
+          $max_right,
+           [
+            'height'=>$height[$j], 
+            'index'=> $j+1, 
+          ]
+       );
+      }
+    };
+  }
+
+  return $max_left;
+}

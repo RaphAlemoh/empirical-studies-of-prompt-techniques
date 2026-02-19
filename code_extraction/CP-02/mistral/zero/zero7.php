@@ -1,0 +1,23 @@
+<?php
+
+function isValid($s) {
+    $stack = [];
+    $pairs = [')' => '[', ']' => '{', '}' => '{'];
+
+    foreach (str_split($s) as $char) {
+        if ($char === '(' || $char === '[' || $char === '{') {
+            array_push($stack, $char);
+        } elseif (!empty($stack) && $pairs[$char] === array_pop($stack)) {
+            continue;
+        } else {
+            return false;
+        }
+    }
+
+    return empty($stack);
+}
+```
+
+This function works by initializing an empty stack and defining a mapping for each closing bracket to its corresponding opening bracket. It iterates through the given string, pushing opening brackets onto the stack and popping them when encountering their matching closing brackets. If the string has any unmatched closing brackets or the stack is not empty at the end, it returns false, indicating an invalid string. Otherwise, it returns true, meaning the string is valid.
+
+The time complexity of this solution is O(n) because it iterates through each character in the input string once (where n is the length of the string).

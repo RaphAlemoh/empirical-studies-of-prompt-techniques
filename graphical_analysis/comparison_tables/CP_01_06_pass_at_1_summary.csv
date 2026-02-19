@@ -1,0 +1,19 @@
+Coding Problem,Model,Zero-shot,Few-shot,CoT
+CP-01,codellama,100.0,100.0,100.0
+CP-01,mistral,0.0,100.0,0.0
+CP-01,starcoder2,0.0,0.0,0.0
+CP-02,codellama,0.0,100.0,100.0
+CP-02,mistral,0.0,100.0,33.33
+CP-02,starcoder2,0.0,100.0,100.0
+CP-03,codellama,50.0,100.0,0.0
+CP-03,mistral,100.0,33.33,50.0
+CP-03,starcoder2,0.0,0.0,0.0
+CP-04,codellama,100.0,66.67,66.67
+CP-04,mistral,66.67,66.67,66.67
+CP-04,starcoder2,0.0,0.0,33.33
+CP-05,codellama,0.0,0.0,33.33
+CP-05,mistral,0.0,0.0,0.0
+CP-05,starcoder2,0.0,0.0,0.0
+CP-06,codellama,33.33,33.33,33.33
+CP-06,mistral,33.33,33.33,33.33
+CP-06,starcoder2,0.0,0.0,0.0

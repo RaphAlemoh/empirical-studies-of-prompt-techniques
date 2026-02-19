@@ -1,0 +1,43 @@
+
+function mergeKLists(array $lists): ?ListNode {
+    if (count($lists) === 0) {
+        return null;
+    }
+    if (count($lists) === 1) {
+        return $lists[0];
+    }
+    
+    // Divide the input arrays into two halves.
+    $mid = count($lists) / 2;
+    $leftLists = array_slice($lists, 0, $mid);
+    $rightLists = array_slice($lists, $mid);
+    
+    // Recursively merge the left and right halves.
+    return mergeTwoLists(mergeKLists($leftLists), mergeKLists($rightLists));
+}
+
+function mergeTwoLists(?ListNode $l1, ?ListNode $l2): ?ListNode {
+    $dummy = new ListNode(0);
+    $current = $dummy;
+    
+    while ($l1 !== null && $l2 !== null) {
+        if ($l1->val <= $l2->val) {
+            $current->next = $l1;
+            $l1 = $l1->next;
+        } else {
+            $current->next = $l2;
+            $l2 = $l2->next;
+        }
+        $current = $current->next;
+    }
+    
+    // Add the remaining elements from one of the lists.
+    if ($l1 !== null) {
+        $current->next = $l1;
+    } elseif ($l2 !== null) {
+        $current->next = $l2;
+    }
+    
+    return $dummy->next;
+}
+

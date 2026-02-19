@@ -1,0 +1,19 @@
+<?php
+
+function trap(array $height): int {
+    // Find the left and right boundaries of the maximum water that can be trapped
+    $leftMax = 0;
+    $rightMax = 0;
+    for ($i = 1; $i < count($height) - 1; $i++) {
+        $leftMax = max($leftMax, $height[$i]);
+        $rightMax = max($rightMax, $height[$count($height) - $i]);
+    }
+    
+    // Calculate the total units of trapped water
+    $totalUnits = 0;
+    for ($i = 1; $i < count($height) - 1; $i++) {
+        $totalUnits += min($leftMax, $rightMax) - $height[$i];
+    }
+    
+    return $totalUnits;
+}

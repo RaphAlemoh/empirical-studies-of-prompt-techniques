@@ -1,0 +1,28 @@
+You are a software engineer.
+
+Task:
+You are given an array of k sorted singly linked lists. Merge them into one sorted linked list and return the head of the merged list.
+
+Data Structure:
+Each node is defined as:
+class ListNode {
+    public int $val;
+    public ?ListNode $next;
+    public function __construct(int $val = 0, ?ListNode $next = null) {
+        $this->val = $val;
+        $this->next = $next;
+    }
+}
+
+Constraints:
+0 <= k <= 10000
+0 <= total number of nodes <= 10000
+-10000 <= node values <= 10000
+
+Output Requirements:
+- Implement:
+  function mergeKLists(array $lists): ?ListNode
+- Use an efficient algorithm (O(N log k) preferred)
+- Output only valid PHP code.
+
+Generate the solution now.

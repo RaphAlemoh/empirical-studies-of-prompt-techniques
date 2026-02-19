@@ -1,0 +1,37 @@
+
+
+Solution:
+<?php
+function isValid(string $s): bool {
+    $stack = [];
+
+    foreach (str_split($s) as $char) {
+        if ($char === '(' || $char === '[' ||  $char === '{') {
+            $stack[] = $char;
+
+            continue;
+         }
+
+        if (!count($stack)) return false;
+
+
+        switch ($char){
+            case ')':
+                if (array_pop($stack)!=='(')return false;
+                break;
+            case '}':
+                if(array_pop($stack)!='{')  return false ;
+                break;
+            case ']':
+                if (array_pop($stack)!=='[')  return false ;
+
+                break;
+        }
+    }
+
+    // Check the stack, it must be empty.
+    return !count($stack);
+}
+
+
+

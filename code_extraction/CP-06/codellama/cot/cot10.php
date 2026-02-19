@@ -1,0 +1,13 @@
+<?php
+
+function mergeKLists($lists) {
+    if (count($lists) === 0) {
+        return null;
+    }
+
+    while (count($lists) > 1) {
+        $lists = array_map(null, ...$lists);
+    }
+
+    return $lists[0];
+}

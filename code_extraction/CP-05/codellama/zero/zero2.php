@@ -1,0 +1,16 @@
+<?php
+
+function trap(array $height): int {
+    // Calculate the maximum height of each bar
+    $maxHeights = array_map(function($h) { return max(0, $h); }, $height);
+
+    // Calculate the area of water trapped by each bar
+    $areas = array_map(null, $maxHeights, array_slice($maxHeights, 1), array_slice($maxHeights, -1));
+    $areas = array_map(function($a) { return ($a[0] < $a[1]) ? $a[0] : $a[2]; }, $areas);
+    $areas = array_map(function($h) { return $h * ($h - 1); }, $areas);
+
+    // Sum the areas of water trapped by each bar
+    $totalArea = array_sum($areas);
+
+    return $totalArea;
+}

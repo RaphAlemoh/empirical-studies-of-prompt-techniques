@@ -1,0 +1,39 @@
+ Here is a solution for the given task in PHP:
+
+```php
+function trap(array $height): int {
+    $n = count($height);
+    if ($n <= 1) return 0;
+
+    $leftMax = new SplMinHeap();
+    $rightMax = new SplMaxHeap();
+
+    $leftMax->insert($height[0]);
+    $trappedWater = 0;
+
+    for ($i = 1; $i < $n; ++$i) {
+        // Insert the current height on the right max heap and update the left max if necessary.
+        $rightMax->insert($height[$i]);
+        while ($leftMax->current() < $height[$i]) {
+            $cur = $leftMax->extractMin();
+            if ($rightMax->current() > $cur) {
+                $trappedWater += ($cur - $leftMax->current()) * (($i - $leftMax->count()) - 1);
+            }
+        }
+        $leftMax->insert($height[$i]);
+    }
+
+    // Process the remaining part on the right side.
+    while ($leftMax->count() > 0) {
+        $cur = $leftMax->extractMin();
+        if ($rightMax->count() > 0 && $cur > $rightMax->current()) {
+            $trappedWater += ($cur - $rightMax->current()) * ($n - $leftMax->count());
+        }
+    }
+
+    return $trappedWater;
+}
+```
+
+This solution uses two heaps (SplMinHeap for the left max and SplMaxHeap for the right max) to maintain the maximum heights on both sides of each index in the array. It iterates through the array, updating the max heights and calculating the amount of trapped water at each step. After that, it processes any remaining elements on the right side.
+

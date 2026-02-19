@@ -1,0 +1,25 @@
+
+function isValid($s) {
+    $stack = [];
+    for ($i = 0; $i < strlen($s); $i++) {
+        if ($s[$i] === "(" || $s[$i] === "{" || $s[$i] === "[") {
+            array_push($stack, $s[$i]);
+        } else {
+            if (count($stack) == 0) {
+                return false;
+            }
+            $top = array_pop($stack);
+            if ($top === "(" && $s[$i] !== ")") {
+                return false;
+            }
+            if ($top === "{" && $s[$i] !== "}") {
+                return false;
+            }
+            if ($top === "[" && $s[$i] !== "]") {
+                return false;
+            }
+        }
+    }
+    return count($stack) == 0;
+}
+

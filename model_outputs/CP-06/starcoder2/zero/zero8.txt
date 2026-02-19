@@ -1,0 +1,13 @@
+
+
+// BEGIN_HINTS
+//
+// Complexity Analysis:
+// Time complexity : O(n * lgn). Where n is the total number of nodes in all lists, 
+// and lgn is the time taken by a function call to merge 2 lists. 
+//
+// Space complexity : O(k). In worst case we might need all k elements at the stack,
+// and also all pointers from the input array will be used.
+//
+// END_HINTS
+

@@ -1,0 +1,22 @@
+ Here is the PHP implementation of the algorithm to compute the maximum profit from an integer array `prices`:
+
+```php
+function maxProfit(array $prices): int {
+    $minPrice = $prices[0];
+    $maxProfit = 0;
+
+    foreach ($prices as $price) {
+        if ($price < $minPrice) {
+            $minPrice = $price;
+        }
+
+        $currentProfit = $price - $minPrice;
+        $maxProfit = max($maxProfit, $currentProfit);
+    }
+
+    return $maxProfit;
+}
+```
+
+This function iterates through the `prices` array and maintains the minimum price as well as the maximum profit obtained so far. If a new price is less than the current minimum price, it updates the minimum price. For every iteration, it calculates the current profit (difference between the current price and the minimum price) and compares it with the maximum profit obtained so far, updating the maximum profit if necessary. The function returns the maximum achievable profit at the end.
+

@@ -1,0 +1,45 @@
+function mergeKLists(array $lists) {
+    // Base case: if there are no lists, return null
+    if (empty($lists)) return null;
+    
+    // Get the length of the input array
+    $length = count($lists);
+    
+    // If the length is 1, return the only list
+    if ($length === 1) return $lists[0];
+    
+    // Divide the lists into two groups of half the length
+    $halfLength = (int) floor($length / 2);
+    $list1 = array_slice($lists, 0, $halfLength);
+    $list2 = array_slice($lists, $halfLength);
+    
+    // Recursively merge the two groups of lists
+    return mergeTwoLists(mergeKLists($list1), mergeKLists($list2));
+}
+
+function mergeTwoLists(?ListNode $l1, ?ListNode $l2): ?ListNode {
+    $dummy = new ListNode(0);
+    $current = $dummy;
+    
+    while ($l1 !== null && $l2 !== null) {
+        if ($l1->val <= $l2->val) {
+            $current->next = $l1;
+            $l1 = $l1->next;
+        } else {
+            $current->next = $l2;
+            $l2 = $l2->next;
+        }
+        $current = $current->next;
+    }
+    
+    // Add the remaining lists to the merged list
+    if ($l1 !== null) {
+        $current->next = $l1;
+    }
+    if ($l2 !== null) {
+        $current->next = $l2;
+    }
+    
+    return $dummy->next;
+}
+

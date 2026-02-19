@@ -1,0 +1,28 @@
+ Here is a solution in PHP that implements the trap rain water problem with O(n) time complexity. The idea is to maintain two pointers `left` and `right`, initially set at the first and last indices of the array respectively. We then compare the minimum height between the left and right pointers, whichever is smaller becomes the wall for the current trapped water unit. The width of the trapped water is 1, so we multiply the height by the number of steps taken by the pointer with the smaller height towards the pointer with the larger height.
+
+```php
+function trap($height) {
+    $n = count($height);
+    $trappedWater = 0;
+    $left = 0;
+    $right = $n - 1;
+    $leftMax = $rightMax = 0;
+
+    while ($left < $right) {
+        if ($height[$left] <= $height[$right]) {
+            $leftMax = max($leftMax, $height[$left]);
+            $trappedWater += $leftMax - $height[$left];
+            $left++;
+        } else {
+            $rightMax = max($rightMax, $height[$right]);
+            $trappedWater += $rightMax - $height[$right];
+            $right--;
+        }
+    }
+
+    return $trappedWater;
+}
+```
+
+This function maintains the O(n) time complexity and outputs the total units of trapped water.
+

@@ -1,0 +1,16 @@
+<?php
+
+function removeDuplicates(&$nums) {
+    $len = count($nums);
+    if ($len <= 1) {
+        return $len;
+    }
+    $i = 0;
+    for ($j = 1; $j < $len; $j++) {
+        if ($nums[$j] !== $nums[$i]) {
+            $i++;
+            $nums[$i] = $nums[$j];
+        }
+    }
+    return $i + 1;
+}

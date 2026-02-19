@@ -1,0 +1,42 @@
+ Here is a solution in PHP for your problem that follows the given constraints and returns the total units of trapped water in O(n) time complexity. The idea behind this solution is to maintain two pointers, `left` and `right`, starting from the beginning and end of the array respectively, and compare their respective maximum heights. The maximum height between the two is then used to calculate the amount of water that can be trapped at that position.
+
+```php
+function trap($height) {
+    $n = count($height);
+    $left = 0;
+    $right = $n - 1;
+    $total_water = 0;
+    $left_max = 0;
+    $right_max = 0;
+
+    while ($left < $right) {
+        if ($height[$left] < $height[$right]) {
+            // If left max is smaller, move left pointer and update total water and left max accordingly.
+            if ($height[$left] > $left_max) {
+                $left_max = $height[$left];
+            } else {
+                $total_water += $left_max - $height[$left];
+            }
+            $left++;
+        } else {
+            // If right max is smaller, move right pointer and update total water and right max accordingly.
+            if ($height[$right] > $right_max) {
+                $right_max = $height[$right];
+            } else {
+                $total_water += $right_max - $height[$right];
+            }
+            $right--;
+        }
+    }
+
+    return $total_water;
+}
+```
+
+You can test the function with the following example:
+
+```php
+$array = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1];
+echo trap($array); // Outputs: 6
+```
+

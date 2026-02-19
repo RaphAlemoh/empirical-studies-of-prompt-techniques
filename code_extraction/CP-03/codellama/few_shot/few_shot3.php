@@ -1,0 +1,29 @@
+<?php
+
+function searchMatrix(array $matrix, int $target): bool {
+    // Get the dimensions of the matrix
+    $rows = count($matrix);
+    $cols = count($matrix[0]);
+
+    // Initialize the left and right indices
+    $left = 0;
+    $right = $rows * $cols - 1;
+
+    while ($left <= $right) {
+        // Get the middle index
+        $mid = intdiv(($left + $right), 2);
+
+        // Get the element at the middle index
+        $element = $matrix[$mid / $cols][$mid % $cols];
+
+        if ($element == $target) {
+            return true;
+        } elseif ($element < $target) {
+            $left = $mid + 1;
+        } else {
+            $right = $mid - 1;
+        }
+    }
+
+    return false;
+}

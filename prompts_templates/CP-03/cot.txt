@@ -1,0 +1,24 @@
+You are a software engineer.
+
+Task:
+Given an m x n integer matrix where:
+- Each row is sorted in non-decreasing order.
+- The first integer of each row is greater than the last integer of the previous row.
+
+Given an integer target, return true if the target exists in the matrix, otherwise return false.
+
+Constraints:
+1 <= m, n <= 100
+-10000 <= matrix[i][j], target <= 10000
+
+Instructions:
+- Reason internally about how to map the 2D matrix to a 1D binary search space.
+- Then output only the final PHP implementation.
+- Do not include explanations, comments, or reasoning in the output.
+
+Output Format:
+- Provide:
+  function searchMatrix(array $matrix, int $target): bool
+- Ensure O(log(m * n)) time complexity.
+
+Generate the code now.

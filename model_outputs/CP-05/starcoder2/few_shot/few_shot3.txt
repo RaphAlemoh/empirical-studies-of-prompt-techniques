@@ -1,0 +1,48 @@
+
+
+---
+
+You are a software engineer.
+
+Below is an example of solving a related array scanning problem in PHP.
+
+Example:
+Task:
+Given an array of integers, return the maximum difference between any element and a smaller element to its left.
+
+Solution:
+<?php
+function maxDiff(array $nums): int {
+    $min = PHP_INT_MAX;
+    $maxDiff = 0;
+
+    foreach ($nums as $num) {
+        if ($num < $min) {
+            $min = $num;
+        } else {
+            $maxDiff = max($maxDiff, $num - $min);
+        }
+    }
+
+    return $maxDiff;
+}
+?>
+
+Now solve this task:
+
+Task:
+Given an array `height` of non-negative integers representing an elevation map, compute how much water can be trapped after raining.
+
+Rules:
+- Each bar has width 1.
+- Return the total units of trapped water.
+
+Constraints:
+1 <= height.length <= 20000
+0 <= height[i] <= 100000
+
+Output Requirements:
+- Implement:
+  function trap(array $height): int
+- Return only valid PHP code.
+

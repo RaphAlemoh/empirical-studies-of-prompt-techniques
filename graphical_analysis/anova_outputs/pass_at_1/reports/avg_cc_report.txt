@@ -1,0 +1,14 @@
+STATISTICAL REPORT — AVG_CC (pass_at_1)
+============================================================
+
+Descriptive Statistics File:
+anova_outputs/pass_at_1/tables/avg_cc_descriptive_stats.csv
+
+Normality Test File:
+anova_outputs/pass_at_1/tables/avg_cc_normality.csv
+
+Levene’s Test:
+Statistic: 0.4724, p-value: 0.824
+
+ANOVA Table:
+anova_outputs/pass_at_1/tables/avg_cc_anova.csv

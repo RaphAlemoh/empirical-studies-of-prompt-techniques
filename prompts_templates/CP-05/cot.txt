@@ -1,0 +1,24 @@
+You are a software engineer.
+
+Task:
+Given an array `height` of non-negative integers representing an elevation map, compute how much water can be trapped after raining.
+
+Rules:
+- Each bar has width 1.
+- Return the total units of trapped water.
+
+Constraints:
+1 <= height.length <= 20000
+0 <= height[i] <= 100000
+
+Instructions:
+- Reason internally about the optimal algorithm.
+- Then output only the final PHP implementation.
+- Do not include explanations, comments, or reasoning in the output.
+
+Output Format:
+- Provide:
+  function trap(array $height): int
+- Ensure O(n) time complexity and O(1) extra space.
+
+Generate the code now.

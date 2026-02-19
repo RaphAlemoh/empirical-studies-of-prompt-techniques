@@ -1,0 +1,30 @@
+
+
+<!-- <div class="solution-template" style="display:none"> -->
+  <div class="solution-template" style="display: none;">
+    <div><br><div class="output_code_placeholder">SOLUTION</div></div>
+
+    <div>
+      <?php
+        $data = [
+          'inputs' => [],
+        ];
+
+        // Create input
+        echo '<p><b>Input: </b>';
+        foreach ($data['inputs'] as $input) {
+            $input_id = $input . '_input';
+
+            echo '<input class="custom-input" id="'.$input_id.'" style="width: 100%;" placeholder="Enter ' . strtoupper($input).'">';
+        }
+
+        // Generate solution template
+        $problem = new Problem('trap_water');
+        $problem->setSolutionTemplate();
+      ?>
+    </div>
+  </div>
+<!-- </div> -->
+
+
+

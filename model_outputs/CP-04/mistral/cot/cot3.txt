@@ -1,0 +1,23 @@
+ Here is the PHP function that computes the maximum profit with the specified constraints:
+
+```php
+function maxProfit(array $prices): int {
+    $minPrice = $prices[0];
+    $maxProfit = 0;
+
+    foreach ($prices as $price) {
+        if ($price < $minPrice) {
+            $minPrice = $price;
+        } elseif ($price - $minPrice > $maxProfit) {
+            $maxProfit = $price - $minPrice;
+        }
+    }
+
+    return $maxProfit;
+}
+```
+
+The algorithm works by iterating through the given array. At each step, it keeps track of the minimum price and the maximum profit obtained so far. If the current price is less than the minimum price encountered before, then we update the `minPrice`. If the current price minus the minimum price found so far is greater than the current maximum profit, then we update the `maxProfit`.
+
+The time complexity of this algorithm is O(n) because it iterates through each element in the array once. The extra space complexity is O(1) as it only uses two variables for calculation, both having a constant space requirement.
+

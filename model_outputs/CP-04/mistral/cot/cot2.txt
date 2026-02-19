@@ -1,0 +1,19 @@
+ Here is the PHP implementation of the algorithm:
+
+```php
+function maxProfit(array $prices): int {
+    $minPrice = $prices[0];
+    $maxProfit = 0;
+
+    foreach ($prices as $price) {
+        $minPrice = min($minPrice, $price);
+        $profit = $price - $minPrice;
+        $maxProfit = max($maxProfit, $profit);
+    }
+
+    return $maxProfit;
+}
+```
+
+This function uses a sliding window approach to calculate the maximum profit. It initializes `$minPrice` with the first stock price and `$maxProfit` with 0. Then, it iterates through the array, at each step updating the minimum price seen so far and calculating the current profit as the difference between the current stock price and the minimum price. Finally, it keeps track of the maximum profit seen so far by taking the maximum between `$maxProfit` and the current profit calculated at each iteration. This algorithm runs in O(n) time complexity and uses constant O(1) extra space.
+

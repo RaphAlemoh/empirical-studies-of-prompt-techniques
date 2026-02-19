@@ -1,0 +1,10 @@
+Prompt,Model,Shapiro_W,p_value
+cot,codellama,0.8857,0.2964
+cot,mistral,0.9054,0.4068
+cot,starcoder2,0.8984,0.3647
+few_shot,codellama,0.9098,0.4354
+few_shot,mistral,0.898,0.3623
+few_shot,starcoder2,0.8515,0.1617
+zero,codellama,0.8324,0.1127
+zero,mistral,0.9151,0.4706
+zero,starcoder2,0.7388,0.0155

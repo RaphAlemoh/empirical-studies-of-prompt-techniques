@@ -1,0 +1,50 @@
+You are a software engineer.
+
+Below is an example of merging two sorted linked lists in PHP.
+
+Example:
+Task:
+Merge two sorted linked lists and return the merged list.
+
+Solution:
+<?php
+function mergeTwoLists(?ListNode $l1, ?ListNode $l2): ?ListNode {
+    $dummy = new ListNode(0);
+    $current = $dummy;
+
+    while ($l1 !== null && $l2 !== null) {
+        if ($l1->val <= $l2->val) {
+            $current->next = $l1;
+            $l1 = $l1->next;
+        } else {
+            $current->next = $l2;
+            $l2 = $l2->next;
+        }
+        $current = $current->next;
+    }
+
+    $current->next = $l1 !== null ? $l1 : $l2;
+    return $dummy->next;
+}
+?>
+
+Now solve this task:
+
+Task:
+You are given an array of k sorted singly linked lists. Merge them into one sorted linked list and return the head of the merged list.
+
+Data Structure:
+class ListNode {
+    public int $val;
+    public ?ListNode $next;
+    public function __construct(int $val = 0, ?ListNode $next = null) {
+        $this->val = $val;
+        $this->next = $next;
+    }
+}
+
+Output Requirements:
+- Implement:
+  function mergeKLists(array $lists): ?ListNode
+- Use an efficient algorithm (O(N log k) preferred)
+- Return only valid PHP code.

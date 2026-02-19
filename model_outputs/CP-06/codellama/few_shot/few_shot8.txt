@@ -1,0 +1,45 @@
+  <?php
+class ListNode {
+    public int $val;
+    public ?ListNode $next;
+    public function __construct(int $val = 0, ?ListNode $next = null) {
+        $this->val = $val;
+        $this->next = $next;
+    }
+}
+function mergeKLists(array $lists): ?ListNode {
+    if (count($lists) == 0) {
+        return null;
+    } elseif (count($lists) == 1) {
+        return $lists[0];
+    }
+    
+    // Divide the lists into two halves
+    $mid = count($lists) / 2;
+    $left = array_slice($lists, 0, $mid);
+    $right = array_slice($lists, $mid);
+    
+    // Recursively merge the two halves
+    return mergeTwoLists(mergeKLists($left), mergeKLists($right));
+}
+function mergeTwoLists(?ListNode $l1, ?ListNode $l2): ?ListNode {
+    $dummy = new ListNode(0);
+    $current = $dummy;
+    
+    while ($l1 !== null && $l2 !== null) {
+        if ($l1->val <= $l2->val) {
+            $current->next = $l1;
+            $l1 = $l1->next;
+        } else {
+            $current->next = $l2;
+            $l2 = $l2->next;
+        }
+        $current = $current->next;
+    }
+    
+    // Add any remaining nodes from the non-empty list
+    $current->next = $l1 !== null ? $l1 : $l2;
+    return $dummy->next;
+}
+?>
+

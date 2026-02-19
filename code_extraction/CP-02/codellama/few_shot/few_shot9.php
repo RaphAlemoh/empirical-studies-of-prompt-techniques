@@ -1,0 +1,42 @@
+<?php
+
+function isValid(string $s): bool
+- Return only valid PHP code.
+
+Solution:
+<?php
+function isValid(string $s): bool {
+    $stack = [];
+
+    for ($i = 0; $i < strlen($s); $i++) {
+        if (in_array($s[$i], ['(', '{', '['])) {
+            // If the current character is an opening bracket, push it to the stack.
+            array_push($stack, $s[$i]);
+        } elseif ($s[$i] == ')') {
+            // If the current character is a closing parenthesis, pop the last opening bracket from the stack and ensure that it matches the current closing bracket.
+            if (count($stack) > 0 && $stack[count($stack) - 1] == '(') {
+                array_pop($stack);
+            } else {
+                return false;
+            }
+        } elseif ($s[$i] == '}') {
+            // If the current character is a closing brace, pop the last opening bracket from the stack and ensure that it matches the current closing brace.
+            if (count($stack) > 0 && $stack[count($stack) - 1] == '{') {
+                array_pop($stack);
+            } else {
+                return false;
+            }
+        } elseif ($s[$i] == ']') {
+            // If the current character is a closing bracket, pop the last opening bracket from the stack and ensure that it matches the current closing bracket.
+            if (count($stack) > 0 && $stack[count($stack) - 1] == '[') {
+                array_pop($stack);
+            } else {
+                return false;
+            }
+        }
+    }
+
+    // If the stack is empty, then the string is valid.
+    return count($stack) == 0;
+}
+?>

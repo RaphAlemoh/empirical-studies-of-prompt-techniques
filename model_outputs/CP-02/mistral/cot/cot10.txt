@@ -1,0 +1,23 @@
+ Here's a PHP implementation for the task:
+
+```php
+function isValid($s) {
+    $stack = [];
+    $map = ['{', '[', '(', function ($c) { return $c . ')'; }];
+
+    foreach (str_split($s) as $char) {
+        if (!empty($stack) && in_array($char, $map[array_pop($stack)])) {
+            array_pop($stack);
+        } else {
+            $stack[] = $char;
+        }
+    }
+
+    return empty($stack);
+}
+```
+
+This solution maintains a stack to store the opening brackets and checks if each character in the input string matches with its corresponding closing bracket in the stack. If the characters do not match, they are pushed onto the stack; otherwise, their respective pairs are removed from both the stack and the input string. The function returns true if the stack is empty at the end of the processing and false otherwise.
+
+This solution has O(n) time complexity and O(n) extra space due to the stack.
+

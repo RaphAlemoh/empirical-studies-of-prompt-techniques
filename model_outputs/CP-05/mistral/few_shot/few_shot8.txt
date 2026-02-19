@@ -1,0 +1,34 @@
+ Here is a solution for the given task in PHP:
+
+```php
+function trap(array $height): int {
+    $n = count($height);
+    if ($n < 3) return 0;
+
+    $leftMax = array_fill(0, $n, 0);
+    $rightMax = array_fill(0, $n, 0);
+
+    // Initialize left and right maximum heights
+    $leftMax[0] = $height[0];
+    for ($i = 1; $i < $n; ++$i) {
+        $leftMax[$i] = max($leftMax[$i - 1], $height[$i]);
+    }
+
+    // Initialize left and right maximum heights in reverse order
+    $rightMax[$n - 1] = $height[$n - 1];
+    for ($i = $n - 2; $i >= 0; --$i) {
+        $rightMax[$i] = max($rightMax[$i + 1], $height[$i]);
+    }
+
+    // Calculate the total volume of trapped water
+    $total = 0;
+    for ($i = 0; $i < $n; ++$i) {
+        $total += min($leftMax[$i], $rightMax[$i]) - $height[$i];
+    }
+
+    return $total;
+}
+```
+
+This function first initializes the left and right maximum heights for each column in the array. Then, it calculates the trapped water volume by iterating through the array and subtracting the minimum between the left and right maximum heights from the corresponding height at that position. The total amount of trapped water is then returned.
+

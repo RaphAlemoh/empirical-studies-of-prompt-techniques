@@ -1,0 +1,12 @@
+<?php
+
+function removeDuplicates(&$nums) {
+     // Write your code here.
+    $j = 1;//start from index=1, as index zero is already sorted.
+    for($i=1;$i<count($nums);$i++){//loop through all the elements of array
+        if ($nums[$i] !=0 && $nums[$j-1] != $nums[$i]){//if this element not 0 and previous element not equal to this element
+           $nums[$j++] = $nums[$i];//then we replace it with previous element.
+        }
+    }
+    return $j;
+}

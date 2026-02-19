@@ -1,0 +1,29 @@
+ Here's the solution for the given task using a stack-based approach in PHP:
+
+```php
+function isValid(string $s): bool {
+    $stack = [];
+    $mapping = [')' => '(', '}' => '{', ']' => '['];
+
+    foreach (str_split($s) as $ch) {
+        if ($ch === '(' || $ch === '{' || $ch === '[') {
+            $stack[] = $ch;
+        } else if (!empty($stack) && array_pop($stack) === $mapping[$ch]) {
+            // Correctly matched bracket, continue iterating
+        } else {
+            // Mismatched or unopened bracket, return false
+            return false;
+        }
+    }
+
+    // Check if there are any remaining open brackets in the stack
+    return empty($stack;);
+}
+```
+
+This code creates a function `isValid()` that takes a string `$s` containing only parentheses and brackets. It initializes an empty stack and a mapping array to check for corresponding opening and closing brackets.
+
+The function iterates through the characters in the input string. If it encounters an opening bracket, it is pushed onto the stack. If it encounters a closing bracket, the top item on the stack is popped out and compared against the mapping of the current character.
+
+If there is no matching opening bracket or if the closing bracket does not match the popped opening bracket, the function returns false immediately to indicate an invalid input string. Once the loop completes, the function checks if the stack is empty. If it is, then all brackets are correctly matched and the function returns true; otherwise, the function returns false for an invalid input string.
+

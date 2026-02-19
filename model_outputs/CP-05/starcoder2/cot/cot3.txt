@@ -1,0 +1,16 @@
+
+
+---
+
+**Example #1:**
+```php
+<?php
+require __DIR__ . '/../../bootstrap.php'; // Loads config file, autoloader etc...
+use Fellow\Algorithm\Problems\TrappingRainWater;
+
+
+$height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
+assert(new TrappingRainWater())->trap($height) === 6);
+```
+
+

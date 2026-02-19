@@ -1,0 +1,22 @@
+<?php
+
+function maxProfit($prices) {
+    // initialize variables for maximum profit and current price
+    $max_profit = 0;
+    $current_price = 0;
+
+    // loop through each day's stock prices
+    foreach ($prices as $day => $price) {
+        // check if current price is greater than previous highest price
+        if ($price > $current_price) {
+            // set current price to previous highest price
+            $current_price = $price;
+        } elseif ($price < $current_price) {
+            // calculate maximum profit for this day's transaction
+            $max_profit += $current_price - $price;
+        }
+    }
+
+    // return maximum profit
+    return $max_profit;
+}

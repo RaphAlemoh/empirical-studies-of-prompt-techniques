@@ -1,0 +1,32 @@
+
+To solve this task, we can use a dynamic programming approach to find the maximum profit from buying and selling the stock at most once. The algorithm will have two main parts:
+
+1. Compute the minimum cost of buying the stock on each day.
+2. Compute the maximum profit by comparing the difference between the current price and the minimum cost of buying the stock on that day.
+
+Here's an example implementation in PHP:
+```php
+function maxProfit($prices) {
+    $minCost = array_fill(0, count($prices), INF); // Initialize min cost to infinity
+    $maxProfit = 0;
+    
+    for ($i = 1; $i < count($prices); $i++) {
+        // Update minimum cost of buying the stock on each day
+        $minCost[$i] = min($minCost[$i - 1], $prices[$i]);
+        
+        // Compute maximum profit by comparing current price and minimum cost of buying the stock on that day
+        $maxProfit += max(0, $prices[$i] - $minCost[$i]);
+    }
+    
+    return $maxProfit;
+}
+```
+Here's an explanation of how the algorithm works:
+
+1. Initialize two arrays `minCost` and `maxProfit`. The former will store the minimum cost of buying the stock on each day, while the latter will store the maximum profit computed so far.
+2. Set the first element of `minCost` to 0 (since there is no cost to buy the stock on the first day).
+3. Iterate over each day in the input array `prices`. For each day, compare the current price with the minimum cost of buying the stock on that day. If the current price is less than or equal to the minimum cost, then there is no profit from buying the stock on that day, and we set the maximum profit to 0. Otherwise, we compute the profit by subtracting the minimum cost from the current price and add it to the maximum profit computed so far.
+4. Return the maximum profit computed at the end of the iteration.
+
+The time complexity of this algorithm is O(n), where n is the length of the input array `prices`. The space complexity is also O(n) because we need to store the minimum cost of buying the stock on each day in the `minCost` array, which has a size of n.
+

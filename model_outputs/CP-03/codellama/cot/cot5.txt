@@ -1,0 +1,15 @@
+```php
+function searchMatrix($matrix, $target) {
+    // Map the 2D matrix to a 1D binary search space
+    $flattened = array_reduce($matrix, function ($acc, $row) {
+        return array_merge($acc, $row);
+    });
+
+    // Perform a binary search on the flattened array
+    $index = array_search($target, $flattened);
+
+    // Check if the target was found and return true, otherwise false
+    return ($index !== false) ? true : false;
+}
+```
+

@@ -1,0 +1,52 @@
+ Here is a PHP implementation of the Merge K Sorted Lists problem using the Merge Sort algorithm with minimal extra space:
+
+```php
+function merge($list1, $list2) {
+    $head = new ListNode();
+    $current = $head;
+
+    while ($list1 !== null && $list2 !== null) {
+        if ($list1->val <= $list2->val) {
+            $current->next = $list1;
+            $list1 = $list1->next;
+        } else {
+            $current->next = $list2;
+            $list2 = $list2->next;
+        }
+        $current = $current->next;
+    }
+
+    if ($list1 !== null) {
+        $current->next = $list1;
+    } else {
+        $current->next = $list2;
+    }
+
+    return $head->next;
+}
+
+function mergeKLists(array $lists): ?ListNode {
+    if (empty($lists)) {
+        return null;
+    }
+
+    for ($i = 1; $i < count($lists); ++$i) {
+        $lists[$i] = merge($lists[0], $lists[$i]);
+    }
+
+    $middle = floor(count($lists) / 2);
+
+    for ($x = 0; $middle > 0; --$middle) {
+        $lists[$x] = merge($lists[$x], $lists[$x + $middle]);
+    }
+
+    if ($middle !== floor(count($lists))) {
+        $lists[floor($middle)] = merge($lists[floor($middle)], $lists[count($lists) - 1]);
+    }
+
+    return $lists[0];
+}
+```
+
+The `mergeKLists()` function is a modified version of the standard Merge Sort algorithm. It merges the lists in pairs, starting with the first two and moving down to smaller sub-arrays until only one list remains. The merging process is optimized using a single Linked List (the `$current` node) that maintains the merged list as it iterates through both input lists and performs comparisons to decide which value to add next. This ensures an efficient time complexity of O(N log k).
+

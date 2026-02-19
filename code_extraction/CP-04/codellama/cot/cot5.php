@@ -1,0 +1,17 @@
+<?php
+
+function maxProfit(array $prices): int {
+    // Initialize variables to keep track of maximum profit and current holding cost
+    $maxProfit = 0;
+    $holdingCost = 0;
+
+    // Iterate through the input array, starting from the second element
+    for ($i = 1; $i < count($prices); ++$i) {
+        // Update the holding cost based on the current price and the previous price
+        $holdingCost += max(0, $prices[$i] - $prices[$i - 1]);
+        // Update the maximum profit based on the current holding cost and the previous maximum profit
+        $maxProfit = max($maxProfit, $holdingCost);
+    }
+
+    return $maxProfit;
+}

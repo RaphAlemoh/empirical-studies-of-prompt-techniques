@@ -1,0 +1,28 @@
+ Here is the PHP implementation of the optimal solution for the given problem:
+
+```php
+function trap(array $height): int {
+    $maxLeft = [];
+    $maxRight = [];
+    $result = 0;
+
+    $leftMax = $rightMax = PHP_INT_MIN;
+
+    foreach (array_reverse($height) as $i => $val) {
+        $rightMax = max($rightMax, $val);
+        $maxRight[$i] = $rightMax;
+    }
+
+    $leftMax = $height[0];
+
+    foreach ($height as $i => $val) {
+        $result += min($leftMax, $rightMax[$i]) - $val;
+        $leftMax = max($leftMax, $val);
+    }
+
+    return $result;
+}
+```
+
+This solution has O(n) time complexity and O(1) extra space. The `trap()` function calculates the amount of trapped water by keeping track of the maximum height to the left and right at each position while iterating through the given array in linear time. It also uses constant extra space for the variables required during the computation, such as `$result`, `$leftMax`, `$rightMax`, `$maxLeft` and `$maxRight`.
+

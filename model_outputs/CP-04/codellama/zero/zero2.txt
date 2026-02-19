@@ -1,0 +1,30 @@
+```php
+<?php
+function maxProfit(array $prices): int {
+    // initialize variables for profit and minimum price seen so far
+    $profit = 0;
+    $minPrice = INF;
+    
+    foreach ($prices as $price) {
+        // update minimum price seen so far
+        if ($minPrice > $price) {
+            $minPrice = $price;
+        }
+        
+        // calculate profit for this day
+        $profit += $price - $minPrice;
+    }
+    
+    return $profit;
+}
+```
+Here's an explanation of the code:
+
+* We initialize two variables, `profit` and `minPrice`, to zero. The variable `profit` will store the total profit from all transactions, while `minPrice` will store the minimum stock price seen so far.
+* We loop through each day in the input array and perform the following steps:
+	+ Update the minimum stock price seen so far if necessary (i.e., if the current price is lower than the previous minimum).
+	+ Calculate the profit for this day by adding the difference between the current price and the minimum price seen so far to `profit`.
+* At the end of the loop, we return the maximum achievable profit from all transactions.
+
+The time complexity of this solution is O(n) because it only involves a single pass through the input array and no additional loops or nested data structures.
+

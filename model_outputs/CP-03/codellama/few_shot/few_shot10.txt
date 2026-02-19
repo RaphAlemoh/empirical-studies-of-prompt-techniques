@@ -1,0 +1,42 @@
+
+To solve this task, we can use a modified version of the binary search algorithm to find the target in the matrix. We start by checking if the first element of the matrix is greater than or equal to the target, and if so, we check if the target exists in the first row of the matrix. If not, we perform a binary search on the first column of the matrix to find the target.
+
+Here's an example implementation:
+```php
+function searchMatrix(array $matrix, int $target): bool {
+    $m = count($matrix);
+    $n = count($matrix[0]);
+
+    // Check if the first element of the matrix is greater than or equal to the target
+    if ($matrix[0][0] >= $target) {
+        for ($i = 0; $i < $m; $i++) {
+            if ($matrix[$i][0] === $target) {
+                return true;
+            }
+        }
+    } else {
+        // Perform a binary search on the first column of the matrix to find the target
+        $left = 0;
+        $right = $n - 1;
+
+        while ($left <= $right) {
+            $mid = intdiv($left + $right, 2);
+            if ($matrix[0][$mid] === $target) {
+                return true;
+            } elseif ($matrix[0][$mid] < $target) {
+                $left = $mid + 1;
+            } else {
+                $right = $mid - 1;
+            }
+        }
+    }
+
+    return false;
+}
+```
+This function uses the `count` function to get the number of rows and columns in the matrix, and then checks if the first element of the matrix is greater than or equal to the target. If not, it performs a binary search on the first column of the matrix to find the target. The binary search algorithm used here has a time complexity of O(log(m * n)), which is the same as the time complexity of the original binary search algorithm.
+
+The function uses the `intdiv` function to perform integer division and get the middle index of the first column of the matrix. This is necessary because the `$left` and `$right` variables are both integers, and we need to compare them with a floating-point number (the target). By using `intdiv`, we ensure that the comparison is done correctly.
+
+The function returns `true` if the target exists in the matrix, and `false` otherwise.
+

@@ -1,0 +1,18 @@
+<?php
+
+function trap($height){
+    $water = 0;
+    $i = 0;
+    $j = count($height) - 1;
+
+    while ($i < $j) {
+        $minHeight = min($height[$i], $height[$j]);
+        $water += ($minHeight - max($height[$i], $height[$j])) * ($j-$i);
+        if ($height[$i] < $height[$j]) {
+            $i++;
+        } else {
+            $j--;
+        }
+    }
+    return $water;
+}

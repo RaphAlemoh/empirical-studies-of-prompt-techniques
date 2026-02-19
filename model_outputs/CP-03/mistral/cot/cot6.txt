@@ -1,0 +1,32 @@
+ ```php
+function searchMatrix(array $matrix, int $target) {
+    $rowStart = 0;
+    $rowEnd = count($matrix);
+
+    while ($rowStart < $rowEnd) {
+        $midRow = floor(($rowStart + $rowEnd) / 2);
+        $startCol = 0;
+        $endCol = count($matrix[$midRow]);
+
+        while ($startCol < $endCol) {
+            $midCol = floor(($startCol + $endCol) / 2);
+            if ($matrix[$midRow][$midCol] === $target) {
+                return true;
+            } elseif ($matrix[$midRow][$midCol] < $target) {
+                $startCol++;
+            } else {
+                $endCol--;
+            }
+        }
+
+        if ($matrix[$midRow][$endCol] > $target) {
+            $rowEnd = $midRow;
+        } elseif ($matrix[$midRow][$startCol] <= $target) {
+            $rowStart = $midRow + 1;
+        }
+    }
+
+    return false;
+}
+```
+

@@ -1,0 +1,75 @@
+```
+class ListNode {
+    public int $val;
+    public ?ListNode $next;
+    public function __construct(int $val = 0, ?ListNode $next = null) {
+        $this->val = $val;
+        $this->next = $next;
+    }
+}
+
+function mergeKLists(array $lists): ?ListNode {
+    // Optimal merging strategy: Merge two lists at a time,
+    // until only one list remains. This ensures that the
+    // final merged list is sorted and efficient in terms of
+    // time complexity (O(N log k)).
+    
+    // Base case: If there are no lists to merge, return null.
+    if (count($lists) === 0) {
+        return null;
+    }
+    
+    // Merge two lists at a time until only one list remains.
+    while (count($lists) > 1) {
+        $list1 = array_shift($lists);
+        $list2 = array_shift($lists);
+        
+        $mergedList = mergeTwoLists($list1, $list2);
+        
+        // Add the merged list to the list of lists.
+        $lists[] = $mergedList;
+    }
+    
+    return array_pop($lists);
+}
+
+function mergeTwoLists(?ListNode $list1, ?ListNode $list2): ?ListNode {
+    // Base case: If either list is null, return the non-null list.
+    if ($list1 === null) {
+        return $list2;
+    }
+    
+    if ($list2 === null) {
+        return $list1;
+    }
+    
+    // Merge the two lists by iterating through both lists and
+    // comparing the values of each node. If the value of a node
+    // is less than the value of the other node, add it to the
+    // merged list and advance the pointer of the appropriate list.
+    $mergedList = new ListNode();
+    $current = $mergedList;
+    
+    while ($list1 !== null && $list2 !== null) {
+        if ($list1->val < $list2->val) {
+            $current->next = $list1;
+            $current = $current->next;
+            $list1 = $list1->next;
+        } else {
+            $current->next = $list2;
+            $current = $current->next;
+            $list2 = $list2->next;
+        }
+    }
+    
+    // If either list is not null, add the remaining nodes to the merged list.
+    if ($list1 !== null) {
+        $current->next = $list1;
+    } elseif ($list2 !== null) {
+        $current->next = $list2;
+    }
+    
+    return $mergedList->next;
+}
+```
+

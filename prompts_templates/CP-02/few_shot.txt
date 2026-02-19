@@ -1,0 +1,42 @@
+You are a software engineer.
+
+Below is an example of using a stack-based approach in PHP.
+
+Example:
+Task:
+Given a string of lowercase letters, return true if the string is a palindrome, otherwise false.
+
+Solution:
+<?php
+function isPalindrome(string $s): bool {
+    $stack = [];
+    $chars = str_split($s);
+
+    foreach ($chars as $ch) {
+        $stack[] = $ch;
+    }
+
+    foreach ($chars as $ch) {
+        if (array_pop($stack) !== $ch) {
+            return false;
+        }
+    }
+
+    return true;
+}
+?>
+
+Now solve this task:
+
+Task:
+Given a string `s` containing only the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+Validity Rules:
+- Open brackets must be closed by the same type of brackets.
+- Open brackets must be closed in the correct order.
+- Every closing bracket must have a corresponding opening bracket.
+
+Output Requirements:
+- Implement:
+  function isValid(string $s): bool
+- Return only valid PHP code.

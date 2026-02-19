@@ -1,0 +1,30 @@
+
+```php
+function isValid($s) {
+    $stack = array();
+    for ($i = 0; $i < strlen($s); $i++) {
+        $char = $s[$i];
+        if (in_array($char, array("(", "{", "["))) {
+            // push to stack
+            array_push($stack, $char);
+        } else {
+            // pop from stack
+            $top = array_pop($stack);
+            if ($top === null) {
+                return false;
+            }
+            // check that the popped character is the matching pair
+            if (($char == ")" && $top != "(") ||
+                    ($char == "]" && $top != "[") ||
+                    ($char == "}" && $top != "{")) {
+                return false;
+            }
+        }
+    }
+    // check that the stack is empty
+    return count($stack) === 0;
+}
+```
+Explanation:
+The solution uses a stack data structure to keep track of the opening brackets. For each character in the input string, we check if it's an opening bracket or a closing bracket. If it's an opening bracket, we push it onto the stack. If it's a closing bracket, we pop from the stack and check if the popped character is the matching pair. We continue until all characters have been processed. Finally, we check that the stack is empty to determine whether the input string is valid.
+

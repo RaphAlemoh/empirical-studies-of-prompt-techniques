@@ -1,0 +1,63 @@
+
+
+Solution 1:
+<?php
+function mergeKLists(array $lists): ?ListNode {
+    if (empty($lists)) return null;
+
+    $dummy = new ListNode();
+    $current = $dummy;
+
+    while (!empty($lists)) {
+        $minValue = PHP_INT_MAX;
+
+        foreach ($lists as  $key => &$list)
+            if (!$list || $list->val < $minValue)
+                list($lists[$key], $minValue, $current) = [
+                    $list, $list ? $list->val : PHP_INT_MAX, $current
+                ];
+        $current->next = $list;
+    }
+
+    return $dummy->next;
+}
+?>
+
+Solution 2:
+<?php
+function mergeKLists(array $lists): ?ListNode {
+  if (empty($lists)) return null;
+
+  // make a min-heap from the first elements of each list.
+  // you can also use max-heap but that's less efficient, because in
+  // the worst case we must read the whole list to find out which node
+  // has minimum value.
+  $minHeap = new SplMinHeap();
+  foreach ($lists as  &$list) {
+    if (!$list || !$list->val) continue;
+
+    $minHeap->insert($list);
+    $list = $list->next;
+  }
+
+  // create a dummy head node, which will be updated during merge.
+  $dummyHead = new ListNode();
+  $current = $dummyHead;
+
+  while ($minHeap->count()) {
+      list($list) = $minHeap->extract();
+
+      if (!$list || !$list->val) continue;
+
+      $current->next = $list;
+      $current = $current->next;
+
+      // insert new node to the min-heap.
+      $newNode = new ListNode(0,  $list->next);
+      $minHeap->insert($newNode);
+  }
+
+  return $dummyHead->next;
+}
+?>
+

@@ -1,0 +1,23 @@
+<?php
+
+function isValid($s) {
+    $stack = [];
+    $map = ['{'=> '}', '['=> ']', '(' => ')'];
+
+    foreach (str_split($s) as $char) {
+        if ($char === '{' || $char === '[' || $char === '(') {
+            array_push($stack, $char);
+        } else {
+            if (!empty($stack) && $map[$stack[count($stack)-1]] === $char) {
+                array_pop($stack);
+            } else {
+                return false;
+            }
+        }
+    }
+
+    return empty($stack);
+}
+```
+
+This function uses a stack to keep track of the opening brackets and checks if each closing bracket matches its corresponding opening bracket. If there are any unmatched closing brackets, the function returns false; otherwise, it returns true. The time complexity is O(n) due to iterating through the string once and using constant space for the stack (O(1)).

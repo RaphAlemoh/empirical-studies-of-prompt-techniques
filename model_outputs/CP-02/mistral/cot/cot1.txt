@@ -1,0 +1,23 @@
+ ```php
+function isValid($s) {
+    $stack = [];
+    $openers = ['(', '[', '{'];
+    $closers = [')', ']', '}'];
+
+    for ($i = 0; $i < strlen($s); $i++) {
+        if (in_array($s[$i], $openers)) {
+            array_push($stack, $s[$i]);
+        }
+
+        if (in_array($s[$i], $closers) && !empty($stack)) {
+            $last = array_pop($stack);
+            if ($s[$i] !== str_repeat(end($closers), strlen(substr($s, $i))) || $last !== substr($s, 0, strlen($last))[strlen($last) - 1]) {
+                return false;
+            }
+        }
+    }
+
+    return empty($stack);
+}
+```
+

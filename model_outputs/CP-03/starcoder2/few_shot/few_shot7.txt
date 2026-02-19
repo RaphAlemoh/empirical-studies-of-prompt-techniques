@@ -1,0 +1,29 @@
+
+
+Example Input and Output:
+Input 1:
+    [
+        [-5,-4],
+        [-3,-2]
+     ]
+  $target = -5
+Output 1: true
+Explanation for Input1
+    Since -5 is smaller than the last integer of previous row (-2), -5 will be on the left side.
+    Now, we are searching in [-5,-2] which means -4, -3 and -2 should be on the right side.
+    So there is no -5 exists in [-3,-2].
+
+Input 2: 
+    [
+        [-10,-9],
+        [-8,-7], 
+        [-6,-5]
+     ]
+  $target = 1
+Output 2: false
+Explanation for Input2
+    Since 1 < the first integer of each row, -1 is on the right side.
+    Now we are searching in [1,3]. Since no integers smaller than 1 exists on the left side.
+    Therefore there's no 1 exist in [1,3] as well.
+
+

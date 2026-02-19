@@ -1,0 +1,50 @@
+ Here is a solution in PHP that uses a min-heap to solve the problem efficiently, with a time complexity of O(n log k).
+
+```php
+use function SplMinHeap::construct;
+
+class ListNode {
+    public int $val;
+    public ?ListNode $next;
+    public function __construct(int $val = 0, ?ListNode $next = null) {
+        $this->val = $val;
+        $this->next = $next;
+    }
+}
+
+function mergeKLists(array $lists): ?ListNode {
+    if (empty($lists)) return null;
+
+    $minHeap = construct(function ($a, $b) {
+        return $a->val - $b->val;
+    });
+
+    foreach ($lists as $list) {
+        if (!is_null($list)) {
+            $minHeap->insert($list);
+        }
+    }
+
+    $head = null;
+    $prevNode = null;
+
+    while (!$minHeap->isEmpty()) {
+        /** @var ListNode $current */
+        $current = $minHeap->extract();
+        $node = new ListNode($current->val);
+
+        if (is_null($head)) {
+            $head = $node;
+        } else {
+            $prevNode->next = $node;
+        }
+
+        $prevNode = $node;
+    }
+
+    return $head;
+}
+```
+
+This implementation first initializes a min-heap containing the heads of each input linked list. It then processes each item in the heap one by one, creating a new linked list and connecting the nodes together in sorted order. The head node of the merged list is returned at the end.
+

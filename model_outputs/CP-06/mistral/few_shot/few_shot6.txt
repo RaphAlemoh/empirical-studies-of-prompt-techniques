@@ -1,0 +1,44 @@
+ Here is a solution for merging k sorted linked lists in PHP, using an efficient algorithm with a time complexity of O(k \* n log n), where k is the number of lists and n is the average length of the lists.
+
+```php
+function mergeKLists(array $lists): ?ListNode {
+    if (empty($lists)) {
+        return null;
+    }
+
+    $count = count($lists);
+
+    for ($heapSize = $count; $heapSize > 1; $heapSize = ceil($heapSize / 2)) {
+        $heap = new SplMinHeap();
+
+        foreach ($lists as $list) {
+            if (!is_null($list)) {
+                $heap->insert(compact('list'));
+            }
+        }
+
+        $dummy = new ListNode(0);
+        $current = &$dummy;
+
+        while (!$heap->isEmpty()) {
+            list($node) = $heap->extractMin();
+
+            $current->next = $node;
+            $current = $current->next;
+
+            if (!is_null($node->next)) {
+                $heap->insert(compact('node->next'));
+            }
+        }
+
+        $lists = [$dummy->next];
+    }
+
+    return reset($lists);
+}
+```
+
+In this solution, I have used a min-heap to efficiently merge the linked lists. First, we build a min-heap with all the heads of the given linked lists. After that, we iteratively extract the smallest node (minimum value) from the heap and append it to our result list. The next iteration continues until the heap is empty or we have processed all the nodes from the input lists.
+
+The time complexity of this algorithm is O(k log k + n), where k is the number of linked lists and n is the total number of elements in the lists. This is optimal for large values of k, as it scales linearly with the total number of elements (n).
+

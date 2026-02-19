@@ -1,0 +1,14 @@
+STATISTICAL REPORT — AVG_EXECUTION_TIME_MS (pass_at_1)
+============================================================
+
+Descriptive Statistics File:
+anova_outputs/pass_at_1/tables/avg_execution_time_ms_descriptive_stats.csv
+
+Normality Test File:
+anova_outputs/pass_at_1/tables/avg_execution_time_ms_normality.csv
+
+Levene’s Test:
+Statistic: 1.0608, p-value: 0.4069
+
+ANOVA Table:
+anova_outputs/pass_at_1/tables/avg_execution_time_ms_anova.csv

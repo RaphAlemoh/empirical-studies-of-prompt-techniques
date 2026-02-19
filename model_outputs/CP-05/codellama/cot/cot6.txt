@@ -1,0 +1,24 @@
+
+```php
+<?php
+function trap(array $height): int {
+    // Initialize the left and right pointers to the beginning and end of the array, respectively
+    $left = 0;
+    $right = count($height) - 1;
+
+    // Initialize the maximum amount of water to be trapped as 0
+    $maxWater = 0;
+
+    // Loop through the array from left to right
+    for ($i = 0; $i < count($height); $i++) {
+        // Get the minimum height value between the left and right pointers
+        $minHeight = min($height[$left], $height[$right]);
+
+        // Update the maximum amount of water to be trapped based on the current height values
+        $maxWater += ($minHeight - $height[$i]) > 0 ? ($minHeight - $height[$i]) : 0;
+    }
+
+    return $maxWater;
+}
+```
+

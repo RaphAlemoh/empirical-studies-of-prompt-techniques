@@ -1,0 +1,26 @@
+ Here is a simple PHP function that uses a stack data structure to solve this problem. The function `isValid` checks if the input string is valid according to the given rules:
+
+```php
+function isValid(string $s) {
+    $stack = [];
+    $valid_brackets = ['{', '[', '('];
+    $closers = ['}', ']', ')'];
+
+    for ($i = 0; $i < strlen($s); $i++) {
+        if (in_array($s[$i], $valid_brackets)) {
+            array_push($stack, $s[$i]);
+        } elseif (!empty($stack) && strpos($closers, $s[$i]) === strpos($closers, array_pop($stack)) + 1) {
+            // If the stack is not empty and the closing bracket matches the top of the stack
+        } else {
+            return false;
+        }
+    }
+
+    return empty($stack);
+}
+```
+
+This function works by iterating through the input string. When it encounters an opening bracket, it pushes it onto a stack. When it encounters a closing bracket, it checks if the top of the stack contains the corresponding opening bracket and pops it from the stack. If there are no more elements in the stack at the end, the string is valid; otherwise, it's invalid.
+
+The time complexity of this solution is O(n) where n is the length of the input string since we iterate through the string only once and perform constant-time operations on the stack.
+

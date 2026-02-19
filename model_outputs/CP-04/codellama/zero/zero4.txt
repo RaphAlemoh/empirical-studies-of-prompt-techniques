@@ -1,0 +1,20 @@
+
+function maxProfit(array $prices) {
+    // Initialize variables to keep track of the maximum profit and the current price
+    $maxProfit = 0;
+    $currentPrice = null;
+
+    // Iterate through the prices array
+    foreach ($prices as $price) {
+        // If the current price is higher than the previous price, update the maximum profit
+        if ($currentPrice !== null && $price > $currentPrice) {
+            $maxProfit += ($price - $currentPrice);
+        }
+
+        // Update the current price
+        $currentPrice = $price;
+    }
+
+    return $maxProfit;
+}
+

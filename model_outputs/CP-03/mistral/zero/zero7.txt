@@ -1,0 +1,25 @@
+ Here is a binary search solution in PHP that follows your constraints and has a time complexity of O(log(m \* n)). The idea is to start from the rightmost bottom cell and perform a binary search by moving diagonally up or to the left based on whether the current element is greater than or less than the target.
+
+```php
+function searchMatrix(array $matrix, int $target): bool {
+    $m = count($matrix);
+    if ($m === 0) return false;
+
+    $n = count($matrix[0]);
+    $i = $m - 1;
+    $j = $n - 1;
+
+    while ( $i >= 0 && $j >= 0 ) {
+        $current = $matrix[$i][$j];
+
+        if ($current === $target) return true;
+        else if ($current < $target) $i--;
+        else $j--;
+    }
+
+    return false;
+}
+```
+
+This function will return `true` if the target is found in the matrix and `false` otherwise. The binary search starts from the rightmost bottom cell, and moves diagonally up or to the left based on whether the current element is greater than or less than the target. It stops when it finds either the target or reaches an element that is smaller than the target (if moving up) or larger than the target (if moving left). If the search goes out of bounds, it simply returns false since the matrix is guaranteed to be within the given constraints.
+

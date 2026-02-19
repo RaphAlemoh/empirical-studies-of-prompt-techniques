@@ -1,0 +1,27 @@
+<?php
+
+function searchMatrix($matrix, $target) {
+	// Calculate the number of rows and columns in the matrix
+	$m = count($matrix);
+	$n = count($matrix[0]);
+
+	// Initialize variables to keep track of the current row and column
+	$row = 0;
+	$col = $n - 1;
+
+	// Search for the target while the row is within the bounds of the matrix
+	while ($row < $m) {
+		if ($matrix[$row][$col] == $target) {
+			return true;
+		} else if ($matrix[$row][$col] > $target) {
+			// If the target is less than the current element, move to the previous column
+			$col--;
+		} else {
+			// If the target is greater than the current element, move to the next row
+			$row++;
+		}
+	}
+
+	// If the loop exits normally, the target was not found
+	return false;
+}

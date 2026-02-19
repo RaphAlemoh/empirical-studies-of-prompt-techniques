@@ -1,0 +1,30 @@
+ Here is a binary search solution in PHP that should meet your requirements:
+
+```php
+function searchMatrix($matrix, $target) {
+    if (empty($matrix)) return false;
+
+    $m = count($matrix);
+    $n = count($matrix[0]);
+
+    $left = 0;
+    $right = $m * $n - 1;
+
+    while ($left <= $right) {
+        $mid = floor(($left + $right) / 2);
+        $row = intval($mid / $n);
+        $col = $mid % $n;
+
+        if ($matrix[$row][$col] === $target) return true;
+        else if ($matrix[$row][$col] < $target) $left = $mid + 1;
+        else $right = $mid - 1;
+    }
+
+    return false;
+}
+```
+
+This function performs binary search on the matrix by treating each row as a sorted array, and each cell in the matrix as an element in those arrays. The initial range of the search is the entire matrix (from 0 to `m * n - 1`). At each step, it calculates the row and column index for the middle element, checks if the target equals that element, updates the left or right boundary accordingly, and continues until the target is found or the search range becomes empty. If the target is not found after exhausting all possible positions in the matrix, the function returns false.
+
+The time complexity of this solution is O(log(m * n)) as required.
+

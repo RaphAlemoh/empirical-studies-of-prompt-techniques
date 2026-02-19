@@ -1,0 +1,23 @@
+ Here is a solution for the given task in PHP:
+
+```php
+function maxProfit(array $prices): int {
+    if (count($prices) <= 1) return 0;
+
+    $minPrice = $prices[0];
+    $maxProfit = 0;
+
+    foreach ($prices as $price) {
+        $currentProfit = $price - $minPrice;
+        $maxProfit = max($maxProfit, $currentProfit);
+        $minPrice = min($minPrice, $price);
+    }
+
+    return $maxProfit;
+}
+```
+
+This function initializes the minimum price as the first element of the array and the maximum profit to zero. It then iterates through the array, updating the minimum price if the current price is lower, and storing the difference between the current price and the minimum price as a potential profit. The maximum achievable profit is calculated by comparing each potential profit with the current maximum profit and choosing the greater value.
+
+The function returns the computed maximum profit.
+

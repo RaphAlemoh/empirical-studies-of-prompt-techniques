@@ -1,0 +1,56 @@
+ Here is a solution for the task you provided in PHP:
+
+```php
+function trap(array $height): int {
+    $n = count($height);
+    if ($n <= 1) return 0;
+
+    $leftMax = new SplMaxHeap();
+    $rightMax = new SplMinHeap();
+    $leftMax->insert($height[0]);
+
+    $unitsTrapped = 0;
+
+    for ($i = 1; $i < $n; $i++) {
+        // Insert current element to the right max heap
+        $rightMax->insert($height[$i]);
+
+        // If current element is greater than left max, pop from left max heap
+        if ($height[$i] > $leftMax->getCurrent()) {
+            $leftMax->extract();
+        }
+
+        // Calculate the water level between left and right maximum heights
+        $waterLevel = min($leftMax->getCurrent(), $rightMax->getCurrent()) - $height[$i];
+
+        // If water level is positive, add it to total units trapped
+        if ($waterLevel > 0) {
+            $unitsTrapped += $waterLevel;
+        }
+    }
+
+    // Insert last element to the left max heap for calculating trapped water in the last column
+    $leftMax->insert($height[$n - 1]);
+
+    for ($i = $n - 2; $i >= 0; $i--) {
+        if ($height[$i] > $leftMax->getCurrent()) {
+            $leftMax->extract();
+        }
+
+        // Calculate the water level between left and right maximum heights
+        $waterLevel = min($leftMax->getCurrent(), $rightMax->getCurrent()) - $height[$i];
+
+        // If water level is positive, add it to total units trapped
+        if ($waterLevel > 0) {
+            $unitsTrapped += $waterLevel;
+        }
+    }
+
+    return $unitsTrapped;
+}
+```
+
+This function uses two heaps (SplMaxHeap for left max and SplMinHeap for right min) to keep track of the maximum height to the left and right of each element in the input array. By iterating through the array, it calculates the trapped water level between the current height and the maximum height to its left and right, adding any positive amounts to the total units trapped.
+
+The time complexity of this solution is O(n) due to linear iteration through the input array and logarithmic access to the heaps (O(log n)). The space complexity is O(n) due to storing the input array and the two heaps.
+

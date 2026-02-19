@@ -1,0 +1,34 @@
+<?php
+
+function isValid(string $s): bool {
+    $stack = [];
+    for ($i = 0; $i < strlen($s); $i++) {
+        if (($s[$i] == '(') || ($s[$i] == '{') || ($s[$i] == '[')) {
+            $stack[] = $s[$i];
+        } else {
+            $last_char = array_pop($stack);
+            if (!$last_char) {
+                return false;
+            }
+            switch ($last_char) {
+                case '(':
+                    if ($s[$i] != ')') {
+                        return false;
+                    }
+                    break;
+                case '{':
+                    if ($s[$i] != '}') {
+                        return false;
+                    }
+                    break;
+                case '[':
+                    if ($s[$i] != ']') {
+                        return false;
+                    }
+                    break;
+            }
+        }
+    }
+    return count($stack) == 0;
+}
+```

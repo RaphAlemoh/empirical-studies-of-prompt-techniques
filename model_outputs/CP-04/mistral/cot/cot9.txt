@@ -1,0 +1,21 @@
+ Here's the PHP implementation for the task:
+
+```php
+function maxProfit(array $prices): int {
+    $minPrice = $prices[0];
+    $maxProfit = 0;
+
+    foreach ($prices as $price) {
+        if ($price < $minPrice) {
+            $minPrice = $price;
+        } elseif ($price - $minPrice > $maxProfit) {
+            $maxProfit = $price - $minPrice;
+        }
+    }
+
+    return $maxProfit;
+}
+```
+
+This implementation uses two variables, `$minPrice` and `$maxProfit`, to keep track of the minimum price found so far and the maximum profit achieved. It iterates through the array and updates the `$minPrice` when it finds a lower price than the current minimum, and checks if the difference between the current price and the minimum price is greater than the current maximum profit, updating it accordingly. The final profit obtained is returned at the end of the function.
+

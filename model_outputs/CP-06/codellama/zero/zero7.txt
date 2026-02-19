@@ -1,0 +1,59 @@
+```php
+function mergeKLists($lists) {
+    // If there are no lists, return null
+    if (empty($lists)) return null;
+
+    // Merge the first two lists
+    $head = $this->mergeTwoLists($lists[0], $lists[1]);
+
+    // Recursively merge the rest of the lists
+    for ($i = 2; $i < count($lists); $i++) {
+        $head = $this->mergeTwoLists($head, $lists[$i]);
+    }
+
+    return $head;
+}
+
+function mergeTwoLists($list1, $list2) {
+    // If either list is null, return the other list
+    if ($list1 === null || $list2 === null) return $list1 !== null ? $list1 : $list2;
+
+    // Create a new dummy node as the head of the merged list
+    $head = new ListNode(0);
+
+    // Set the pointers to the beginning of both lists
+    $p1 = $list1;
+    $p2 = $list2;
+
+    // Set the current pointer of the merged list to the dummy node
+    $curr = $head;
+
+    while ($p1 !== null && $p2 !== null) {
+        // If the value of the first node is less than the second node, add it to the merged list and move on to the next node in the first list
+        if ($p1->val < $p2->val) {
+            $curr->next = $p1;
+            $curr = $curr->next;
+            $p1 = $p1->next;
+        } else { // Otherwise, add it to the merged list and move on to the next node in the second list
+            $curr->next = $p2;
+            $curr = $curr->next;
+            $p2 = $p2->next;
+        }
+    }
+
+    // If there are still nodes left in either of the lists, add them to the merged list
+    if ($p1 !== null) {
+        $curr->next = $p1;
+    } elseif ($p2 !== null) {
+        $curr->next = $p2;
+    }
+
+    return $head->next; // Return the head of the merged list
+}
+```
+This solution uses a recursive approach to merge the k sorted singly linked lists. It first merges two lists at a time using the `mergeTwoLists` function, and then recursively calls itself with the merged lists until there are no more lists left to merge. The final result is the head of the merged list.
+
+The `mergeTwoLists` function takes two input lists and returns their merged version as a new list. It does this by creating a new dummy node as the head of the merged list, then iterating through both input lists and adding nodes to the merged list based on their values. If the value of one node is less than the other, it adds the first node to the merged list and moves on to the next node in the first list. Otherwise, it adds the second node to the merged list and moves on to the next node in the second list. It continues this process until both input lists are empty. If there are still nodes left in either of the lists, it adds them to the merged list. Finally, it returns the head of the merged list.
+
+This solution has a time complexity of O(N log k), where N is the total number of nodes and k is the number of lists. This is because the `mergeTwoLists` function iterates through both input lists at most once, so the overall time complexity is proportional to the sum of the lengths of the input lists. The space complexity is O(1) since we only need to store a few pointers to the current position in the merged list and the head of the merged list.
+

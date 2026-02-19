@@ -1,0 +1,27 @@
+  Here's a possible implementation of the `searchMatrix` function using binary search:
+```
+function searchMatrix(array $matrix, int $target): bool {
+    // Initialize variables for the binary search algorithm
+    $low = 0;
+    $high = count($matrix) - 1;
+    $mid = ($low + $high) / 2;
+
+    // Search through the rows of the matrix using a binary search
+    while ($low <= $high) {
+        // Check if the current row contains the target
+        if (in_array($target, $matrix[$mid])) {
+            return true;
+        }
+
+        // If the target is not found in the current row, move to the next row
+        $mid = ($low + $high) / 2;
+    }
+
+    // If the target is not found in any of the rows, return false
+    return false;
+}
+```
+This implementation uses a binary search algorithm to search through the rows of the matrix. The `in_array` function is used to check if the target exists in each row. The algorithm starts by initializing variables for the binary search and setting the middle index to the number of rows divided by 2. It then searches through the rows using a binary search, checking if the current row contains the target. If the target is not found in any of the rows, the algorithm returns false.
+
+The time complexity of this implementation is O(log(m * n)) because the binary search algorithm has a worst-case time complexity of O(log(n)), where n is the number of elements in the array. The algorithm makes at most m calls to `in_array`, which each have a time complexity of O(n), so the overall time complexity is O(m * log(n)).
+

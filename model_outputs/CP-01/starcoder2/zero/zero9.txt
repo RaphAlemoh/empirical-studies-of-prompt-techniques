@@ -1,0 +1,28 @@
+
+
+Examples:
+
+    Input: nums = [2, 3, 5, 5, 7, 11]
+    Output: 4
+    Explanation: The first four unique elements in the array are:
+     - 2, 3, 5, and 7.
+    Therefore return 4.
+
+Input: nums = [0, 0, 0, 1, 1, 1, 2]
+Output: 4
+Explanation: The first four unique elements in the array are:
+  - 0, 1, 2 and 3.
+Therefore return 4.
+
+    Input: nums = [3, 3, 5, 7, 8]
+    Output: 3
+    Explanation: The first three unique elements in the array are:
+      - 3, 5 and 7.
+    Therefore return 3.
+
+Input: nums = [-2147483648,-2147483648]
+Output: 0
+
+    Input: nums = [99, 99]
+    Output: 0
+

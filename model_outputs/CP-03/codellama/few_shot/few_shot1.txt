@@ -1,0 +1,40 @@
+
+To solve this task, we can use a modified version of the binary search algorithm to search for the target in the matrix. The key insight is that since each row is sorted in non-decreasing order and the first integer of each row is greater than the last integer of the previous row, we can use the first integer of each row as a pivot element to compare with the target.
+
+Here's an example implementation:
+```php
+function searchMatrix(array $matrix, int $target): bool {
+    $m = count($matrix);
+    $n = count($matrix[0]);
+    
+    // Initialize variables for binary search
+    $left = 0;
+    $right = $m * $n - 1;
+    $mid = intdiv($left + $right, 2);
+    
+    // Loop until the target is found or the search range is empty
+    while ($left <= $right) {
+        // Get the current row and column of the pivot element
+        $row = floor($mid / $n);
+        $col = $mid % $n;
+        
+        // Check if the target exists in the current row
+        if ($matrix[$row][$col] === $target) {
+            return true;
+        } elseif ($matrix[$row][$col] < $target) {
+            // If the pivot element is less than the target, narrow down the search range to the right half
+            $left = $mid + 1;
+        } else {
+            // If the pivot element is greater than the target, narrow down the search range to the left half
+            $right = $mid - 1;
+        }
+        
+        // Update the mid index for the next iteration
+        $mid = intdiv($left + $right, 2);
+    }
+    
+    return false;
+}
+```
+The time complexity of this algorithm is O(log(m * n)), as we only need to iterate through half of the rows and columns on each iteration. This is because we are only considering the elements that are closer to the target, which means we have less work to do on each iteration.
+

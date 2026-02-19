@@ -1,0 +1,29 @@
+```php
+function searchMatrix($matrix, $target) {
+  $rowCount = count($matrix);
+  $colCount = count($matrix[0]);
+  for ($i = 0; $i < $rowCount; $i++) {
+    if (binarySearch($matrix[$i], $target)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function binarySearch(array $arr, $target) {
+  $low = 0;
+  $high = count($arr) - 1;
+  while ($low <= $high) {
+    $mid = (int)(($low + $high) / 2);
+    if ($arr[$mid] == $target) {
+      return true;
+    } elseif ($arr[$mid] < $target) {
+      $low = $mid + 1;
+    } else {
+      $high = $mid - 1;
+    }
+  }
+  return false;
+}
+```
+

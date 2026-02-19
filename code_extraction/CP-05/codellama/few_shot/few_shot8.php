@@ -1,0 +1,28 @@
+<?php
+
+function trap(array $height): int {
+    $left = 0;
+    $right = count($height) - 1;
+    $maxLeft = 0;
+    $maxRight = 0;
+
+    while ($left < $right) {
+        if ($height[$left] < $height[$right]) {
+            if ($height[$left] >= $maxLeft) {
+                $maxLeft = $height[$left];
+            } else {
+                $trapped += $maxLeft - $height[$left];
+            }
+            $left++;
+        } else {
+            if ($height[$right] >= $maxRight) {
+                $maxRight = $height[$right];
+            } else {
+                $trapped += $maxRight - $height[$right];
+            }
+            $right--;
+        }
+    }
+
+    return $trapped;
+}

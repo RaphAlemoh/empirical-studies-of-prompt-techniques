@@ -1,0 +1,21 @@
+ Here is a simple PHP function that solves the problem with O(n) time complexity:
+
+```php
+function maxProfit(array $prices): int {
+    $minPrice = $prices[0];
+    $maxProfit = 0;
+
+    foreach ($prices as $price) {
+        if ($price < $minPrice) {
+            $minPrice = $price;
+        } elseif ($price - $minPrice > $maxProfit) {
+            $maxProfit = $price - $minPrice;
+        }
+    }
+
+    return $maxProfit;
+}
+```
+
+This function initializes `$minPrice` with the first price, then iterates through the array. If it encounters a lower price, it updates `$minPrice`. If it finds a profit opportunity (i.e., a higher price than `$minPrice`), it checks if this new profit is greater than the current maximum and updates it if necessary. The final `$maxProfit` variable contains the answer.
+

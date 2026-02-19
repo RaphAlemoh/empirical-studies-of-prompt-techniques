@@ -1,0 +1,41 @@
+ Here's a PHP implementation of merging k sorted singly linked lists using the merge-sort approach with minimal extra space:
+
+```php
+function mergeKLists($lists) {
+    $n = count($lists);
+    if ($n <= 1) return isset($lists[0]) ? $lists[0] : null;
+
+    $mid = floor($n / 2);
+    $left = array_slice($lists, 0, $mid);
+    $right = array_slice($lists, $mid);
+
+    return merge(mergeKLists($left), mergeKLists($right));
+}
+
+function merge(ListNode $list1, ListNode $list2) {
+    $dummy = new ListNode(0);
+    $current = $dummy;
+
+    while (isset($list1) && isset($list2)) {
+        if ($list1->val <= $list2->val) {
+            $current->next = $list1;
+            $list1 = $list1->next;
+        } else {
+            $current->next = $list2;
+            $list2 = $list2->next;
+        }
+        $current = $current->next;
+    }
+
+    if (isset($list1)) {
+        $current->next = $list1;
+    } else {
+        $current->next = $list2;
+    }
+
+    return $dummy->next;
+}
+```
+
+The provided code uses a merge-sort approach to divide the input linked lists into two halves and recursively merges them. The `merge` function is responsible for merging two sorted singly linked lists by comparing their head nodes and concatenating them in an appropriate order.
+

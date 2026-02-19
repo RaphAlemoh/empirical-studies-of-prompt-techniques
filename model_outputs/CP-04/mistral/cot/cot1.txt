@@ -1,0 +1,21 @@
+ Here is the PHP function that computes the maximum profit as per your requirements:
+
+```php
+function maxProfit(array $prices) {
+    $minPrice = $prices[0];
+    $maxProfit = 0;
+
+    foreach ($prices as $price) {
+        if ($price < $minPrice) {
+            $minPrice = $price;
+        } elseif ($price - $minPrice > $maxProfit) {
+            $maxProfit = $price - $minPrice;
+        }
+    }
+
+    return $maxProfit;
+}
+```
+
+This function initializes the minimum price as the first stock price and iterates through the array to find the maximum profit by comparing the current price with the minimum price found so far. If a new minimum price is encountered, it updates the minimum price accordingly. If the difference between the current price and the minimum price found so far is greater than the current maximum profit, it replaces the maximum profit with this new value. The function returns the final calculated maximum profit at the end.
+

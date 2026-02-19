@@ -1,0 +1,43 @@
+```php
+function isValid(string $s): bool {
+    // Initialize an empty stack to store opening brackets
+    $stack = [];
+
+    // Iterate through each character in the input string
+    foreach ($s as $char) {
+        // If the current character is an opening bracket, push it onto the stack
+        if (in_array($char, ['(', '{', '['])) {
+            array_push($stack, $char);
+        } else { // If the current character is a closing bracket
+            // Check if there are any opening brackets in the stack
+            if (empty($stack)) {
+                return false; // If there are no opening brackets, return false
+            }
+
+            // Get the last opening bracket from the stack
+            $lastOpeningBracket = array_pop($stack);
+
+            // Check if the current closing bracket matches the last opening bracket
+            if ($char !== match($lastOpeningBracket)) {
+                return false; // If they don't match, return false
+            }
+        }
+    }
+
+    // Return true if there are no more opening brackets in the stack
+    return empty($stack);
+}
+
+function match(string $bracket): string {
+    switch ($bracket) {
+        case '(':
+            return ')';
+        case '{':
+            return '}';
+        case '[':
+            return ']';
+    }
+}
+```
+In this solution, we use a stack to keep track of the opening brackets and then check if they are properly closed when the closing bracket is encountered. We also have a function `match` that returns the matching closing bracket for a given opening bracket.
+

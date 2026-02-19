@@ -1,0 +1,15 @@
+ Here is the PHP function `removeDuplicates` that removes duplicates from a sorted array in place:
+
+```php
+function removeDuplicates(&$nums) {
+    $pos = 0;
+    for ($i = 1; $i < count($nums); $i++) {
+        if ($nums[$i] != $nums[$pos]) {
+            $pos++;
+            $nums[$pos] = $nums[$i];
+        }
+    }
+    return $pos + 1;
+}
+```
+

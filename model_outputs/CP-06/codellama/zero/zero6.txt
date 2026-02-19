@@ -1,0 +1,68 @@
+
+function mergeKLists(array $lists): ?ListNode {
+    // Create an empty array to store the merged lists
+    $mergedLists = [];
+
+    // Loop through each list in the input and add it to the mergedLists array
+    foreach ($lists as $list) {
+        if ($list !== null) {
+            $mergedLists[] = $list;
+        }
+    }
+
+    // While there are still lists left to merge
+    while (count($mergedLists) > 1) {
+        // Initialize two variables to keep track of the current and next list to merge
+        $currentList = array_shift($mergedLists);
+        $nextList = array_shift($mergedLists);
+
+        // Merge the two lists and add the result to the mergedLists array
+        $mergedLists[] = mergeTwoLists($currentList, $nextList);
+    }
+
+    return array_pop($mergedLists);
+}
+
+function mergeTwoLists(ListNode $list1, ListNode $list2): ?ListNode {
+    // Initialize two variables to keep track of the current and next node in each list
+    $currentNode1 = $list1;
+    $nextNode1 = $list1->next;
+    $currentNode2 = $list2;
+    $nextNode2 = $list2->next;
+
+    // Initialize a variable to keep track of the head of the merged list
+    $head = new ListNode(0);
+    $tail = $head;
+
+    while ($currentNode1 !== null && $currentNode2 !== null) {
+        // Compare the values of the current nodes in each list and add the smaller one to the merged list
+        if ($currentNode1->val <= $currentNode2->val) {
+            $tail->next = new ListNode($currentNode1->val);
+            $tail = $tail->next;
+            $currentNode1 = $nextNode1;
+            $nextNode1 = $nextNode1 !== null ? $nextNode1->next : null;
+        } else {
+            $tail->next = new ListNode($currentNode2->val);
+            $tail = $tail->next;
+            $currentNode2 = $nextNode2;
+            $nextNode2 = $nextNode2 !== null ? $nextNode2->next : null;
+        }
+    }
+
+    // Add any remaining nodes from the non-empty list to the merged list
+    while ($currentNode1 !== null) {
+        $tail->next = new ListNode($currentNode1->val);
+        $tail = $tail->next;
+        $currentNode1 = $nextNode1;
+        $nextNode1 = $nextNode1 !== null ? $nextNode1->next : null;
+    }
+    while ($currentNode2 !== null) {
+        $tail->next = new ListNode($currentNode2->val);
+        $tail = $tail->next;
+        $currentNode2 = $nextNode2;
+        $nextNode2 = $nextNode2 !== null ? $nextNode2->next : null;
+    }
+
+    return $head->next;
+}
+

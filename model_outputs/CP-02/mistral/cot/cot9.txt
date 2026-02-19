@@ -1,0 +1,24 @@
+ Here's a PHP implementation for the given task:
+
+```php
+function isValid($s) {
+    $stack = [];
+    $openers = ['(', '[', '{'];
+    $closers = [')', ']', '}'];
+
+    foreach (str_split($s) as $char) {
+        if (in_array($char, $openers)) {
+            array_push($stack, $char);
+        } elseif ($char === str_replace($openers, '$0', $stack[count($stack) - 1]) && count($stack) > 0) {
+            array_pop($stack);
+        } else {
+            return false;
+        }
+    }
+
+    return empty($stack);
+}
+```
+
+This function uses a stack to validate the input string. It iterates through each character in the string, pushing opening brackets onto the stack and popping them when encountering their corresponding closing bracket. If an invalid character is found or the stack is not empty at the end of iteration, it returns false, indicating that the input string is not valid. Otherwise, it returns true, meaning that the input string is valid. The time complexity is O(n) and space complexity is O(n) for the worst-case scenario when the entire input string consists of matching brackets only (i.e., using O(1) extra space would require storing the full input string, which is not considered).
+

@@ -1,0 +1,33 @@
+ Here is a binary search solution in PHP that meets the given constraints and has O(log(m * n)) time complexity:
+
+```php
+function searchMatrix($matrix, $target) {
+    $rows = count($matrix);
+    if ($rows === 0) return false;
+
+    $left = 0;
+    $right = $rows - 1;
+
+    while ($left <= $right) {
+        $mid = floor(($left + $right) / 2);
+
+        $firstInCurrentRow = $matrix[$mid];
+        $lastInPreviousRow = $mid > 0 ? $matrix[$mid - 1] : null;
+
+        if ($target === $firstInCurrentRow) {
+            return true;
+        }
+
+        if (is_null($lastInPreviousRow) || $target > $firstInCurrentRow) {
+            $left = $mid + 1;
+        } else {
+            $right = $mid - 1;
+        }
+    }
+
+    return false;
+}
+```
+
+This function performs a binary search over the rows, starting from the middle row and comparing the first element of the current row to the target. If the target is found, it returns `true`. Otherwise, it updates the left or right pointer depending on whether the target should be in the current row or not, until it finds the target or determines that the matrix does not contain it. The time complexity of this solution is O(log(m * n)).
+

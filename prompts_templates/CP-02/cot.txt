@@ -1,0 +1,20 @@
+You are a software engineer.
+
+Task:
+Given a string `s` containing only the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+Constraints:
+1 <= s.length <= 10000
+s consists only of '()[]{}'
+
+Instructions:
+- Reason internally about the correct validation strategy.
+- Then output only the final PHP implementation.
+- Do not include explanations, comments, or reasoning in the output.
+
+Output Format:
+- Provide:
+  function isValid(string $s): bool
+- Ensure O(n) time complexity and O(1) or O(n) extra space.
+
+Generate the code now.

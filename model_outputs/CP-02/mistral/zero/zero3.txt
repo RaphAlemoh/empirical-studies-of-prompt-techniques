@@ -1,0 +1,23 @@
+ Here is a PHP solution for the given task:
+
+```php
+function isValid($s) {
+    if (empty($s)) return true;
+
+    $stack = [];
+    $map = ['{', '[', '(', '[' => ']', '}' => '}', ')' => '('];
+
+    foreach (str_split($s) as $char) {
+        if (!empty($stack) && $stack[count($stack)-1] === $map[$char]) {
+            array_pop($stack);
+        } else {
+            $stack[] = $char;
+        }
+    }
+
+    return empty($stack);
+}
+```
+
+This function uses a stack data structure to keep track of open brackets and checks if the closing bracket is corresponding to an open one. If all open brackets are properly closed, the function returns `true`, otherwise `false`. The time complexity is O(n) as required.
+

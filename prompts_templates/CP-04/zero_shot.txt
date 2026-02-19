@@ -1,0 +1,24 @@
+nano prompt_templates/CP-06/zero.txt
+
+You are a software engineer.
+
+Task:
+Write a PHP function that computes the maximum profit from an integer array `prices`, where `prices[i]` is the stock price on day i.
+
+Rules:
+- You may complete as many transactions as you like.
+- You can only hold one stock at a time.
+- You may buy and sell on the same day.
+- Return the maximum achievable profit.
+
+Constraints:
+1 <= prices.length <= 30000
+0 <= prices[i] <= 10000
+
+Output Requirements:
+- Implement a function:
+  function maxProfit(array $prices): int
+- Use efficient time complexity (O(n))
+- Do not include explanations, only valid PHP code.
+
+Generate the solution now.

@@ -1,0 +1,28 @@
+<?php
+
+function mergeKLists($lists) {
+    if (!count($lists)) return null;
+
+    $minHeap = new SplMinHeap();
+    foreach ($lists as $list) {
+        if ($list !== null) {
+            $minHeap[] = $list;
+        }
+    }
+
+    $mergedHead = $first = new ListNode(0);
+    while ($minHeap->valid()) {
+        $node = array_shift($minHeap);
+        $next = $node->next;
+        $node->next = null;
+
+        $first->next = $node;
+        $first = $first->next;
+
+        if ($next !== null) {
+            $minHeap[] = $next;
+        }
+    }
+
+    return $mergedHead->next;
+}

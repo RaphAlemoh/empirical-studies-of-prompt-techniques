@@ -1,0 +1,106 @@
+
+Task:
+Given an array `height` of non-negative integers representing an elevation map, compute how much water can be trapped after raining.
+
+Rules:
+
+* Each bar has width 1.
+* Return the total units of trapped water.
+
+Constraints:
+
+1. <= height.length <= 20000
+2. 0 <= height[i] <= 100000
+
+Output Requirements:
+
+* Implement:
+function trap(array $height): int
+* Return only valid PHP code.
+
+Let's start by analyzing the problem statement and coming up with a solution.
+
+The problem is asking us to find the total amount of water that can be trapped after raining on an elevation map represented as an array. The elevation map is made up of non-negative integers, where each integer represents the height of a bar. We need to find the maximum amount of water that can be trapped by the bars in the map.
+
+To solve this problem, we will use a two-pointer approach. We will start with two pointers, one at the beginning of the array and another at the end of the array. We will then iterate through the array, moving the pointers towards each other until they meet. At each step, we will check if the sum of the heights of the bars on either side of the pointers is less than or equal to the height of the bar on the left pointer. If it is, we will add the difference between the two heights to a total variable.
+
+Here is some sample PHP code that implements this solution:
+```php
+function trap(array $height): int {
+    $total = 0;
+    $leftPointer = 0;
+    $rightPointer = count($height) - 1;
+
+    while ($leftPointer < $rightPointer) {
+        if ($height[$leftPointer] > $height[$rightPointer]) {
+            $total += ($height[$leftPointer] - $height[$rightPointer]);
+        } else {
+            $total += ($height[$rightPointer] - $height[$leftPointer]);
+        }
+        $leftPointer++;
+        $rightPointer--;
+    }
+
+    return $total;
+}
+```
+Let's walk through an example to see how this code works. Suppose we have the following elevation map:
+```php
+$height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
+```
+We can visualize the bars in this map as follows:
+```
+    height[0] = 0
+   /        \
+height[1] = 1   height[2] = 0
+   |          |
+height[3] = 2   height[4] = 1
+   |          |
+height[5] = 0   height[6] = 1
+   |          |
+height[7] = 1   height[8] = 3
+   |          |
+height[9] = 2   height[10] = 1
+```
+Now, we can start the pointers at the beginning and end of the array:
+```php
+$leftPointer = 0;
+$rightPointer = count($height) - 1;
+```
+We will then iterate through the array, moving the pointers towards each other until they meet. At each step, we will check if the sum of the heights of the bars on either side of the pointers is less than or equal to the height of the bar on the left pointer. If it is, we will add the difference between the two heights to a total variable:
+```php
+while ($leftPointer < $rightPointer) {
+    if ($height[$leftPointer] > $height[$rightPointer]) {
+        $total += ($height[$leftPointer] - $height[$rightPointer]);
+    } else {
+        $total += ($height[$rightPointer] - $height[$leftPointer]);
+    }
+    $leftPointer++;
+    $rightPointer--;
+}
+```
+In this example, we will first check the heights of the bars on either side of the pointers:
+* `height[0]` (left pointer) = 0
+* `height[1]` (right pointer) = 1
+* `height[2]` = 0
+
+The sum of these heights is less than or equal to the height of the bar on the left pointer, so we will add the difference between the two heights:
+```php
+$total += ($height[$leftPointer] - $height[$rightPointer]);
+// Total = 1
+```
+Next, we will move the pointers towards each other until they meet. At this point, we will check the heights of the bars on either side of the pointers again:
+* `height[0]` (left pointer) = 0
+* `height[1]` (right pointer) = 3
+* `height[2]` = 2
+* `height[3]` = 1
+
+The sum of these heights is greater than the height of the bar on the left pointer, so we will add the difference between the two heights:
+```php
+$total += ($height[$rightPointer] - $height[$leftPointer]);
+// Total = 4
+```
+Finally, we will repeat this process until the pointers meet. At each step, we will check the heights of the bars on either side of the pointers and add the difference between the two heights to our total if necessary. Once the pointers have met, we can return the total amount of water that can be trapped by the bars in the map.
+
+I hope this helps! Let me know if you have any questions or need further clarification.
+

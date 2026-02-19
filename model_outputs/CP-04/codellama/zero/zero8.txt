@@ -1,0 +1,15 @@
+
+```php
+<?php
+function maxProfit($prices) {
+    $profit = 0;
+    for ($i = 1; $i < count($prices); $i++) {
+        if ($prices[$i] > $prices[$i-1]) {
+            $profit += $prices[$i] - $prices[$i-1];
+        }
+    }
+    return $profit;
+}
+```
+This function uses a for loop to iterate over the array of stock prices. The profit variable is initialized to zero and incremented by the difference between each day's price and the previous day's price when the latter is greater. At the end, it returns the total maximum profit. This solution has an efficiency of O(n) because the time complexity depends on the number of iterations over the array, which in this case is the length of the array, or n.
+

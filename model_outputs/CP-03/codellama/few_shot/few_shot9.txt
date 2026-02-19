@@ -1,0 +1,31 @@
+
+Here's a possible solution in PHP:
+```php
+function searchMatrix($matrix, $target) {
+    $rows = count($matrix);
+    $cols = count($matrix[0]);
+    $left = 0;
+    $right = $rows * $cols - 1;
+
+    while ($left <= $right) {
+        $mid = intdiv($left + $right, 2);
+        $row = floor(($mid / $cols));
+        $col = $mid % $cols;
+        if ($matrix[$row][$col] == $target) {
+            return true;
+        } elseif ($matrix[$row][$col] < $target) {
+            $left = $mid + 1;
+        } else {
+            $right = $mid - 1;
+        }
+    }
+
+    return false;
+}
+```
+This solution uses the binary search algorithm to find the target in the matrix. It first calculates the number of rows and columns in the matrix, then sets the left and right pointers for the binary search. The while loop iterates until the left pointer is greater than the right pointer, at which point the target is either found or not found. If the target is found, it returns true, otherwise it returns false.
+
+The time complexity of this solution is O(log(m * n)), where m and n are the number of rows and columns in the matrix respectively. This is because each iteration of the while loop reduces the range of possible values by half, so the algorithm effectively takes log2(m * n) iterations to find the target.
+
+The space complexity of this solution is O(1), as it only uses a fixed amount of memory to store the left and right pointers, as well as any temporary variables used in the while loop.
+

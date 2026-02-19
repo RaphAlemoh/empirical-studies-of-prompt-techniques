@@ -1,0 +1,14 @@
+<?php
+
+function removeDuplicates(&$nums) {
+    $uniqueCount = 0;
+    for ($i = 0; $i < count($nums); ) {
+        if ($i > 0 && $nums[$i] == $nums[$i - 1]) {
+            array_splice($nums, $i, 1);
+            continue; // Move to the next iteration without incrementing $i
+        }
+        $uniqueCount++;
+        $i++;
+    }
+    return $uniqueCount;
+}

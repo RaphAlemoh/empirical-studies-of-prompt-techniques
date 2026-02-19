@@ -1,0 +1,25 @@
+```
+function searchMatrix(array $matrix, int $target): bool {
+    $numRows = count($matrix);
+    if ($numRows === 0) return false;
+
+    $numCols = count($matrix[0]);
+    if ($numCols === 0) return false;
+
+    // Find the row where the target first appears
+    for ($i = 0; $i < $numRows; $i++) {
+        $row = $matrix[$i];
+        $j = 0;
+        while ($j < $numCols && $target > $row[$j]) {
+            $j++;
+        }
+        if ($j < $numCols && $target === $row[$j]) {
+            return true;
+        }
+    }
+
+    // If the target is not found in any row, it does not exist in the matrix
+    return false;
+}
+```
+

@@ -1,0 +1,14 @@
+STATISTICAL REPORT — AVG_LOC (pass_at_1)
+============================================================
+
+Descriptive Statistics File:
+anova_outputs/pass_at_1/tables/avg_loc_descriptive_stats.csv
+
+Normality Test File:
+anova_outputs/pass_at_1/tables/avg_loc_normality.csv
+
+Levene’s Test:
+Statistic: 0.5648, p-value: 0.8008
+
+ANOVA Table:
+anova_outputs/pass_at_1/tables/avg_loc_anova.csv

@@ -1,0 +1,14 @@
+STATISTICAL REPORT — AVG_ACCURACY (pass_at_10)
+============================================================
+
+Descriptive Statistics File:
+anova_outputs/pass_at_10/tables/avg_accuracy_descriptive_stats.csv
+
+Normality Test File:
+anova_outputs/pass_at_10/tables/avg_accuracy_normality.csv
+
+Levene’s Test:
+Statistic: 0.1487, p-value: 0.9961
+
+ANOVA Table:
+anova_outputs/pass_at_10/tables/avg_accuracy_anova.csv

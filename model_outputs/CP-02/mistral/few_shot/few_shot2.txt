@@ -1,0 +1,36 @@
+ Here's an example of how you can solve the task using a stack approach in PHP:
+
+```php
+function isValid(string $s): bool {
+    if (empty($s)) {
+        return false;
+    }
+
+    $stack = [];
+    $openers = ['{', '[', '('];
+    $closers = [']', ')', '}'];
+
+    foreach (str_split($s) as $char) {
+        if (in_array($char, $openers)) {
+            $stack[] = $char;
+        } elseif (in_array($char, $closers)) {
+            if ($stack === [] || !matchClosingBracket($stack[count($stack) - 1], $char)) {
+                return false;
+            }
+            array_pop($stack);
+        }
+    }
+
+    // Check if there are any open brackets left in the stack.
+    return empty($stack);
+}
+
+function matchClosingBracket(string $opener, string $closer): bool {
+    return $opener === '{' && $closer === '}' ||
+           $opener === '[' && $closer === ']' ||
+           $opener === '(' && $closer === ')';
+}
+```
+
+The function `isValid()` checks if a given string is valid by utilizing a stack and two arrays for openers and closers of brackets. The inner function `matchClosingBracket()` takes an opener and a closer as arguments, and returns true if the closing bracket matches the corresponding opening bracket. The main function iterates through the given string, pushing openers onto the stack and checking if the closing brackets match and are properly ordered before popping them off the stack. If there are any remaining open brackets in the stack at the end of the iteration, the input string is not valid.
+

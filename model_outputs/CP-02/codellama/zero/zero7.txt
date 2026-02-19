@@ -1,0 +1,49 @@
+  <?php
+  class Solution {
+      public static function isValid(string $s): bool {
+          // Create an empty stack to store opening brackets
+          $stack = array();
+
+          // Iterate through each character in the string
+          for ($i = 0; $i < strlen($s); $i++) {
+              $char = $s[$i];
+
+              // If the character is an opening bracket, push it to the stack
+              if (in_array($char, array('(', '{', '['))) {
+                  array_push($stack, $char);
+              }
+
+              // If the character is a closing bracket, pop from the stack and compare it with the current char
+              else if (in_array($char, array(')', '}', ']'))) {
+                  // Get the top element of the stack
+                  $top = end($stack);
+
+                  // If the stack is empty or the top element is not the matching opening bracket, return false
+                  if ($top === false || self::getMatchingBracket($top) != $char) {
+                      return false;
+                  }
+
+                  // Pop the top element from the stack since it has been matched with the current char
+                  array_pop($stack);
+              }
+          }
+
+          // Return true if the stack is empty, otherwise return false
+          return count($stack) == 0;
+      }
+
+      public static function getMatchingBracket(string $bracket): string {
+          switch ($bracket) {
+              case '(':
+                  return ')';
+              case '{':
+                  return '}';
+              case '[':
+                  return ']';
+              default:
+                  throw new Exception("Invalid bracket: $bracket");
+          }
+      }
+  }
+  ?>
+

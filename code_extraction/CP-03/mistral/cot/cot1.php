@@ -1,0 +1,26 @@
+<?php
+
+function searchMatrix(array $matrix, int $target): bool {
+    $n = count($matrix);
+    if ($n === 0) return false;
+    $low = 0;
+    $high = $n * count($matrix[0]);
+
+    while ($low < $high) {
+        $mid = (int) ($low + ($high - $low)/2);
+        $row = intval($mid / count($matrix[0]));
+        $col = $mid % count($matrix[0]);
+
+        if ($target === $matrix[$row][$col] && $row < $n - 1 && $matrix[$row + 1][$col] <= $target) {
+            return true;
+        }
+
+        if ($matrix[$row][$col] > $target) {
+            $high = $mid;
+        } else {
+            $low = $mid + 1;
+        }
+    }
+
+    return false;
+}

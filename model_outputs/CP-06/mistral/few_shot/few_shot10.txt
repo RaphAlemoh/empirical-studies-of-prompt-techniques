@@ -1,0 +1,32 @@
+ Here is a solution in PHP that merges k sorted linked lists using a priority queue approach, which has an O(n log k) time complexity:
+
+```php
+function mergeKLists(array $lists): ?ListNode {
+    if (empty($lists)) return null;
+
+    $minHeap = new SplMinHeap();
+    foreach ($lists as $list) {
+        if (!is_null($list)) {
+            $minHeap[] = $list;
+        }
+    }
+
+    $dummy = new ListNode(0);
+    $current = $dummy;
+
+    while ($minHeap) {
+        $node = array_shift($minHeap);
+        $current->next = $node;
+        $current = $current->next;
+
+        if (!is_null($node->next)) {
+            $minHeap[] = $node->next;
+        }
+    }
+
+    return $dummy->next;
+}
+```
+
+In this solution, we first populate a min-heap (SplMinHeap) with the heads of all the given sorted linked lists. Then, we create a dummy node and loop through the min-heap to add each element from the lists to the merged list until the heap is empty. We also make sure to add the next node of each added element into the min-heap so that it's ready for the next iteration. Finally, we return the head of the merged list (i.e., the dummy node's next).
+

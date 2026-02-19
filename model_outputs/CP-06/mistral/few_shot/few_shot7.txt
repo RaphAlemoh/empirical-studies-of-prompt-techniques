@@ -1,0 +1,28 @@
+ Here's the solution for merging k sorted singly linked lists in PHP using an efficient algorithm (Mergesort):
+
+```php
+function mergeSort($lists, $start, $end) {
+    if ($start >= $end) {
+        return isset($lists[$start]) ? $lists[$start] : null;
+    }
+
+    $mid = floor(($start + $end) / 2);
+    $l1 = mergeSort($lists, $start, $mid);
+    $l2 = mergeSort($lists, $mid + 1, $end);
+    return mergeTwoLists($l1, $l2);
+}
+
+function mergeKLists(array $lists) {
+    $n = count($lists);
+    for ($i = 0; $i < $n; $i++) {
+        if (!isset($lists[$i])) {
+            throw new Exception('All lists must be provided');
+        }
+    }
+
+    return mergeSort($lists, 0, $n - 1);
+}
+```
+
+The `mergeSort()` function merges the given linked lists recursively using the divide-and-conquer approach, while `mergeKLists()` initializes and validates the input arrays of linked lists.
+

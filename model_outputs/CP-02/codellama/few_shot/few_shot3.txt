@@ -1,0 +1,37 @@
+
+Here is one possible solution to the task:
+```php
+function isValid(string $s): bool {
+    // Initialize an empty stack to store opening brackets
+    $stack = [];
+
+    // Iterate through each character in the string
+    foreach ($s as $ch) {
+        // If the current character is an opening bracket, push it onto the stack
+        if (in_array($ch, ['(', '{', '['])) {
+            $stack[] = $ch;
+        } elseif (in_array($ch, [')', '}', ']'])) {
+            // If the current character is a closing bracket, pop the top element from the stack and compare it with the current character
+            if (count($stack) === 0 || !in_array(end($stack), $ch)) {
+                return false;
+            } else {
+                array_pop($stack);
+            }
+        }
+    }
+
+    // If there are still elements in the stack, it means that there are unmatched opening brackets
+    return count($stack) === 0;
+}
+```
+Explanation:
+
+1. We initialize an empty stack to store opening brackets.
+2. We iterate through each character in the string and perform the following actions:
+	* If the current character is an opening bracket, we push it onto the stack.
+	* If the current character is a closing bracket, we pop the top element from the stack and compare it with the current character. If they do not match, we return false. Otherwise, we continue to the next iteration.
+3. We repeat step 2 until we have processed all characters in the string.
+4. If there are still elements in the stack, it means that there are unmatched opening brackets. We return false. Otherwise, we return true.
+
+Note: This solution uses a stack-based approach to keep track of the opening brackets and ensure that they are properly matched with their corresponding closing brackets.
+

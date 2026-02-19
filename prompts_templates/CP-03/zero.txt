@@ -1,0 +1,20 @@
+You are a software engineer.
+
+Task:
+Given an m x n integer matrix where:
+- Each row is sorted in non-decreasing order.
+- The first integer of each row is greater than the last integer of the previous row.
+
+Given an integer target, return true if the target exists in the matrix, otherwise return false.
+
+Constraints:
+1 <= m, n <= 100
+-10000 <= matrix[i][j], target <= 10000
+
+Output Requirements:
+- Implement:
+  function searchMatrix(array $matrix, int $target): bool
+- Use O(log(m * n)) time complexity.
+- Output only valid PHP code.
+
+Generate the solution now.

@@ -1,0 +1,53 @@
+
+class ListNode {
+    public int $val;
+    public ?ListNode $next;
+    public function __construct(int $val = 0, ?ListNode $next = null) {
+        $this->val = $val;
+        $this->next = $next;
+    }
+}
+
+function mergeKLists(array $lists): ?ListNode {
+    // Initialize the head of the merged list to be the first element in the lists array
+    $head = $lists[0];
+    // Initialize the current pointer to be the head of the merged list
+    $current = $head;
+    // Loop through each list in the lists array
+    for ($i = 1; $i < count($lists); $i++) {
+        // Merge the current list with the next list in the lists array
+        $current = mergeTwoLists($current, $lists[$i]);
+    }
+    return $head;
+}
+
+function mergeTwoLists(ListNode $list1, ListNode $list2): ?ListNode {
+    // Initialize the head of the merged list to be the smallest element between the two input lists
+    $head = null;
+    if ($list1->val <= $list2->val) {
+        $head = $list1;
+        $list1 = $list1->next;
+    } else {
+        $head = $list2;
+        $list2 = $list2->next;
+    }
+    // Initialize the current pointer to be the head of the merged list
+    $current = $head;
+    while ($list1 !== null && $list2 !== null) {
+        if ($list1->val <= $list2->val) {
+            $current->next = $list1;
+            $list1 = $list1->next;
+        } else {
+            $current->next = $list2;
+            $list2 = $list2->next;
+        }
+        $current = $current->next;
+    }
+    if ($list1 !== null) {
+        $current->next = $list1;
+    } else if ($list2 !== null) {
+        $current->next = $list2;
+    }
+    return $head;
+}
+

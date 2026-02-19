@@ -1,0 +1,62 @@
+ Here is the solution for merging multiple sorted linked lists in PHP using an efficient algorithm with a time complexity of O(n log k), where n is the total number of nodes and k is the number of linked lists:
+
+```php
+function mergeKLists($lists) {
+    $count = count($lists);
+
+    if ($count === 0) return null;
+
+    for ($i = 1; $i < $count; $i *= 2) {
+        $tempLists = [];
+
+        for ($j = 0; $j < $count; $j += $i * 2) {
+            $list1 = $lists[$j];
+            $list2 = null;
+
+            if (isset($lists[$j + $i])) {
+                $list2 = $lists[$j + $i];
+            }
+
+            $lists[$j] = mergeTwoLists($list1, $list2);
+        }
+
+        foreach ($tempLists as $list) {
+            $lists[] = $list;
+        }
+    }
+
+    return $lists[0];
+}
+
+function mergeTwoLists(?ListNode $l1, ?ListNode $l2): ?ListNode {
+    if ($l1 === null) return $l2;
+    if ($l2 === null) return $l1;
+
+    $dummy = new ListNode(0);
+    $current = $dummy;
+
+    while ($l1 !== null && $l2 !== null) {
+        if ($l1->val <= $l2->val) {
+            $current->next = $l1;
+            $l1 = $l1->next;
+        } else {
+            $current->next = $l2;
+            $l2 = $l2->next;
+        }
+        $current = $current->next;
+    }
+
+    if ($l1 !== null) {
+        $current->next = $l1;
+    }
+
+    if ($l2 !== null) {
+        $current->next = $l2;
+    }
+
+    return $dummy->next;
+}
+```
+
+This solution breaks the given linked lists into smaller groups and merges them recursively until each group contains only one linked list. Then it merges these individual linked lists to get the final merged sorted linked list.
+

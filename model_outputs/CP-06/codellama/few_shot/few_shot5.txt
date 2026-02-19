@@ -1,0 +1,56 @@
+
+Task: Merge k sorted singly linked lists and return the head of the merged list.
+
+Input: An array of k sorted singly linked lists. Each list is represented as a linked list object with the following properties:
+
+* `val`: The value of the current node.
+* `next`: A reference to the next node in the list, or null if the current node is the last node in the list.
+
+Output: The head of the merged linked list. The returned linked list should be sorted and contain all the nodes from the input lists.
+
+Constraints:
+
+* 1 <= k <= 10^4
+* 0 <= List Size <= 10^4
+* -10^5 <= Element Value <= 10^5
+
+Approach:
+
+1. Initialize an empty linked list as the result, `mergedList`.
+2. Iterate through each of the input lists and merge them into the `mergedList`.
+3. For each list, iterate through it and add the nodes to the `mergedList` in sorted order.
+4. If any of the nodes are null, ignore them and move on to the next node.
+5. Once all the nodes have been added to the `mergedList`, return the head of the merged list.
+
+Time Complexity: O(N log k), where N is the total number of nodes in all the input lists, and k is the number of input lists. This is because we need to iterate through each node in the input lists at most once and add them to the `mergedList` in sorted order.
+
+Space Complexity: O(N), where N is the total number of nodes in all the input lists. This is because the `mergedList` contains all the nodes from the input lists, so its size is proportional to the total number of nodes in all the input lists.
+
+Code:
+```php
+function mergeKLists(array $lists): ?ListNode {
+    $mergedList = null;
+    
+    foreach ($lists as $list) {
+        if (!$list) continue;
+        
+        // Iterate through each node in the current list and add it to the mergedList
+        for ($node = $list; $node; $node = $node->next) {
+            // Add the node to the end of the mergedList, keeping it sorted
+            if (!$mergedList || $mergedList->val > $node->val) {
+                $mergedList = new ListNode($node->val);
+                $current = $mergedList;
+            } else {
+                while ($current->next && $current->next->val < $node->val) {
+                    $current = $current->next;
+                }
+                $current->next = new ListNode($node->val);
+                $current = $current->next;
+            }
+        }
+    }
+    
+    return $mergedList;
+}
+```
+

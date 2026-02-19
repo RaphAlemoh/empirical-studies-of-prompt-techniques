@@ -1,0 +1,26 @@
+ Here's a PHP solution that implements the given task using a stack-based approach to check if the input string `$s` is valid according to the specified validity rules:
+
+```php
+function isValid(string $s): bool {
+    $stack = [];
+    $openingBrackets = ['(', '{', '['];
+    $closingBrackets = [')', '}', ']'];
+
+    foreach (str_split($s) as $ch) {
+        if (in_array($ch, $openingBrackets)) {
+            $stack[] = $ch;
+        } elseif (in_array($ch, $closingBrackets)) {
+            if (!$stack || !in_array(array_pop($stack), [$closingBrackets[array_search($ch, $closingBrackets) - 1]]);
+                return false;
+            }
+        } else {
+            continue; // Ignore invalid characters (not a bracket)
+        }
+    }
+
+    return empty($stack);
+}
+```
+
+This code defines a function `isValid(string $s): bool` that returns true if the input string is valid according to the specified rules, otherwise false. The function first initializes an empty stack and stores opening and closing brackets separately for easy comparison. It then iterates through each character in the input string. If it encounters an opening bracket, it pushes the bracket onto the stack; if it encounters a closing bracket, it checks that there is an equivalent opening bracket at the top of the stack (if any) and pops it off the stack. Finally, the function returns true if the stack is empty after processing all characters in the input string, indicating that all closing brackets have been matched with their corresponding opening ones.
+

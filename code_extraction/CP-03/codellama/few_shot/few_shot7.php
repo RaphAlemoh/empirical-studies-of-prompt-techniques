@@ -1,0 +1,30 @@
+<?php
+
+function searchMatrix($matrix, $target) {
+    // Calculate the dimensions of the matrix
+    $m = count($matrix);
+    $n = count($matrix[0]);
+
+    // Initialize the left and right indices for each row
+    $rowLeft = 0;
+    $rowRight = $n - 1;
+
+    // Loop through each row of the matrix
+    for ($i = 0; $i < $m; $i++) {
+        // Calculate the midpoint of the current row
+        $mid = intdiv($rowLeft + $rowRight, 2);
+
+        // Check if the target is in the current row
+        if ($matrix[$i][$mid] == $target) {
+            return true;
+        } elseif ($matrix[$i][$mid] > $target) {
+            // If the target is less than the midpoint, search the left half of the row
+            $rowRight = $mid - 1;
+        } else {
+            // If the target is greater than the midpoint, search the right half of the row
+            $rowLeft = $mid + 1;
+        }
+    }
+
+    return false;
+}

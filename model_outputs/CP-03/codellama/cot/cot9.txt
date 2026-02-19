@@ -1,0 +1,26 @@
+```
+function searchMatrix(&$matrix, &$target) {
+    // map the matrix to a 1D binary search space
+    $flat_matrix = array();
+    foreach ($matrix as &$row) {
+        $flat_matrix = array_merge($flat_matrix, $row);
+    }
+    
+    // perform a binary search on the 1D array
+    $low = 0;
+    $high = count($flat_matrix) - 1;
+    while ($low <= $high) {
+        $mid = (int)floor(($low + $high) / 2);
+        if ($target == $flat_matrix[$mid]) {
+            return true;
+        } elseif ($target < $flat_matrix[$mid]) {
+            $high = $mid - 1;
+        } else {
+            $low = $mid + 1;
+        }
+    }
+    
+    return false;
+}
+```
+

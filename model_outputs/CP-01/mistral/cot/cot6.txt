@@ -1,0 +1,13 @@
+ ```php
+function &removeDuplicates(array &$nums) {
+    $index = 0;
+    for ($i = 1; $i < count($nums); $i++) {
+        if ($nums[$i] != $nums[$index]) {
+            $index++;
+            $nums[$index] = $nums[$i];
+        }
+    }
+    return $index + 1;
+}
+```
+

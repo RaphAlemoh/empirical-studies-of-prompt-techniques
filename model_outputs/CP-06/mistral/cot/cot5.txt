@@ -1,0 +1,28 @@
+ ```php
+function mergeKLists(array $lists) {
+    $heap = new SplMinHeap();
+    foreach ($lists as $list) {
+        if (!is_null($list)) {
+            $heap->insert([$list, 0]);
+        }
+    }
+    $head = null;
+    $current = &$head;
+    while (!$heap->isEmpty()) {
+        list($node, $index) = $heap->extractMin();
+        if ($current === null) {
+            $current = $node;
+        } else {
+            $next = $node->next;
+            $node->next = null;
+            $current->next = $node;
+            $current = $next;
+        }
+        if (!is_null($node->next)) {
+            $heap->insert([$node->next, $index]);
+        }
+    }
+    return $head;
+}
+```
+

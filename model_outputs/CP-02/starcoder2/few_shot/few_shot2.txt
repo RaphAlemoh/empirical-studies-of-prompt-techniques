@@ -1,0 +1,31 @@
+
+
+<?php
+function isValid(string $s): bool {
+    if (strlen($s) % 2 === 1 || strlen($s) === 0) return false;
+
+    $stack = [];
+    $map = [
+        ')' => '(',
+        '}' => '{',
+        ']' => '[',
+    ];
+
+    foreach ($s as $ch) {
+        switch ($ch) {
+            case '[': case ']':
+                $stack[] = $ch; break;
+
+            case '(' : case ')':
+                if (empty($stack)) return false;
+
+                if ($map[$ch] !== array_pop($stack))
+                    return false;
+
+        }
+    }
+
+    return empty($stack);
+}
+?>
+

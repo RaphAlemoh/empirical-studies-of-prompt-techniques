@@ -1,0 +1,30 @@
+
+Here's a possible implementation of the `maxProfit` function:
+```php
+function maxProfit(array $prices): int {
+    if (empty($prices)) {
+        return 0;
+    }
+
+    $minPrice = PHP_INT_MAX;
+    $maxProfit = 0;
+    foreach ($prices as $price) {
+        if ($price < $minPrice) {
+            $minPrice = $price;
+        } elseif ($price - $minPrice > $maxProfit) {
+            $maxProfit = $price - $minPrice;
+        }
+    }
+
+    return $maxProfit;
+}
+```
+This function works by keeping track of the minimum price seen so far and the maximum profit seen so far. At each iteration, we update the minimum price and the maximum profit as follows:
+
+* If the current price is less than the previous minimum price, we update the minimum price to be the current price.
+* Otherwise, if the current price is greater than the previous minimum price, we calculate the maximum profit as the difference between the current price and the previous minimum price, and update the maximum profit if it's greater than the previous value.
+
+Finally, we return the maximum profit as the result of the function.
+
+Note that this implementation assumes that the input array is not empty, and handles the case where the input array is empty by returning 0.
+

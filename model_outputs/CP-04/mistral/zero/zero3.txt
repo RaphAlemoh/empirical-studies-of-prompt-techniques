@@ -1,0 +1,22 @@
+ Here's a PHP function that computes the maximum profit using the buy-and-sell strategy with O(n) time complexity:
+
+```php
+function maxProfit(array $prices): int {
+    $minPrice = $prices[0];
+    $maxProfit = 0;
+
+    foreach ($prices as $price) {
+        if ($price < $minPrice) {
+            $minPrice = $price; // update minimum price on encountering a lower price
+        } elseif ($price > $minPrice) {
+            $maxProfit = max($maxProfit, $price - $minPrice); // calculate and store the profit
+            $minPrice = $price; // update minimum price after making a transaction
+        }
+    }
+
+    return $maxProfit;
+}
+```
+
+This function iterates through the given array and keeps track of both the minimum price found so far (initializing it to the first element) and the maximum profit made from buying at a lower price and selling at a higher one. If the current price is less than the minimum price, it updates the minimum price; otherwise, if it's greater, it calculates the profit and stores it while updating the minimum price for the next iteration. Finally, it returns the maximum profit achieved during the iterations.
+

@@ -1,0 +1,16 @@
+
+
+Sample Input:
+(()())
+([{}])
+[()]{}{Code}[Run]
+
+
+Sample Output:
+True
+True
+True
+
+
+
+

@@ -1,0 +1,30 @@
+ Here is a simple solution in PHP for the given task. The function uses a stack data structure to keep track of open brackets and checks if the closing bracket matches with the corresponding open bracket.
+
+```php
+function isValid($s) {
+    $openers = ['(', '[', '{'];
+    $closers = [')', ']', '}'];
+    $stack = [];
+
+    for ($i = 0; $i < strlen($s); $i++) {
+        if (in_array($s[$i], $openers)) {
+            array_push($stack, $s[$i]);
+        } elseif (in_array($s[$i], $closers)) {
+            if (!empty($stack)) {
+                $last = array_pop($stack);
+                if ($closers[$i] != str_replace($openers, $closers, $last)) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+    }
+
+    // If the stack is empty after checking the entire string, it means all brackets are matched correctly.
+    return empty($stack);
+}
+```
+
+This function has a time complexity of O(n) and uses PHP arrays to create sets for openers and closers, and a simple stack to keep track of open brackets. The function checks the string character by character and compares closing brackets with their corresponding open brackets using the `in_array()` function and checks if the order is correct using the `empty($stack)`. If any error is found, it returns `false`, otherwise, it returns `true`.
+

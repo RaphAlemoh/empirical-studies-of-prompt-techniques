@@ -1,0 +1,12 @@
+<?php
+
+function maxProfit(array $prices): int {
+    $maxProfit = 0;
+    for ($i = 1; $i < count($prices); $i++) {
+        $profit = $prices[$i] - $prices[$i - 1];
+        if ($profit > $maxProfit) {
+            $maxProfit = $profit;
+        }
+    }
+    return $maxProfit;
+}

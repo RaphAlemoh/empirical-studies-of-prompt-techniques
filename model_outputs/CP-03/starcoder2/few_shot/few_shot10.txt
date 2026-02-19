@@ -1,0 +1,8 @@
+
+
+Input: [[10], [5]] target = 2
+
+Output: false
+
+
+

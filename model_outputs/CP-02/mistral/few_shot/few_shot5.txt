@@ -1,0 +1,24 @@
+ Here's the solution for the given task using a stack-based approach in PHP:
+
+```php
+function isValid(string $s): bool {
+    $stack = [];
+    $validBrackets = ['(', '{', '['];
+    $openingBrackets = [')', '}', ']'];
+
+    foreach (str_split($s) as $ch) {
+        if (!in_array($ch, $validBrackets) && !empty($stack) && strpos($openingBrackets, $stack[count($stack) - 1]) === strrpos($openingBrackets, $ch)) {
+            array_pop($stack);
+        } else if (!in_array($ch, $validBrackets)) {
+            return false;
+        } else {
+            $stack[] = $ch;
+        }
+    }
+
+    return empty($stack);
+}
+```
+
+This function works by checking each character in the input string. If it is an opening bracket, it gets pushed onto the stack. If it's a closing bracket, it checks if the corresponding opening bracket exists on top of the stack and pops it off. If the given closing bracket doesn't have a matching opening bracket or there's no opening bracket found for the current closing bracket, the function returns false. Once all characters in the input string are processed, the function returns true if the stack is empty (meaning all brackets were closed correctly) and false otherwise.
+

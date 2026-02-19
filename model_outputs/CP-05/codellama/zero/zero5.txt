@@ -1,0 +1,35 @@
+<?php
+function trap($height) {
+    $n = count($height);
+    if ($n == 0) return 0;
+
+    // left and right pointers to keep track of the maximum height
+    $leftMax = array_fill(0, $n, 0);
+    $rightMax = array_fill(0, $n, 0);
+
+    // initialize left pointer
+    for ($i = 1; $i < $n; $i++) {
+        $leftMax[$i] = max($height[$i], $leftMax[$i - 1]);
+    }
+
+    // initialize right pointer
+    for ($i = $n - 2; $i >= 0; $i--) {
+        $rightMax[$i] = max($height[$i], $rightMax[$i + 1]);
+    }
+
+    // calculate the trapped water
+    $trappedWater = 0;
+    for ($i = 0; $i < $n; $i++) {
+        $trappedWater += min($leftMax[$i], $rightMax[$i]) - $height[$i];
+    }
+
+    return $trappedWater;
+}
+?>
+
+This solution uses two pointers to keep track of the maximum heights on the left and right sides of each bar. The left pointer starts at index 1, and the right pointer starts at index n-2. For each bar, we compare the height of the bar with the maximum height on its left and right sides, and calculate the trapped water.
+
+The time complexity of this solution is O(n), where n is the length of the input array, because we only need to iterate through the array once to find the maximum heights on both sides of each bar. The space complexity is also O(n), because we use an array of size n to store the maximum heights on the left and right sides of each bar.
+
+This solution assumes that the input array is non-empty, and that all elements are non-negative integers. If any of these assumptions do not hold, the solution may produce incorrect results or crash.
+

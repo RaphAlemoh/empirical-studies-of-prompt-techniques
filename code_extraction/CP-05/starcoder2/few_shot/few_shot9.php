@@ -1,0 +1,5 @@
+<?php
+
+function trap(array $height) {
+     // Write code here
+}

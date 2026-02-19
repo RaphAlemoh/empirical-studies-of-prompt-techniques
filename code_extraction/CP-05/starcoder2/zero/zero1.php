@@ -1,0 +1,26 @@
+<?php
+
+function trap($heights): int {
+    $leftMax = [];
+    $rightMax = [];
+
+    for ($i = count($heights)-1; $i >= 0; $i--) {
+        if (isset($rightMax[$i]) && isset($leftMax[$i])) {
+            break;
+        }
+
+        if (!empty($rightMax)) {
+            unset($rightMax[$i]);
+        } else {
+            $rightMax[] = max(max($heights), 0);
+        }
+    }
+
+    for ($i=0;$i<count($heights);$i++) {
+        if (isset($leftMax[$i])){
+            break;
+        }
+
+        $leftMax[$i] = min($leftMax[$i-1], max($heights));
+    }
+}

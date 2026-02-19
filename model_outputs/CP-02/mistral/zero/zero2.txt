@@ -1,0 +1,28 @@
+ Here is a PHP solution for your task that follows the given constraints and output requirements:
+
+```php
+function isValid($s) {
+    if (empty($s)) return true;
+
+    $stack = [];
+    $openers = ['(', '[', '{'];
+    $closers = [')', ']', '}'];
+
+    for ($i = 0; $i < strlen($s); $i++) {
+        $char = $s[$i];
+        if (in_array($char, $openers)) {
+            array_push($stack, $char);
+        } elseif (in_array($char, $closers)) {
+            if (!empty($stack) && $closers[array_key_last($stack)] === $char && $char !== array_pop($stack)) {
+                return false;
+            }
+        }
+    }
+
+    // Check if there are any openers left in the stack
+    return empty($stack);
+}
+```
+
+This solution uses a stack to keep track of opening brackets, and checks that each closing bracket has a corresponding opening one. It also ensures that the order is correct by popping elements from the stack when encountering closers. If the stack is empty at the end, then the input string is valid; otherwise it's not.
+

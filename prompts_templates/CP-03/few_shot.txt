@@ -1,0 +1,43 @@
+You are a software engineer.
+
+Below is an example of performing binary search on a 1D array in PHP.
+
+Example:
+Task:
+Given a sorted array of integers, return true if a target exists, otherwise false.
+
+Solution:
+<?php
+function binarySearch(array $nums, int $target): bool {
+    $left = 0;
+    $right = count($nums) - 1;
+
+    while ($left <= $right) {
+        $mid = intdiv($left + $right, 2);
+        if ($nums[$mid] === $target) {
+            return true;
+        } elseif ($nums[$mid] < $target) {
+            $left = $mid + 1;
+        } else {
+            $right = $mid - 1;
+        }
+    }
+
+    return false;
+}
+?>
+
+Now solve this task:
+
+Task:
+Given an m x n integer matrix where:
+- Each row is sorted in non-decreasing order.
+- The first integer of each row is greater than the last integer of the previous row.
+
+Given an integer target, return true if the target exists in the matrix, otherwise return false.
+
+Output Requirements:
+- Implement:
+  function searchMatrix(array $matrix, int $target): bool
+- Use O(log(m * n)) time complexity.
+- Return only valid PHP code.

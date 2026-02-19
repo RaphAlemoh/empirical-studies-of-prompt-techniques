@@ -1,0 +1,59 @@
+ Here is a solution in PHP using the Merge Sort algorithm, which has a time complexity of O(N log k). The code merges the k sorted linked lists by recursively splitting them into smaller sublists until each sublist contains only one node, then merging them back together.
+
+```php
+function mergeLists($left, $right) {
+    if ($left === null) {
+        return $right;
+    }
+
+    if ($right === null) {
+        return $left;
+    }
+
+    $result = new ListNode(null);
+    $head = $result;
+
+    while (true) {
+        if ($left->val <= $right->val) {
+            $head->next = $left;
+            $left = $left->next;
+        } else {
+            $head->next = $right;
+            $right = $right->next;
+        }
+
+        $head = $head->next;
+
+        if ($left === null) {
+            $head->next = $right;
+            break;
+        }
+
+        if ($right === null) {
+            $head->next = $left;
+            break;
+        }
+    }
+
+    return $result->next;
+}
+
+function mergeKLists(array $lists): ?ListNode {
+    if (empty($lists)) {
+        return null;
+    }
+
+    $n = count($lists);
+    for ($i = floor($n / 2); $i > 0; $i -= 1) {
+        for ($j = 0; $j < $i; $j += $n / $i) {
+            $lists[j]   = mergeLists($lists[j],   $lists[$j + $n / $i]);
+            $lists[$j + intval(($n + $i - 1) / $i)] = mergeLists($lists[$j + intval(($n + $i - 1) / $i)], $lists[$j + 1 + intval(($n + $i - 1) / $i)]);
+        }
+    }
+
+    return $lists[0];
+}
+```
+
+This implementation utilizes recursion to split the lists into smaller chunks, merge them, and then combine the results. Finally, it returns the head of the merged list.
+

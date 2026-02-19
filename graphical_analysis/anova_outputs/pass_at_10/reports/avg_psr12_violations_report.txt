@@ -1,0 +1,14 @@
+STATISTICAL REPORT — AVG_PSR12_VIOLATIONS (pass_at_10)
+============================================================
+
+Descriptive Statistics File:
+anova_outputs/pass_at_10/tables/avg_psr12_violations_descriptive_stats.csv
+
+Normality Test File:
+anova_outputs/pass_at_10/tables/avg_psr12_violations_normality.csv
+
+Levene’s Test:
+Statistic: 1.5205, p-value: 0.1771
+
+ANOVA Table:
+anova_outputs/pass_at_10/tables/avg_psr12_violations_anova.csv

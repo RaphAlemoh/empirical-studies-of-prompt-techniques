@@ -1,0 +1,23 @@
+ ```php
+function searchMatrix(array $matrix, int $target) {
+    $rows = array_keys($matrix);
+    $low = 0;
+    $high = count($rows) - 1;
+
+    while ($low <= $high) {
+        $mid = floor(($low + $high) / 2);
+        if ($target === $matrix[$rows[$mid]][0]) {
+            return true;
+        }
+
+        if ($matrix[$rows[$mid]][0] > $target) {
+            $high = $mid - 1;
+        } else {
+            $low = $mid + 1;
+        }
+    }
+
+    return false;
+}
+```
+

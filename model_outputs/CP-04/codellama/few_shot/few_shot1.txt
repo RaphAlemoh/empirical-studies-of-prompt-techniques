@@ -1,0 +1,23 @@
+
+Here's a possible solution for the task:
+```php
+function maxProfit(array $prices): int {
+    $minPrice = INF; // Initialize minimum price to infinity
+    $maxProfit = 0;
+
+    foreach ($prices as $price) {
+        if ($price < $minPrice) {
+            $minPrice = $price;
+        } elseif ($price - $minPrice > $maxProfit) {
+            $maxProfit = $price - $minPrice;
+        }
+    }
+
+    return $maxProfit;
+}
+```
+Explanation:
+The solution works by maintaining a minimum price and maximum profit. At each iteration of the loop, we check if the current price is less than the minimum price, if so, we update the minimum price to the current price. If the current price is greater than the minimum price, we calculate the maximum profit as the difference between the current price and the minimum price. We return the maximum profit at the end of the loop.
+
+The time complexity of this solution is O(n), where n is the length of the input array `prices`. The space complexity is O(1) because no additional data structures are used.
+

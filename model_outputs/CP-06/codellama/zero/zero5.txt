@@ -1,0 +1,61 @@
+
+```php
+class ListNode {
+    public int $val;
+    public ?ListNode $next;
+    public function __construct(int $val = 0, ?ListNode $next = null) {
+        $this->val = $val;
+        $this->next = $next;
+    }
+}
+
+function mergeKLists(array $lists): ?ListNode {
+    // Base case: If there are no lists to merge, return null.
+    if (empty($lists)) {
+        return null;
+    }
+
+    // Recursive case: Merge the first two lists and then recurse on the merged list.
+    $head = $lists[0];
+    for ($i = 1; $i < count($lists); $i++) {
+        $head = mergeTwoLists($head, $lists[$i]);
+    }
+
+    return $head;
+}
+
+function mergeTwoLists(?ListNode $l1, ?ListNode $l2): ?ListNode {
+    if ($l1 === null) {
+        return $l2;
+    }
+    if ($l2 === null) {
+        return $l1;
+    }
+
+    $dummyHead = new ListNode(0);
+    $curr = $dummyHead;
+
+    while ($l1 !== null && $l2 !== null) {
+        if ($l1->val <= $l2->val) {
+            $curr->next = $l1;
+            $l1 = $l1->next;
+        } else {
+            $curr->next = $l2;
+            $l2 = $l2->next;
+        }
+        $curr = $curr->next;
+    }
+
+    if ($l1 !== null) {
+        $curr->next = $l1;
+    } else {
+        $curr->next = $l2;
+    }
+
+    return $dummyHead->next;
+}
+```
+This solution has a time complexity of O(N log k), where N is the total number of nodes in all k lists, and k is the number of lists. It works by merging two lists at a time using the `mergeTwoLists` function, until there are only two lists left to merge. The final merged list is then returned.
+
+Note that this solution assumes that the input lists are sorted in ascending order. If the lists are not sorted, you may need to adjust the implementation of `mergeTwoLists` accordingly.
+

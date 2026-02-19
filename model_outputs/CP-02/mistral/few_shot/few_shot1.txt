@@ -1,0 +1,30 @@
+ Here's a solution for the given task using a stack-based approach in PHP:
+
+```php
+function isValid(string $s): bool {
+    $openingBrackets = ['(', '{', '['];
+    $closingBrackets = [')', '}', ']'];
+    $stack = [];
+
+    for ($i = 0; $i < strlen($s); ++$i) {
+        $char = $s[$i];
+
+        if (in_array($char, $openingBrackets)) {
+            $stack[] = $char;
+        } elseif (in_array($char, $closingBrackets)) {
+            if (!$stack || $stack[count($stack) - 1] !== str_replace($closingBrackets, $openingBrackets, $char)) {
+                return false;
+            }
+
+            array_pop($stack);
+        }
+    }
+
+    return empty($stack);
+}
+```
+
+This implementation initializes an associative array with the opening and closing brackets as keys. It then iterates through each character in the input string `$s`. If the current character is an opening bracket, it pushes it onto the stack. If it's a closing bracket, it checks if there's no stack or if the top element of the stack does not match the corresponding opening bracket for the closing bracket. If either condition fails, the function returns false to indicate invalid input.
+
+Finally, if the stack is empty after iterating through all characters in the string, the function returns true to indicate a valid input.
+

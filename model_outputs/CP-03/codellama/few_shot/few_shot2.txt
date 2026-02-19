@@ -1,0 +1,30 @@
+  <?php
+function searchMatrix($matrix, $target) {
+    $m = count($matrix);
+    $n = count($matrix[0]);
+  
+    $left = 0;
+    $right = $m * $n - 1;
+  
+    while ($left <= $right) {
+        $mid = intdiv($left + $right, 2);
+        $row = floor($mid / $n);
+        $col = $mid % $n;
+        if ($matrix[$row][$col] === $target) {
+            return true;
+        } elseif ($matrix[$row][$col] < $target) {
+            $left = $mid + 1;
+        } else {
+            $right = $mid - 1;
+        }
+    }
+  
+    return false;
+}
+?>
+This is a binary search algorithm that works on the matrix. We start by initializing the left and right indices of the search range to 0 and the number of rows and columns in the matrix minus 1, respectively. Then we iterate through the array until we find the target or reach the end of the search range.
+
+For each iteration, we calculate the midpoint between the left and right indices (integer division) and use that to determine which row and column to search in next. If the element at the midpoint is equal to the target, we return true. Otherwise, if the element is less than the target, we update the left index to be one greater than the midpoint, and vice versa for the right index.
+
+We repeat this process until we find the target or reach the end of the search range, at which point we return false. The time complexity of this algorithm is O(log(m * n)), as each iteration reduces the size of the search range by half.
+

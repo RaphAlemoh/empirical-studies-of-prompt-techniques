@@ -1,0 +1,23 @@
+ Here is the solution for your task in PHP:
+
+```php
+function maxProfit(array $prices): int {
+    $minPrice = $prices[0];
+    $maxProfit = 0;
+
+    foreach ($prices as $price) {
+        if ($price < $minPrice) {
+            $minPrice = $price; // update minimum price encountered so far
+        } elseif ($price - $minPrice > $maxProfit) {
+            $maxProfit = $price - $minPrice; // update maximum profit
+        }
+    }
+
+    return $maxProfit;
+}
+```
+
+This function works by maintaining two variables: `$minPrice` and `$maxProfit`. It initializes the minimum price encountered so far with the first stock price, then iterates through the remaining stock prices. If a new stock price is found that is less than the current minimum price, it updates the minimum price. If a new stock price is found that is greater than the minimum price and the difference between them is greater than the current maximum profit, it updates the maximum profit.
+
+The function returns the maximum achievable profit at the end of the iteration.
+

@@ -1,0 +1,32 @@
+
+function isValid($s) {
+    // Initialize a stack to store the opening brackets
+    $stack = array();
+    
+    // Iterate through the string
+    for ($i = 0; $i < strlen($s); $i++) {
+        // Get the current character
+        $char = $s[$i];
+        
+        // Check if the character is an opening bracket
+        if (in_array($char, array('(', '{', '['))) {
+            // Push the opening bracket onto the stack
+            array_push($stack, $char);
+        } else if (in_array($char, array(')', '}', ']'))) {
+            // Get the top element from the stack
+            $top = end($stack);
+            
+            // Check if the opening bracket matches the closing bracket
+            if ($char == ')' && $top != '(' || $char == '}' && $top != '{' || $char == ']' && $top != '[') {
+                return false;
+            }
+            
+            // Pop the opening bracket from the stack
+            array_pop($stack);
+        }
+    }
+    
+    // Check if there are any remaining opening brackets in the stack
+    return count($stack) == 0;
+}
+

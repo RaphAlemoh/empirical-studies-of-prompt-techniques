@@ -1,0 +1,11 @@
+<?php
+
+function removeDuplicates(&$nums) {
+    $i = 0;
+    foreach ($nums as $key => $val) {
+        if ($i < 1 || $nums[$key - 1] != $val) {
+            $nums[$i++] = $val;
+        }
+    }
+    return $i;
+}

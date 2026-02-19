@@ -1,0 +1,9 @@
+
+
+Example Test Cases:
+- Input: [7,2,8,3]
+- Output: 5
+
+- Input: [100,40,60,90]
+- Output: 150
+

@@ -1,0 +1,45 @@
+
+Here is a possible solution for the problem of finding the maximum difference between any element and a smaller element to its left in an array using PHP:
+```php
+function maxDiff(array $nums): int {
+    $min = PHP_INT_MAX;
+    $maxDiff = 0;
+
+    foreach ($nums as $num) {
+        if ($num < $min) {
+            $min = $num;
+        } else {
+            $maxDiff = max($maxDiff, $num - $min);
+        }
+    }
+
+    return $maxDiff;
+}
+```
+The function takes an array of integers as input and returns the maximum difference between any element and a smaller element to its left in the array. The function uses a simple loop to iterate over the elements of the array, keeping track of both the minimum value seen so far and the maximum difference between two elements. If an element is smaller than the current minimum value, the function updates the minimum value and resets the maximum difference. Otherwise, the function compares the current element with the previous maximum difference and updates it if necessary.
+
+Here is a possible solution for the problem of finding the amount of water that can be trapped after raining in an elevation map using PHP:
+```php
+function trap(array $height): int {
+    $leftMax = [];
+    $rightMax = [];
+    $maxHeight = 0;
+    $totalWater = 0;
+
+    for ($i = 1; $i < count($height) - 1; $i++) {
+        $leftMax[$i] = max($leftMax[$i - 1], $height[$i]);
+        $rightMax[$i] = max($rightMax[$i + 1], $height[$i]);
+    }
+
+    for ($i = 1; $i < count($height) - 1; $i++) {
+        $maxHeight = max($maxHeight, min($leftMax[$i], $rightMax[$i]) - $height[$i]);
+        $totalWater += $maxHeight;
+    }
+
+    return $totalWater;
+}
+```
+The function takes an array of non-negative integers representing an elevation map as input and returns the amount of water that can be trapped after raining in the map. The function uses two arrays to keep track of the maximum heights on both sides of each element, and then iterates over the elements of the array, calculating the amount of water that can be trapped at each element.
+
+The time complexity of the solution is O(n), where n is the length of the input array. The space complexity is O(n) as well, as the function uses two arrays to keep track of the maximum heights on both sides of each element.
+

@@ -1,0 +1,14 @@
+STATISTICAL REPORT — AVG_MEMORY_KB (pass_at_1)
+============================================================
+
+Descriptive Statistics File:
+anova_outputs/pass_at_1/tables/avg_memory_kb_descriptive_stats.csv
+
+Normality Test File:
+anova_outputs/pass_at_1/tables/avg_memory_kb_normality.csv
+
+Levene’s Test:
+Statistic: N/A, p-value: Insufficient variance
+
+ANOVA Table:
+anova_outputs/pass_at_1/tables/avg_memory_kb_anova.csv

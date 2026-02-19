@@ -1,0 +1,48 @@
+ Here is a solution in PHP using Merge Sort algorithm which has a time complexity of O(n log k).
+
+```php
+function mergeLists($list1, $list2) {
+    if ($list1 === null) {
+        return $list2;
+    }
+    if ($list2 === null) {
+        return $list1;
+    }
+
+    $merged = new ListNode(0);
+    $head = $merged;
+
+    while (true) {
+        if ($list1->val <= $list2->val) {
+            $head->next = $list1;
+            $list1 = $list1->next;
+        } else {
+            $head->next = $list2;
+            $list2 = $list2->next;
+        }
+        if (is_null($list1) || is_null($list2)) {
+            break;
+        }
+        $head = $head->next;
+    }
+
+    return $merged->next;
+}
+
+function mergeKLists(array $lists): ?ListNode {
+    if (empty($lists)) {
+        return null;
+    }
+
+    for ($i = floor(count($lists) / 2); $i > 0; $i--) {
+        for ($j = 0; $j < $i; $j += 2) {
+            $lists[$j] = mergeLists($lists[$j], $lists[$j + 1] ?? null);
+        }
+    }
+
+    return $lists[0];
+}
+```
+
+This code first defines a helper function `mergeLists()` that merges two sorted linked lists. Then it uses the merge sort algorithm to sort and merge the given k linked lists into one sorted linked list.
+

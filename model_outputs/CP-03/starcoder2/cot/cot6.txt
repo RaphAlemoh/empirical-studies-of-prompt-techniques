@@ -1,0 +1,12 @@
+
+
+<?php
+
+/**
+ * Find target in a sorted 2D matrix.
+ */
+function searchMatrix(array $matrix, int $target): bool {
+    // Implement me!
+}
+
+

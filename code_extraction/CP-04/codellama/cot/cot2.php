@@ -1,0 +1,15 @@
+<?php
+
+function maxProfit($prices){
+    // Compute the maximum profit from an integer array prices, where prices[i] is the stock price on day i
+    $max_profit = 0;
+    $min_price = PHP_INT_MAX;
+    for ($i = 0; $i < count($prices); ++$i) {
+        if ($prices[$i] < $min_price) {
+            $min_price = $prices[$i];
+        } elseif (($profit = $prices[$i] - $min_price) > $max_profit) {
+            $max_profit = $profit;
+        }
+    }
+    return $max_profit;
+}

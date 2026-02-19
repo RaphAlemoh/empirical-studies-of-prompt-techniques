@@ -1,0 +1,33 @@
+ Here is a PHP implementation of the binary search algorithm that solves the given problem with O(log(m * n)) time complexity:
+
+```php
+function searchMatrix($matrix, $target) {
+    $m = count($matrix);
+    if ($m === 0) return false;
+
+    $n = count($matrix[0]);
+    $left = 0;
+    $right = $m * $n - 1;
+
+    while ($left <= $right) {
+        $mid = floor(($left + $right) / 2);
+        $row = intval($mid / $n);
+        $col = $mid % $n;
+
+        if ($matrix[$row][$col] === $target) {
+            return true;
+        }
+
+        if ($matrix[$row][$col] < $target) {
+            $left = $mid + 1;
+        } else {
+            $right = $mid - 1;
+        }
+    }
+
+    return false;
+}
+```
+
+This implementation uses binary search to find the target in the matrix. It first calculates the starting and ending indices based on the number of rows (m) and columns (n). Then it performs binary search by updating the left and right indices accordingly, while also keeping track of the current row and column based on the updated index value. When the target is found or the left and right indices cross each other, the function returns whether the target was found in the matrix or not.
+

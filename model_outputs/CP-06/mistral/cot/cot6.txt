@@ -1,0 +1,43 @@
+ Here is the PHP implementation of merging k sorted singly linked lists:
+
+```php
+function mergeKLists($lists) {
+    if (empty($lists)) {
+        return null;
+    }
+
+    $heap = new SplMinHeap();
+
+    foreach ($lists as $list) {
+        if (!is_null($list)) {
+            $heap->insert(new stdClass() & $list);
+        }
+    }
+
+    $mergedHead = null;
+    $current = &$mergedHead;
+
+    while (!$heap->isEmpty()) {
+        $minNode = $heap->extractMin();
+        $node = $minNode;
+
+        if ($current === null) {
+            $current = $node;
+        } else {
+            $next = $current;
+            $current->next = $node;
+            $current = $current->next;
+        }
+
+        $node = $node->next;
+        if (!is_null($node)) {
+            $heap->insert($node);
+        }
+    }
+
+    return $mergedHead;
+}
+```
+
+This implementation uses a min-heap to maintain the smallest nodes from all lists. It iterates through the heap, combining nodes into one sorted linked list. The time complexity is O(N log k), and it requires minimal extra space by using a SplMinHeap and the reference to the current node (`$current`) for merging the nodes in-place.
+

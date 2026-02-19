@@ -1,0 +1,52 @@
+
+<?php
+class ListNode {
+    public int $val;
+    public ?ListNode $next;
+    public function __construct(int $val = 0, ?ListNode $next = null) {
+        $this->val = $val;
+        $this->next = $next;
+    }
+}
+function mergeKLists(array $lists): ?ListNode {
+    if (count($lists) == 0) return null;
+    elseif (count($lists) == 1) return $lists[0];
+    else {
+        $mid = count($lists)/2;
+        $left = array_slice($lists, 0, $mid);
+        $right = array_slice($lists, $mid+1, count($lists));
+        $lhead = mergeKLists($left);
+        $rhead = mergeKLists($right);
+        return mergeTwoLists($lhead, $rhead);
+    }
+}
+function mergeTwoLists(ListNode $list1, ListNode $list2): ?ListNode {
+    if ($list1 == null) return $list2;
+    elseif ($list2 == null) return $list1;
+    else {
+        if ($list1->val < $list2->val) {
+            $result = new ListNode($list1->val, null);
+            $cur = $result;
+            $list1 = $list1->next;
+        } else {
+            $result = new ListNode($list2->val, null);
+            $cur = $result;
+            $list2 = $list2->next;
+        }
+        while ($list1 != null && $list2 != null) {
+            if ($list1->val < $list2->val) {
+                $cur->next = new ListNode($list1->val, null);
+                $cur = $cur->next;
+                $list1 = $list1->next;
+            } else {
+                $cur->next = new ListNode($list2->val, null);
+                $cur = $cur->next;
+                $list2 = $list2->next;
+            }
+        }
+        if ($list1 != null) $cur->next = $list1;
+        elseif ($list2 != null) $cur->next = $list2;
+    }
+}
+?>
+

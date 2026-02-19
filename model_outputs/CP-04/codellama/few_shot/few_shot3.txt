@@ -1,0 +1,30 @@
+Here is a solution to the task:
+```php
+function maxProfit(array $prices): int {
+    // Initialize variables
+    $maxProfit = 0;
+    $buyPrice = null;
+
+    // Iterate through the prices and check for buying and selling opportunities
+    foreach ($prices as $price) {
+        if ($buyPrice === null || $price > $buyPrice) {
+            $buyPrice = $price;
+        } elseif ($price < $buyPrice) {
+            $maxProfit += $buyPrice - $price;
+            $buyPrice = null;
+        }
+    }
+
+    // Return the maximum achievable profit
+    return $maxProfit;
+}
+```
+The algorithm works as follows:
+
+1. Initialize variables `$maxProfit` and `$buyPrice` to 0 and `null`, respectively. These variables will be used to keep track of the maximum profit and the current buy price, respectively.
+2. Iterate through the prices using a `foreach` loop. For each price, check if it is higher than the current buy price. If so, update the buy price to that value.
+3. If the current price is lower than the buy price, calculate the maximum profit by subtracting the current price from the buy price and adding it to the `$maxProfit` variable. Then, reset the buy price to `null`.
+4. Return the maximum achievable profit at the end of the loop.
+
+This solution has a time complexity of O(n) and space complexity of O(1), where n is the length of the input array.
+

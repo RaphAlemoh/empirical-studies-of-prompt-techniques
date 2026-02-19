@@ -1,0 +1,13 @@
+<?php
+
+function maxProfit($a){
+    $max = 0;
+
+    for ($i=0;$i<count($a);$i++){
+        for ($j=$i+1;$j<$i+2;$j++) {
+            if ( $a[$j] > $a[$i]) 
+                $max += abs( $a[$j]-$a[$i]);
+        }
+    }
+    return $max;
+}

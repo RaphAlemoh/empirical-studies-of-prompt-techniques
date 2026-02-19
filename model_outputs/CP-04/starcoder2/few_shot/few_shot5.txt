@@ -1,0 +1,32 @@
+
+
+Example 1:
+<?php
+function maxProfit(array $prices): int {
+    return 7;
+}
+?>
+
+Example 2:
+<?php
+function maxProfit(array $prices): int {
+    return 0;
+}
+?>
+
+Now solve this task:
+
+Task:
+Given a list of integers `nums`, return the largest sum of non-adjacent elements.
+If no non-adjacent elements exist, return 0 in this case.
+
+Constraints:
+1 <= nums.length <= 4 * 10^4
+-10 ^ 5 <= nums[i] <= 10 ^ 5
+
+Output Requirements:
+- Implement:
+  function largestSum(array $nums): int
+- Return only valid PHP code.
+
+

@@ -1,0 +1,32 @@
+ Here is a solution for the task you provided in PHP:
+
+```php
+function trap(array $height): int {
+    $n = count($height);
+    if ($n < 3) return 0;
+
+    $leftMax = new SplMaxHeap();
+    $rightMax = new SplMinHeap();
+    $leftMax->insert($height[0]);
+    $trappedWater = 0;
+
+    for ($i = 1; $i < $n; ++$i) {
+        $rightMax->insert($height[$i]);
+        $currHeight = min($leftMax->getCurrent(), $rightMax->getCurrent());
+        if ($height[$i] < $currHeight) {
+            $trappedWater += $currHeight - $height[$i];
+        } else {
+            $leftMax->remove($height[$i - 1]);
+        }
+    }
+
+    return $trappedWater;
+}
+```
+
+In this solution, we use two heaps: `$leftMax` and `$rightMax`. The `$leftMax` stores the maximum height to the left of each position, and the `$rightMax` stores the minimum height to the right. We initialize both heaps with the first element's height.
+
+Next, we iterate through the array from the second element to the last one, updating the `$leftMax`, `$rightMax`, and `$trappedWater` variables accordingly. If the current height is less than the maximum height to its left or right, we calculate the trapped water for that position and add it to our total. Otherwise, we remove the previous element's height from `$leftMax`.
+
+Finally, we return the total amount of trapped water. The solution takes advantage of the fact that if the current height is greater than the maximum heights to its left or right, no additional water can be trapped at that position.
+

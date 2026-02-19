@@ -1,0 +1,35 @@
+
+Task: Given an array `height` of non-negative integers representing an elevation map, compute how much water can be trapped after raining. Each bar has width 1. Return the total units of trapped water.
+
+Solution: We need to find the maximum amount of water that can be trapped between two consecutive bars. The maximum amount of water that can be trapped is the difference between the heights of the two bars multiplied by the minimum of the two bars.
+
+Here's an example of how this works:
+```php
+$height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
+```
+In this case, the maximum amount of water that can be trapped is 6. This is because the two bars with the greatest difference in height are `height[4]` and `height[9]`, which have a height difference of 3. The minimum of these two bars is 1, so the total units of trapped water is 3 \* 1 = 3.
+
+Here's an algorithm that can be used to solve this problem:
+```php
+function trap(array $height): int {
+    $max_water = 0;
+
+    for ($i = 1; $i < count($height) - 1; $i++) {
+        $left = max($height[$i - 1], $height[$i]);
+        $right = max($height[$i + 1], $height[$i]);
+        $max_water += min($left, $right) - $height[$i];
+    }
+
+    return $max_water;
+}
+```
+This algorithm uses a loop to iterate over each bar in the elevation map. For each bar, it finds the maximum height of the two bars on either side of it and computes the difference between them. It then adds this difference to the total amount of water trapped so far.
+
+Here's an example of how this algorithm works:
+```php
+$height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
+
+echo trap($height); // Output: 6
+```
+In this case, the algorithm will iterate over each bar in the elevation map and compute the maximum amount of water that can be trapped between each pair of consecutive bars. It will then return the total amount of water trapped, which is 6.
+

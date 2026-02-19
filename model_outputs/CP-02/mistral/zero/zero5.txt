@@ -1,0 +1,24 @@
+ Here is a PHP function that checks if the input string is valid according to the given rules. This solution has a time complexity of O(n).
+
+```php
+function isValid($s) {
+    $stack = [];
+    $mapping = [")" => "(", "}" => "{", "]" => "["];
+
+    for ($i = 0; $i < strlen($s); $i++) {
+        if ($s[$i] === "(" || $s[$i] === "{" || $s[$i] === "[") {
+            array_push($stack, $s[$i]);
+        } elseif (count($stack) > 0 && $mapping[$s[$i]] === array_pop($stack)) {
+            // Valid pair found
+        } else {
+            return false;
+        }
+    }
+
+    // Check if the stack is empty after checking all characters
+    return count($stack) === 0;
+}
+```
+
+This function uses a stack data structure to keep track of open brackets and checks whether each closing bracket has a corresponding opening bracket. If any invalid pairs are found or there are unmatched closing brackets, the function returns false. Otherwise, it returns true if all brackets are matched correctly.
+

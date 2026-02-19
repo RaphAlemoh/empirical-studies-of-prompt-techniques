@@ -1,0 +1,43 @@
+<?php
+
+function searchMatrix(array $matrix, int $target): bool {
+    $n = count($matrix);
+    if ($n == 0) return false;
+
+    $left = 0;
+    $right = $n - 1;
+
+    while ($left <= $right) {
+        $mid = intdiv($left + $right, 2);
+        $row = $matrix[$mid];
+
+        if (count($row) == 0) {
+            // The current row is empty, move to the next row.
+            if ($mid < $n - 1 && $matrix[$mid + 1][0] > $target) {
+                $left = $mid + 1;
+                continue;
+            }
+            $right = $mid - 1;
+            continue;
+        }
+
+        $rowLeft = 0;
+        $rowRight = count($row) - 1;
+
+        while ($rowLeft <= $rowRight) {
+            $rowMid = intdiv($rowLeft + $rowRight, 2);
+            if ($row[$rowMid] === $target) return true;
+            if ($row[$rowMid] < $target) $rowLeft = $rowMid + 1;
+            else $rowRight = $rowMid - 1;
+        }
+
+        // The target is not in the current row, move to the next row.
+        if ($matrix[$mid + 1][0] > $target) {
+            $left = $mid + 1;
+        } else {
+            $right = $mid - 1;
+        }
+    }
+
+    return false;
+}

@@ -1,0 +1,50 @@
+```php
+class ListNode {
+    public int $val;
+    public ?ListNode $next;
+    public function __construct(int $val = 0, ?ListNode $next = null) {
+        $this->val = $val;
+        $this->next = $next;
+    }
+}
+
+function mergeKLists(array $lists): ?ListNode
+{
+    if (empty($lists)) return null;
+    // Merge the first two lists
+    $mergedList = $this->mergeTwoLists($lists[0], $lists[1]);
+    // Recursively merge the remaining lists with the merged list
+    for ($i = 2; $i < count($lists); $i++) {
+        $mergedList = $this->mergeTwoLists($mergedList, $lists[$i]);
+    }
+    return $mergedList;
+}
+
+function mergeTwoLists(ListNode $list1, ListNode $list2): ?ListNode
+{
+    if ($list1 === null) return $list2;
+    if ($list2 === null) return $list1;
+    // Initialize the head of the merged list to be either the head of $list1 or $list2
+    $mergedList = $list1->val < $list2->val ? $list1 : $list2;
+    $currentNode = $mergedList;
+    while ($list1 !== null && $list2 !== null) {
+        // If the value of $list1 is less than that of $list2, add it to the merged list and advance $list1
+        if ($list1->val < $list2->val) {
+            $currentNode->next = $list1;
+            $list1 = $list1->next;
+        } else { // Otherwise, add it to the end of the merged list
+            $currentNode->next = $list2;
+            $list2 = $list2->next;
+        }
+        $currentNode = $currentNode->next;
+    }
+    // If one of the lists is not empty, add the remaining nodes to the end of the merged list
+    if ($list1 !== null) {
+        $currentNode->next = $list1;
+    } elseif ($list2 !== null) {
+        $currentNode->next = $list2;
+    }
+    return $mergedList;
+}
+```
+

@@ -1,0 +1,27 @@
+
+
+<?php
+/**
+ * Definition for a singly linked list.
+ */
+class ListNode {
+    public int $val;
+    public ?ListNode $next = null;
+
+    /**
+     * @param int    $val   The value in this node.
+     * @param ?ListNode $next  Reference to the next node in this linked list.
+     */
+    public function __construct(int $val, ?ListNode $next) {
+        $this->val = $val;
+        $this->next = $next;
+    }
+}
+
+
+function mergeKLists(array $lists): ?ListNode
+{
+
+}
+
+

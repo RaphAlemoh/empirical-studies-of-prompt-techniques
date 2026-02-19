@@ -1,0 +1,31 @@
+ ```php
+function trap(array $height): int {
+    $left = array_fill(0, count($height), 0);
+    $right = array_fill(0, count($height), 0);
+
+    $maxLeft = $maxRight = 0;
+    for ($i = 1; $i < count($height); $i++) {
+        if ($height[$i] > $maxLeft) {
+            $maxLeft = $height[$i];
+        } else {
+            $left[$i] = $maxLeft - $height[$i];
+        }
+    }
+
+    for ($i = count($height) - 2; $i >= 0; $i--) {
+        if ($height[$i] > $maxRight) {
+            $maxRight = $height[$i];
+        } else {
+            $right[$i] = $maxRight - $height[$i];
+        }
+    }
+
+    $trappedWater = 0;
+    for ($i = 1; $i < count($height) - 1; $i++) {
+        $trappedWater += min($left[$i], $right[$i]) - $height[$i];
+    }
+
+    return $trappedWater;
+}
+```
+

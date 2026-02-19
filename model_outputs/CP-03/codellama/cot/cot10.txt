@@ -1,0 +1,23 @@
+
+function searchMatrix(array $matrix, int $target): bool {
+    // Map the 2D matrix to a 1D binary search space
+    $flatMatrix = array_merge($matrix);
+
+    // Perform a binary search on the flattened matrix
+    $low = 0;
+    $high = count($flatMatrix) - 1;
+    while ($low <= $high) {
+        $mid = (int) floor(($low + $high) / 2);
+        if ($flatMatrix[$mid] == $target) {
+            return true;
+        } elseif ($flatMatrix[$mid] < $target) {
+            $low = $mid + 1;
+        } else {
+            $high = $mid - 1;
+        }
+    }
+
+    // If the target is not found in the flattened matrix, return false
+    return false;
+}
+

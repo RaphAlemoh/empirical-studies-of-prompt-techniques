@@ -1,0 +1,25 @@
+ To compute the maximum profit from an integer array `prices`, we can use two pointers approach, commonly known as "Buy - Sell" stock trading strategy. This strategy involves finding the minimum price for buying a stock and then finding the highest price for selling it. Here's the PHP function implementation for your task:
+
+```php
+function maxProfit(array $prices): int {
+    if (count($prices) < 2) return 0;
+
+    $minPrice = min($prices);
+    $maxProfit = 0;
+
+    foreach ($prices as $price) {
+        $currentProfit = $price - $minPrice;
+        if ($currentProfit > $maxProfit) {
+            $maxProfit = $currentProfit;
+        }
+        if ($price < $minPrice) {
+            $minPrice = $price;
+        }
+    }
+
+    return $maxProfit;
+}
+```
+
+In this code snippet, we first check whether the array has at least two elements since buying and selling transactions require at least two elements. We initialize the `$minPrice` as the smallest price in the array and `$maxProfit` to 0. Then, we iterate through each element of the `prices` array. If the current price is greater than the minimum price, we calculate the profit by subtracting the minimum price from the current price. If the calculated profit is higher than the maximum profit found so far, we update the maximum profit value. Lastly, if we encounter a price lower than the current minimum price, we update the minimum price to the new found price. Finally, the function returns the maximum achievable profit.
+

@@ -1,0 +1,26 @@
+<?php
+
+function trap(array $height): int {
+    $leftMax = [];
+    $rightMax = [];
+    
+    for ($i = 0; $i < count($height); $i++) {
+        $leftMax[$i] = max($height[$i], $leftMax[$i - 1]);
+    }
+    
+    for ($i = count($height) - 2; $i >= 0; $i--) {
+        $rightMax[$i] = max($height[$i], $rightMax[$i + 1]);
+    }
+    
+    $totalUnitsOfTrappedWater = 0;
+    
+    for ($i = 1; $i < count($height) - 1; $i++) {
+        $unitOfTrappedWater = min($leftMax[$i], $rightMax[$i]) - $height[$i];
+        
+        if ($unitOfTrappedWater > 0) {
+            $totalUnitsOfTrappedWater += $unitOfTrappedWater;
+        }
+    }
+    
+    return $totalUnitsOfTrappedWater;
+}

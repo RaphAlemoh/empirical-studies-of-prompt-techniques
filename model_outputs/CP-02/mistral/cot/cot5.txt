@@ -1,0 +1,25 @@
+ ```php
+function isValid($s) {
+    $stack = [];
+    $brackets = [
+        '(' => ')',
+        '{' => '}',
+        '[' => ']'
+    ];
+
+    foreach (str_split($s) as $char) {
+        if (!in_array($char, array_keys($brackets))) {
+            $stack[] = $char;
+        } else {
+            if ($stack && $stack[count($stack)-1] == $brackets[$char]) {
+                array_pop($stack);
+            } else {
+                return false;
+            }
+        }
+    }
+
+    return empty($stack);
+}
+```
+

@@ -1,0 +1,50 @@
+```
+function mergeKLists(array $lists): ?ListNode {
+    // Check if there are any lists to be merged
+    if (empty($lists)) {
+        return null;
+    }
+
+    // Merge two lists at a time until only one list remains
+    while (count($lists) > 1) {
+        $list1 = array_shift($lists);
+        $list2 = array_shift($lists);
+        $mergedList = mergeTwoLists($list1, $list2);
+        array_unshift($lists, $mergedList);
+    }
+
+    // Return the head of the merged list
+    return array_shift($lists);
+}
+
+function mergeTwoLists(?ListNode $list1, ?ListNode $list2): ?ListNode {
+    if ($list1 === null) {
+        return $list2;
+    } elseif ($list2 === null) {
+        return $list1;
+    }
+
+    $dummyHead = new ListNode();
+    $current = $dummyHead;
+
+    while ($list1 !== null && $list2 !== null) {
+        if ($list1->val <= $list2->val) {
+            $current->next = $list1;
+            $list1 = $list1->next;
+        } else {
+            $current->next = $list2;
+            $list2 = $list2->next;
+        }
+        $current = $current->next;
+    }
+
+    if ($list1 !== null) {
+        $current->next = $list1;
+    } elseif ($list2 !== null) {
+        $current->next = $list2;
+    }
+
+    return $dummyHead->next;
+}
+```
+

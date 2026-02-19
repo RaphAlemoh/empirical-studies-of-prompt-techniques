@@ -1,0 +1,9 @@
+
+
+<?php
+function searchMatrix($matrix, $target) {
+    return false;
+}
+
+
+
